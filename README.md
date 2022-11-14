@@ -19,23 +19,23 @@ We will meet every Friday from 10am to 11am via Teams (Link TBD)
 ***NOTE TO JEFF: START THE RECORDING!***
 
 | Class                  | Topic                                                                 | Video |
-|------------------------|-----------------------------------------------------------------------|-------|
-| Class 1 (2022-11-18):  | Introductions, Course Details, and Software troubleshooting           |       |
-| Class 2 (2022-12-02):  | [RStudio and The Punchline](lessons/01_rstudio.md)                    |       |
-| Class 3 (2022-12-09):  | [R Basics: Functions, Syntax, and Packages](lessons/02_r_basics.md)   |       |
-| Class 4 (2022-12-16):  | [R Basics: Getting Help](lessons/02_r_basics.md#getting-help)         |       |
+|--------------|--------------------------------------------|--------------|
+| Class 1 (2022-11-28):  | Introductions, Course Details, and Software troubleshooting           |       |
+| Class 2 (2022-12-05):  | [RStudio and The Punchline](lessons/01_rstudio.md)                    |       |
+| Class 3 (2022-12-012): | [R Basics: Functions, Syntax, and Packages](lessons/02_r_basics.md)   |       |
+| Class 4 (2022-12-19):  | [R Basics: Getting Help](lessons/02_r_basics.md#getting-help)         |       |
 |                        | [Tidy Data: Part 1](lessons/03_tidy_data_in_r_1.md)                   |       |
-| Class 5 (2022-12-30):  | [Finish Up Tidy Data: Part 1](lessons/03_tidy_data_in_r_1.md)         |       |
-| Class 6 (2023-01-06):  | [Homework 3.1 - In Class](lessons/03_tidy_data_in_r_1.md#homework-31) |       |
+| Class 5 (2022-01-09):  | [Finish Up Tidy Data: Part 1](lessons/03_tidy_data_in_r_1.md)         |       |
+| Class 6 (2023-01-16):  | [Homework 3.1 - In Class](lessons/03_tidy_data_in_r_1.md#homework-31) |       |
 |                        | [Tidy Data: Part 2](lessons/03_tidy_data_in_r_2.md)                   |       |
-| Class 7 (2023-01-13):  | [Piping Chapter from R4DS](https://r4ds.had.co.nz/pipes.html)         |       |
+| Class 7 (2023-01-23):  | [Piping Chapter from R4DS](https://r4ds.had.co.nz/pipes.html)         |       |
 |                        | [Tidy Data: Part 2 (cont)](lessons/03_tidy_data_in_r_2.md#mutate)     |       |
-| Class 8 (2023-01-20):  | [Pivoting](lessons/03_tidy_data_in_r_2.md#pivoting)                   |       |
+| Class 8 (2023-01-30):  | [Pivoting](lessons/03_tidy_data_in_r_2.md#pivoting)                   |       |
 |                        | [Data Viz: Part 1](lessons/04_data_viz_with_ggplot2.md)               |       |
-| Class 9 (2023-01-27):  | [Data Viz: Part 2](lessons/04_data_viz_with_ggplot2.md)               |       |
-| Class 10 (2023-02-03): | Final Data Viz                                                        |       |
-| Class 11 (2023-02-10): | [Basic Stats, Random Forest](lessons/06_basic_stats.md)               |       |
-| Class 12 (2023-02-17): | Geospatial in R                                                       |       |
+| Class 9 (2023-02-06):  | [Data Viz: Part 2](lessons/04_data_viz_with_ggplot2.md)               |       |
+| Class 10 (2023-02-13): | Final Data Viz                                                        |       |
+| Class 11 (2023-02-27): | [Basic Stats, Random Forest](lessons/06_basic_stats.md)               |       |
+| Class 12 (2023-03-06): | Geospatial in R                                                       |       |
 
 ## EPA Disclaimer
 
