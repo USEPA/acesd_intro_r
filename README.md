@@ -26,16 +26,16 @@ We will meet every Friday from 10am to 11am via Teams (Link TBD)
 | Class 4 (2022-12-19):  | [R Basics: Getting Help](lessons/02_r_basics.md#getting-help)         |       |
 |                        | [Tidy Data: Part 1](lessons/03_tidy_data_in_r_1.md)                   |       |
 | Class 5 (2022-01-09):  | [Finish Up Tidy Data: Part 1](lessons/03_tidy_data_in_r_1.md)         |       |
-| Class 6 (2023-01-16):  | [Homework 3.1 - In Class](lessons/03_tidy_data_in_r_1.md#homework-31) |       |
+| Class 6 (2023-01-23):  | [Homework 3.1 - In Class](lessons/03_tidy_data_in_r_1.md#homework-31) |       |
 |                        | [Tidy Data: Part 2](lessons/03_tidy_data_in_r_2.md)                   |       |
-| Class 7 (2023-01-23):  | [Piping Chapter from R4DS](https://r4ds.had.co.nz/pipes.html)         |       |
+| Class 7 (2023-01-30):  | [Piping Chapter from R4DS](https://r4ds.had.co.nz/pipes.html)         |       |
 |                        | [Tidy Data: Part 2 (cont)](lessons/03_tidy_data_in_r_2.md#mutate)     |       |
-| Class 8 (2023-01-30):  | [Pivoting](lessons/03_tidy_data_in_r_2.md#pivoting)                   |       |
+| Class 8 (2023-02-06):  | [Pivoting](lessons/03_tidy_data_in_r_2.md#pivoting)                   |       |
 |                        | [Data Viz: Part 1](lessons/04_data_viz_with_ggplot2.md)               |       |
-| Class 9 (2023-02-06):  | [Data Viz: Part 2](lessons/04_data_viz_with_ggplot2.md)               |       |
-| Class 10 (2023-02-13): | Final Data Viz                                                        |       |
-| Class 11 (2023-02-27): | [Basic Stats, Random Forest](lessons/06_basic_stats.md)               |       |
-| Class 12 (2023-03-06): | Geospatial in R                                                       |       |
+| Class 9 (2023-02-13):  | [Data Viz: Part 2](lessons/04_data_viz_with_ggplot2.md)               |       |
+| Class 10 (2023-02-27): | Final Data Viz                                                        |       |
+| Class 11 (2023-03-06): | [Basic Stats, Random Forest](lessons/06_basic_stats.md)               |       |
+| Class 12 (2023-03-13): | Geospatial in R                                                       |       |
 
 ## EPA Disclaimer
 
