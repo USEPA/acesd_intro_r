@@ -79,7 +79,7 @@ nla_tn_tp_chla_gg <- nla_2017_chem_clean |>
   theme_classic() +
   theme(legend.position = "none") +
   labs(x = "Mean Total Nitrogen", y = "Mean Total Phosphorus", 
-       title = "Comparison of Statewide Total Nitrogen, Total Phosphorus, and Chlorophyll") +
+       title = "Comparison of Nitrogen,  Phosphorus, and Chlorophyll") +
   scale_color_continuous(low = "springgreen", high = "darkgreen")
 
   
