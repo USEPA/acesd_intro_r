@@ -148,7 +148,7 @@ The `read_csv()` function is a re-imagined version of the base R fucntion, `read
 
 Source files for `read_csv()` can either be on a local hard drive or, and this is pretty cool, on the web. We will be using the former for our examples and exercises. If you had a file available from a URL it would be accessed like `mydf <- read.csv("https://example.com/my_cool_file.csv")`. As an aside, paths and the use of forward vs back slash is important. R is looking for forward slashes ("/"), or unix-like paths. You can use these in place of the back slash and be fine. You can use a back slash but it needs to be a double back slash ("\\\\"). This is becuase the single backslash in an escape character that is used to indicate things like newlines or tabs. 
 
-For today's workshop we will focus on both grabbing data from a local file and from a URL, we already have an example of this in our `nerrs_analysis.R`.  In that file look for the line where we use `read_csv()`
+For today's workshop we will focus on both grabbing data from a local file and from a URL, we already have an example of this in our `acesd_analysis.R`.  In that file look for the line where we use `read_csv()`
 
 For your convenience, it looks like:
 
@@ -165,23 +165,22 @@ ne_nerrs_wq
 ```
 
 ```
-## # A tibble: 219,190 x 26
-##    datetimestamp        temp f_temp spcond f_spcond   sal f_sal do_pct f_do_pct do_mgl
-##    <dttm>              <dbl>  <dbl>  <dbl>    <dbl> <dbl> <dbl>  <dbl>    <dbl>  <dbl>
-##  1 2020-05-01 05:00:00   7.5      0   0.18        0   0.1     0   101.        0   12.1
-##  2 2020-05-01 05:15:00   7.4      0   0.18        0   0.1     0   101.        0   12.1
-##  3 2020-05-01 05:30:00   7.4      0   0.18        0   0.1     0   101.        0   12.1
-##  4 2020-05-01 05:45:00   7.4      0   0.18        0   0.1     0   101.        0   12.1
-##  5 2020-05-01 06:00:00   7.4      0   0.18        0   0.1     0   100.        0   12.1
-##  6 2020-05-01 06:15:00   7.4      0   0.18        0   0.1     0   100.        0   12.1
-##  7 2020-05-01 06:30:00   7.4      0   0.18        0   0.1     0   100.        0   12.1
-##  8 2020-05-01 06:45:00   7.4      0   0.18        0   0.1     0   100.        0   12.1
-##  9 2020-05-01 07:00:00   7.4      0   0.18        0   0.1     0   100.        0   12.1
-## 10 2020-05-01 07:15:00   7.4      0   0.18        0   0.1     0   100.        0   12.1
-## # ... with 219,180 more rows, and 16 more variables: f_do_mgl <dbl>, depth <dbl>,
-## #   f_depth <dbl>, ph <dbl>, f_ph <dbl>, turb <dbl>, f_turb <dbl>, chlfluor <dbl>,
-## #   f_chlfluor <dbl>, level <dbl>, f_level <dbl>, cdepth <dbl>, clevel <dbl>, f_cdepth <dbl>,
-## #   f_clevel <dbl>, site <chr>
+## # A tibble: 219,190 × 26
+##    datetimestamp        temp f_temp spcond f_spcond   sal f_sal do_pct f_do_…¹ do_mgl f_do_…² depth f_depth    ph
+##    <dttm>              <dbl>  <dbl>  <dbl>    <dbl> <dbl> <dbl>  <dbl>   <dbl>  <dbl>   <dbl> <dbl>   <dbl> <dbl>
+##  1 2020-05-01 05:00:00   7.5      0   0.18        0   0.1     0   101.       0   12.1       0    NA      -1   6.8
+##  2 2020-05-01 05:15:00   7.4      0   0.18        0   0.1     0   101.       0   12.1       0    NA      -1   6.8
+##  3 2020-05-01 05:30:00   7.4      0   0.18        0   0.1     0   101.       0   12.1       0    NA      -1   6.8
+##  4 2020-05-01 05:45:00   7.4      0   0.18        0   0.1     0   101.       0   12.1       0    NA      -1   6.8
+##  5 2020-05-01 06:00:00   7.4      0   0.18        0   0.1     0   100.       0   12.1       0    NA      -1   6.8
+##  6 2020-05-01 06:15:00   7.4      0   0.18        0   0.1     0   100.       0   12.1       0    NA      -1   6.8
+##  7 2020-05-01 06:30:00   7.4      0   0.18        0   0.1     0   100.       0   12.1       0    NA      -1   6.8
+##  8 2020-05-01 06:45:00   7.4      0   0.18        0   0.1     0   100.       0   12.1       0    NA      -1   6.8
+##  9 2020-05-01 07:00:00   7.4      0   0.18        0   0.1     0   100.       0   12.1       0    NA      -1   6.8
+## 10 2020-05-01 07:15:00   7.4      0   0.18        0   0.1     0   100.       0   12.1       0    NA      -1   6.8
+## # … with 219,180 more rows, 12 more variables: f_ph <dbl>, turb <dbl>, f_turb <dbl>, chlfluor <dbl>,
+## #   f_chlfluor <dbl>, level <dbl>, f_level <dbl>, cdepth <dbl>, clevel <dbl>, f_cdepth <dbl>, f_clevel <dbl>,
+## #   site <chr>, and abbreviated variable names ¹​f_do_pct, ²​f_do_mgl
 ```
 
 ### Other ways to read in data

@@ -127,7 +127,7 @@ The `read_csv()` function is a re-imagined version of the base R fucntion, `read
 
 Source files for `read_csv()` can either be on a local hard drive or, and this is pretty cool, on the web. We will be using the former for our examples and exercises. If you had a file available from a URL it would be accessed like `mydf <- read.csv("https://example.com/my_cool_file.csv")`. As an aside, paths and the use of forward vs back slash is important. R is looking for forward slashes ("/"), or unix-like paths. You can use these in place of the back slash and be fine. You can use a back slash but it needs to be a double back slash ("\\\\"). This is becuase the single backslash in an escape character that is used to indicate things like newlines or tabs. 
 
-For today's workshop we will focus on both grabbing data from a local file and from a URL, we already have an example of this in our `nerrs_analysis.R`.  In that file look for the line where we use `read_csv()`
+For today's workshop we will focus on both grabbing data from a local file and from a URL, we already have an example of this in our `acesd_analysis.R`.  In that file look for the line where we use `read_csv()`
 
 For your convenience, it looks like:
 

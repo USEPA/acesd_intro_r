@@ -48,7 +48,7 @@ as_tibble(nla)
 ```
 
 ```
-## # A tibble: 974 x 10
+## # A tibble: 974 × 10
 ##    SITE_ID       ST    EPA_REG  RT_NLA LAKE_ORIGIN   PTL   NTL   TURB  CHLA SECMEAN
 ##    <chr>         <chr> <chr>    <chr>  <chr>       <int> <int>  <dbl> <dbl>   <dbl>
 ##  1 NLA06608-0001 MT    Region_8 REF    NATURAL         6   151  0.474  0.24    6.4 
@@ -61,7 +61,7 @@ as_tibble(nla)
 ##  8 NLA06608-0010 MI    Region_5 SO-SO  NATURAL        10   473  3.05   4.38    4.48
 ##  9 NLA06608-0012 OK    Region_6 TRASH  MAN-MADE      159  1026 50.3    4.9     0.31
 ## 10 NLA06608-0013 NJ    Region_2 SO-SO  MAN-MADE       28   384  4.21  16.0     0.65
-## # ... with 964 more rows
+## # … with 964 more rows
 ```
 
 So now we have a dataset ready for analysis.
@@ -263,7 +263,9 @@ dens_gg <-ggplot(nla_gather,aes(x=log1p(value))) +
 ggplotly(dens_gg)
 ```
 
-![plot of chunk fancy_density](figure/fancy_density-1.png)
+```
+## Error in path.expand(path): invalid 'path' argument
+```
 
 Next we could look at a scatterplot matrix of the relationship between phosphorus and chlorophyl by each EPA Region.  No need to re-do the shape of the data frame for this one.
 
@@ -295,7 +297,7 @@ t.test(nla$SECMEAN ~ nla$LAKE_ORIGIN)
 ## 
 ## data:  nla$SECMEAN by nla$LAKE_ORIGIN
 ## t = -4.7252, df = 611.31, p-value = 2.854e-06
-## alternative hypothesis: true difference in means is not equal to 0
+## alternative hypothesis: true difference in means between group MAN-MADE and group NATURAL is not equal to 0
 ## 95 percent confidence interval:
 ##  -1.0972582 -0.4529701
 ## sample estimates:
@@ -485,8 +487,8 @@ names(chla_tp) #The bits
 ```
 
 ```
-##  [1] "coefficients"  "residuals"     "effects"       "rank"          "fitted.values" "assign"        "qr"           
-##  [8] "df.residual"   "xlevels"       "call"          "terms"         "model"
+##  [1] "coefficients"  "residuals"     "effects"       "rank"          "fitted.values" "assign"       
+##  [7] "qr"            "df.residual"   "xlevels"       "call"          "terms"         "model"
 ```
 
 ```r

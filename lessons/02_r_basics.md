@@ -18,10 +18,10 @@ In this lesson we are going to go over the very basics of R, cover some basic te
 ## Exercise 2.1
 Let's start off by making sure we are in the correct project and create a script to hold the examples we will work through.  
 
-1. Open your `nerrs_intro_r` project.  
+1. Open your `acesd_intro_r_class` project.  
 2. Create a new R script.
 3. Save the (currently empty) R script as `r_basics.R`
-4. Look at the file tab.  You should be in a `nerrs_intro_r` folder and there should now be a `r_basics.R` file there.
+4. Look at the file tab.  You should be in a `acesd_intro_r_class` folder and there should now be a `r_basics.R` file there.
 5. When this is finished, just say "done" in the Teams chat. 
 6. As I am showing examples, you can follow along, type the same functions and code in your script, and run the code to see what happens.
 
@@ -29,7 +29,7 @@ Let's start off by making sure we are in the correct project and create a script
 
 R is a functional programming language and as such, most everything you do uses a function.
 
-The basic syntax of function follows the form: `function_name(arg1, arg2, ...)`.  With the base install, you will gain access to many (3123 functions, to be exact).  Some examples:
+The basic syntax of function follows the form: `function_name(arg1, arg2, ...)`.  With the base install, you will gain access to many (3679 functions, to be exact).  Some examples:
 
 
 ```r
@@ -56,18 +56,16 @@ rnorm(100, mean = 10, sd = 2)
 ```
 
 ```
-##   [1] 11.815716 11.709837  4.988357 12.332967 12.079867  9.900374  9.272525  9.786860 10.918689
-##  [10]  8.983126  8.892675  7.182900 11.962403  6.429783  8.535214 11.882664 10.999071 14.485866
-##  [19]  9.163759  8.263716  8.387724  9.230968  6.621156  9.292243 10.075009  9.911410  8.719817
-##  [28] 12.382225 10.451251  9.329520  7.410795  8.218058 10.831895  7.653088  9.491875 11.123941
-##  [37]  7.440490  5.084869 10.846158  9.328857 11.438849 10.042399 10.537285 11.610937  8.858129
-##  [46]  7.467185  8.197163 11.738743  9.816212 10.362274 11.083523  9.893658  5.962408 12.173226
-##  [55]  9.990598  8.765046  9.182835  7.026275  9.245872  8.516878  8.857114  9.490912  9.881666
-##  [64]  6.396466 12.591867 14.049789 11.150432  7.903370 10.988963 11.223167 12.962505  9.205076
-##  [73]  7.754639  9.968720  9.304937  9.572267  8.322599  9.011237 10.157370  7.498279 11.200083
-##  [82] 10.308756 10.636605 11.570877 10.035257 13.623371  8.693890  9.049948 10.886803  8.015401
-##  [91]  9.194625 10.058151  8.356317  9.923997  8.668153 10.578812 10.345956 10.815828 11.504936
-## [100] 10.113905
+##   [1]  9.767483  7.091926 11.024896  9.798813 11.063369 10.090666 10.061917 12.053501  6.464252 10.851964
+##  [11] 10.289622  8.070289 10.176615  8.363219 11.458448 11.345107 10.502564  9.834592 14.395046  7.401356
+##  [21] 12.553471 11.599006 11.734332 10.855869  7.931718  6.147823 12.822970  9.327855  7.533605 10.207438
+##  [31]  7.188160  6.884650  7.052746  7.356367 10.413460 11.066741  9.149533 10.974869 13.821806  9.639065
+##  [41] 12.584829  9.457652  9.820674  7.847794 10.065034 10.808316  9.479562  8.065385  8.345370  9.085086
+##  [51]  7.001852 11.759984  7.855169 10.138854 13.619839  9.658445 10.204825 10.288301  7.552558  9.831651
+##  [61]  9.850320  5.721891 10.795348 10.700873 10.392914  9.737703 12.188454 10.649880  9.633929 11.081053
+##  [71] 10.120688 10.757622  8.337686 10.799026  6.723943 12.487169 10.968319  9.105938 10.246816 10.177904
+##  [81] 10.996746 13.015468  8.184030 10.084964  7.771991  9.148841 10.711149 10.606403  8.362808 10.175767
+##  [91]  9.970659 14.658216  8.427472 10.738310  7.864409  9.400493 10.426358  8.374732  8.079189  9.449285
 ```
 
 ```r
@@ -76,7 +74,7 @@ mean(rnorm(100))
 ```
 
 ```
-## [1] -0.1422108
+## [1] 0.1319391
 ```
 
 ```r
@@ -85,7 +83,7 @@ sum(rnorm(100))
 ```
 
 ```
-## [1] -17.58443
+## [1] 6.009717
 ```
 
 ### A few side notes 
@@ -107,7 +105,7 @@ The base install of R is quite powerful, but you will soon have a need or desire
 
 ### CRAN
 
-One of the reasons for R's popularity is CRAN, [The Comprehensive R Archive Network](http://cran.r-project.org/).  This is where you download R and also where most will gain access to packages (there are other places, but that is for later).  Not much else to say about this now other than to be aware of it.  As of 2020-10-30, there are 16424 packages on CRAN! 
+One of the reasons for R's popularity is CRAN, [The Comprehensive R Archive Network](http://cran.r-project.org/).  This is where you download R and also where most will gain access to packages (there are other places, but that is for later).  Not much else to say about this now other than to be aware of it.  As of 2022-11-21, there are 18841 packages on CRAN! 
 
 ### Installing packages
 
@@ -146,7 +144,7 @@ dplyr::mutate
 ## {
 ##     UseMethod("mutate")
 ## }
-## <bytecode: 0x0000020b1d286110>
+## <bytecode: 0x000001fc0893fcd8>
 ## <environment: namespace:dplyr>
 ```
 
@@ -400,7 +398,7 @@ As I mentioned earlier, there are TOO many resources to mention and everyone has
 
 ## Homework 2.1
 
-Start up the class project that we created last class, `nerrs_intro_r` and open up the `nerrs_analysis.R` file.  
+Start up the class project that we created last class, `acesd_intro_r_class` and open up the `acesd_analysis.R` file.  
 
 Take a look at this file and find the following:
 
