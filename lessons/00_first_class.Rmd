@@ -20,6 +20,7 @@ This first class will be pretty light on the R, but it is necessary for us to ge
 - Go over the course details including where to find all the materials, schedule details, etc.
 - Do a round of introductions
 - First crack at RStudio and installing a package
+- The kids and pets rule
 
 # Homework
 
