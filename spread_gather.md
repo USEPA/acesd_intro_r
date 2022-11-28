@@ -21,7 +21,7 @@ dirty_df
 ```
 
 ```
-## # A tibble: 3 x 5
+## # A tibble: 3 × 5
 ##   state   jan   feb march april
 ##   <chr> <dbl> <dbl> <dbl> <dbl>
 ## 1 CT      3.1   1     2.9   4.4
@@ -40,7 +40,7 @@ tidy_df
 ```
 
 ```
-## # A tibble: 12 x 3
+## # A tibble: 12 × 3
 ##    state month vistors
 ##    <chr> <chr>   <dbl>
 ##  1 CT    jan       3.1
@@ -71,7 +71,7 @@ long_df
 ```
 
 ```
-## # A tibble: 12 x 4
+## # A tibble: 12 × 4
 ##    station month parameter value
 ##    <chr>   <chr> <chr>     <dbl>
 ##  1 A       june  chla       18  
@@ -97,7 +97,7 @@ wide_df
 ```
 
 ```
-## # A tibble: 6 x 4
+## # A tibble: 6 × 4
 ##   station month  chla  temp
 ##   <chr>   <chr> <dbl> <dbl>
 ## 1 A       aug    32    26.7
