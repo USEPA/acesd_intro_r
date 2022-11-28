@@ -39,7 +39,7 @@ library(tidyr)
 # Get Data: The data we need is available from the National Aquatic Resource
 # Survey's website. We 
 
-nla_2017_chem <- read_csv("../data/nla_2017_water_chemistry_chla-data.csv", 
+nla_2017_chem <- read_csv("data/nla_2017_water_chemistry_chla-data.csv", 
                           guess_max = 23000)
 
 ################################################################################
@@ -57,7 +57,7 @@ nla_2017_chem_clean <- nla_2017_chem |>
          month = month(date_col), 
          day = day(date_col),
          analyte = tolower(analyte),
-         result = as.numeric(result)) |>
+         result = as(result, "numeric")) |>
   select(uid:date_col, year, month, day, state:result)
 
 nla_2017_chem_clean
