@@ -20,7 +20,7 @@ We will meet every Friday from 10am to 11am via Teams (Link TBD)
 
 | Class                  | Topic                                                                 | Video |
 |----------------|-----------------------------------------|----------------|
-| Class 1 (2022-11-28):  | Introductions, Course Details, and Software troubleshooting           |       |
+| Class 1 (2022-11-28):  | [Course Details, introductions, and Rstudio](lessons/00_first_class.md)|       |
 | Class 2 (2022-12-05):  | [RStudio and The Punchline](lessons/01_rstudio.md)                    |       |
 | Class 3 (2022-12-012): | [R Basics: Functions, Syntax, and Packages](lessons/02_r_basics.md)   |       |
 | Class 4 (2022-12-19):  | [R Basics: Getting Help](lessons/02_r_basics.md#getting-help)         |       |
