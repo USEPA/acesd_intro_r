@@ -14,7 +14,7 @@ The materials will cover:
 
 # Class Schedule and Links to Materials
 
-We will meet every Friday from 10am to 11am via Teams (Link TBD)
+We will meet every Monday from 11am to 12pm via [Teams](https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZGZkNjYzYjAtMDdjMi00MGZiLTkyNGItODUxMjY5ZWQyNmMx%40thread.v2/0?context=%7b%22Tid%22%3a%2288b378b3-6748-4867-acf9-76aacbeca6a7%22%2c%22Oid%22%3a%2290904e2a-aa82-465e-9922-afce4bc6d524%22%7d)
 
 ***NOTE TO JEFF: START THE RECORDING!***
 
