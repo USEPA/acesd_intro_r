@@ -37,7 +37,7 @@ The select "Create Project."  Name this project "acesd_intro_r_class". At this p
 ![rstudio_new_folder](figures/rstudio_project_new_folder.jpg)
 
 
-Now download the files into their appropriate folders.  Right click on each of the the links below and select "Save Link As".  In the window that opens up, browse to the location of the project and the "R" or "data" folders and save these files to the project folder.  Chrome seems to want to call the data file, a ".txt" file.  It shouldn't do that, but it does.  Make sure that you change the ".txt" to ".csv" when you save the file. 
+Now download the files into their appropriate folders.  Right click on each of the the links below and select "Save Link As".  In the window that opens up, browse to the location of the project and save the script in the "R" folder and the NLA data in the "data" folder. Chrome seems to want to call the data file, a ".txt" file.  It shouldn't do that, but it does.  Make sure that you change the ".txt" to ".csv" when you save the file. 
 
 - [ACESD R Analysis](https://raw.githubusercontent.com/usepa/acesd_intro_r/master/lessons/acesd_analysis.R)
 - [2017 National Lakes Assessment Water Chemistry Data](https://www.epa.gov/sites/default/files/2021-04/nla_2017_water_chemistry_chla-data.csv)
