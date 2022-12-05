@@ -19,7 +19,9 @@ Then select "New Project"
 
 ![rstudio_proj1](figures/rstudio_project_new2.jpg)
 
-The select "Create Project."  Name this project "acesd_intro_r_class". At this point you should now have a new, empty project.  We need to download the R Script and some data that we will be using for our workshop. Let's first create a folder for our R scripts and a folder for our data.  
+The select "Create Project."  Name this project "acesd_intro_r_class". At this point you should now have a new, empty project.  We need to download the R Script and some data that we will be using for our workshop. Let's first create a folder for our R scripts and a folder for our data. Click on "New Folder" and create a folder called "R", then repeat that and create a folder called "Data" 
+
+![rstudio_new_folder](figures/rstudio_project_new_folder.jpg)
 
 
 Now download the files into their appropriate folders.  Right click on each of the the links below and select "Save Link As".  In the window that opens up, browse to the location of the project and the "R" or "data" folders and save these files to the project folder.  Chrome seems to want to call the data file, a ".txt" file.  It shouldn't do that, but it does.  Make sure that you change the ".txt" to ".csv" when you save the file. 
