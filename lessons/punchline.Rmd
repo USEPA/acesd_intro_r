@@ -32,7 +32,7 @@ Then select "New Project"
 
 ![rstudio_proj1](figures/rstudio_project_new2.jpg)
 
-The select "Create Project."  Name this project "acesd_intro_r_class". At this point you should now have a new, empty project.  We need to download the R Script and some data that we will be using for our workshop. Let's first create a folder for our R scripts and a folder for our data. Click on "New Folder" and create a folder called "R", then repeat that and create a folder called "Data" 
+The select "Create Project."  Name this project "acesd_intro_r_class". At this point you should now have a new, empty project.  We need to download the R Script and some data that we will be using for our workshop. Let's first create a folder for our R scripts and a folder for our data. Click on "New Folder" and create a folder called "R", then repeat that and create a folder called "data" 
 
 ![rstudio_new_folder](figures/rstudio_project_new_folder.jpg)
 
