@@ -20,8 +20,8 @@ We will meet every Monday from 11am to 12pm via [Teams](https://teams.microsoft.
 
 | Class                  | Topic                                                                 | Video |
 |----------------|-----------------------------------------|----------------|
-| Class 1 (2022-11-28):  | [Course Details, introductions, and Rstudio](lessons/00_first_class.md)|       |
-| Class 2 (2022-12-05):  | [RStudio and The Punchline](lessons/01_rstudio.md)                    |       |
+| Class 1 (2022-11-28):  | [Course Details, introductions, and Rstudio](lessons/00_first_class.md)|[Video](https://usepa-my.sharepoint.com/:v:/g/personal/hollister_jeff_epa_gov/EeN1V7Ylsu9FktnXb8_rEZoBuGdQ-2yAP8Vck8os_d42SQ)       |
+| Class 2 (2022-12-05):  | [RStudio and The Punchline](lessons/01_rstudio.md)                    |[Video](https://usepa-my.sharepoint.com/:v:/g/personal/hollister_jeff_epa_gov/EYpjW84-XZdEsvOzwLdORpoB4YKd1lBG4qyipi3JLzRMPg)       |
 | Class 3 (2022-12-012): | [R Basics: Functions, Syntax, and Packages](lessons/02_r_basics.md)   |       |
 | Class 4 (2022-12-19):  | [R Basics: Getting Help](lessons/02_r_basics.md#getting-help)         |       |
 |                        | [Tidy Data: Part 1](lessons/03_tidy_data_in_r_1.md)                   |       |
