@@ -32,6 +32,8 @@ Now download the files into their appropriate folders.  Right click on each of t
 
 ## Run the script 
 
-And now we can run the script by selecting all lines (i.e. `ctrl-a`) and then clicking on the `Run` button
+You will need to make sure the script is open in RStudio.  You can either click on the file name in the RStudio file browser or go to File: Open File, browse to the R folder in your project and select the "acesd_analysis.R" file.
+
+Once this is open, we can run the script by selecting all lines (e.g. `ctrl-a`) and then clicking on the `Run` button
 
 ![rstudio_knit](figures/rstudio_run.jpg)
