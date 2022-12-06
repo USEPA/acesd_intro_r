@@ -16,6 +16,9 @@ The materials will cover:
 
 We will meet every Monday from 11am to 12pm via [Teams](https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZGZkNjYzYjAtMDdjMi00MGZiLTkyNGItODUxMjY5ZWQyNmMx%40thread.v2/0?context=%7b%22Tid%22%3a%2288b378b3-6748-4867-acf9-76aacbeca6a7%22%2c%22Oid%22%3a%2290904e2a-aa82-465e-9922-afce4bc6d524%22%7d)
 
+[Help Teams Link](https://teams.microsoft.com/l/meetup-join/19:meeting_OTMxMTI5MjQtMjc4ZC00YjkzLTlhODAtMGE3NGIzMDIxMjA2@thread.v2/0?context=%7B%22Tid%22:%2288b378b3-6748-4867-acf9-76aacbeca6a7%22,%22Oid%22:%22562059a4-d9bf-4414-8cdf-b57227ac0d79%22%7D)
+
+
 ***NOTE TO JEFF: START THE RECORDING!***
 
 | Class                  | Topic                                                                 | Video |
