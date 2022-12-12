@@ -57,18 +57,19 @@ rnorm(100, mean = 10, sd = 2)
 ```
 
 ```
-##   [1]  7.757799 12.206113  8.901451  7.870332  8.883776 11.910142 12.514281  5.935526  9.317173
-##  [10] 11.219978  7.824952  6.736964  9.934141  9.845122  8.794760 12.857123  8.303293 10.133299
-##  [19] 11.236423 10.786913  9.360802 10.940260 12.888700 10.720070  8.752528  9.667650 10.961918
-##  [28]  6.014715  7.607440 10.883380  9.808860  9.380238 14.165859 11.409820  9.102842 11.344196
-##  [37]  4.733262  8.052144  8.706415  9.984768  9.657567 11.016998  9.081681 13.916888  9.655016
-##  [46] 12.469129 11.600748 11.046985 12.531164  7.473822  9.432760 10.097622  9.505661 11.060017
-##  [55] 11.498995  9.498498  8.497768 10.845492 10.542679 10.167784  9.866246 11.872059 10.752527
-##  [64] 12.273814 12.280425  8.110882 10.759409  9.487523 10.733394 10.223162 10.289509 10.419553
-##  [73] 11.224591 12.350866  6.503920 10.057593  9.464111  7.479428 11.370087  5.276807  9.511174
-##  [82]  8.236705  9.391218 10.208235  7.303411 10.294634  9.889141  6.295165 10.091415 10.559610
-##  [91]  9.630571  8.118609  7.120526  8.671232  9.361788 10.260492 11.281352  5.807862  8.965048
-## [100] 10.476042
+##   [1] 11.755696 11.121914 10.284130 13.810273  6.636247  9.493372 11.599893  9.368715
+##   [9]  7.596903  6.699497  7.904743 10.505940 13.294486 11.217885  9.013057  9.641244
+##  [17] 13.800120 15.385607  7.894626 13.421263 14.249953  9.134936  8.915983  9.902091
+##  [25]  9.431826  8.212864  8.956093  7.355299 10.364389 13.653980  8.450142 12.753521
+##  [33] 10.103611  8.437192 13.416342 10.879360  9.520307 10.665162  6.808455 13.670032
+##  [41] 11.314634  9.983360 11.432033  9.094391  7.247801 10.809547  7.987177  9.094725
+##  [49]  9.475404 13.909981 11.391582 11.082628 10.884731  9.199617  6.783749  9.229832
+##  [57]  8.508960 10.620694 12.163561 11.129736  8.854397  8.788356  9.871264 11.020135
+##  [65] 11.570144 10.150138 10.625288  9.400668  8.685167  8.651091  7.207828  7.480090
+##  [73]  9.537921 10.345492  8.270725  7.831283  8.528710  9.649303  9.898630  9.629244
+##  [81]  8.522654 10.201705  8.956785 11.259314  7.882807  8.673970 10.182709 13.068450
+##  [89] 10.303831 11.099017 11.209967 10.792451  9.019641 11.075945 10.979124 12.630052
+##  [97] 11.332202  9.971542 10.696752  9.696924
 ```
 
 ```r
@@ -77,7 +78,7 @@ mean(rnorm(100))
 ```
 
 ```
-## [1] -0.1013211
+## [1] -0.03343476
 ```
 
 ```r
@@ -86,7 +87,7 @@ sum(rnorm(100))
 ```
 
 ```
-## [1] 2.955547
+## [1] -0.06599809
 ```
 
 ### A few side notes 
@@ -108,7 +109,7 @@ The base install of R is quite powerful, but you will soon have a need or desire
 
 ### CRAN
 
-One of the reasons for R's popularity is CRAN, [The Comprehensive R Archive Network](http://cran.r-project.org/).  This is where you download R and also where most will gain access to packages (there are other places, but that is for later).  Not much else to say about this now other than to be aware of it.  As of 2022-12-12, there are 18875 packages on CRAN! 
+One of the reasons for R's popularity is CRAN, [The Comprehensive R Archive Network](http://cran.r-project.org/).  This is where you download R and also where most will gain access to packages (there are other places, but that is for later).  Not much else to say about this now other than to be aware of it.  As of 2022-12-12, there are 18874 packages on CRAN! 
 
 ### Installing packages
 
@@ -147,7 +148,7 @@ dplyr::mutate
 ## {
 ##     UseMethod("mutate")
 ## }
-## <bytecode: 0x0000024cce8c31b0>
+## <bytecode: 0x000001a000ad8ae0>
 ## <environment: namespace:dplyr>
 ```
 
@@ -405,7 +406,7 @@ Start up the class project that we created last class, `acesd_intro_r_class` and
 
 Take a look at this file and find the following:
 
-1. Find the `read_csv()` function.  What lines is it on?  What is the name of the argument in this function and what is the value that we have assigned to that argument?
+1. Find the `read_csv()` function.  What lines is it on?  What are the two arguments being used in this call of `read_csv()`and what value have we assigned to those arguments?
 2. Now find the lines on which you think we install packages and load up our packages for your use.  The installation is fancier than it needs to be, but loading the packages is pretty standard.  In your own words, what do you think each of these lines is telling R to do.
 3. Add a line of code after line 25 (or so) to install the package `lubridate`.  Add a line after line 36 (or so) to load `lubridate`.
 5. Bring up the package level help for the `lubridate` package.  What does this package do?

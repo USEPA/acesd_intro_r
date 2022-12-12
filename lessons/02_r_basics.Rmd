@@ -241,7 +241,7 @@ Start up the class project that we created last class, `acesd_intro_r_class` and
 
 Take a look at this file and find the following:
 
-1. Find the `read_csv()` function.  What lines is it on?  What is the name of the argument in this function and what is the value that we have assigned to that argument?
+1. Find the `read_csv()` function.  What lines is it on?  What are the two arguments being used in this call of `read_csv()`and what value have we assigned to those arguments?
 2. Now find the lines on which you think we install packages and load up our packages for your use.  The installation is fancier than it needs to be, but loading the packages is pretty standard.  In your own words, what do you think each of these lines is telling R to do.
 3. Add a line of code after line 25 (or so) to install the package `lubridate`.  Add a line after line 36 (or so) to load `lubridate`.
 5. Bring up the package level help for the `lubridate` package.  What does this package do?
