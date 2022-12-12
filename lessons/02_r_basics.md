@@ -20,16 +20,17 @@ Let's start off by making sure we are in the correct project and create a script
 
 1. Open your `acesd_intro_r_class` project.  
 2. Create a new R script.
-3. Save the (currently empty) R script as `r_basics.R`
-4. Look at the file tab.  You should be in a `acesd_intro_r_class` folder and there should now be a `r_basics.R` file there.
-5. When this is finished, just say "done" in the Teams chat. 
-6. As I am showing examples, you can follow along, type the same functions and code in your script, and run the code to see what happens.
+3. Save the (currently empty) R script as `r_basics.R` into the `R` folder.
+4. Look at the file tab.  You should be in a `acesd_intro_r_class` folder and there should now be a R folder there.  Click on the R folder and there should be the `r_basics.R` file there.
+5. When you have this finished, raise your hand in Teams. 
+
+We will do this for each of the lessons. As I am showing examples, you can follow along, type the same functions and code in your script, and run the code to see what happens.  You will use the script to save the code we are working on.  This should also reinforce the idea of working on an R script and running that code in the R console.
 
 ## Functions and basic syntax 
 
 R is a functional programming language and as such, most everything you do uses a function.
 
-The basic syntax of function follows the form: `function_name(arg1, arg2, ...)`.  With the base install, you will gain access to many (3679 functions, to be exact).  Some examples:
+The basic syntax of function follows the form: `function_name(arg1, arg2, ...)`.  With the base install, you will gain access to many (3177 functions, to be exact).  Some examples:
 
 
 ```r
@@ -56,16 +57,18 @@ rnorm(100, mean = 10, sd = 2)
 ```
 
 ```
-##   [1]  9.767483  7.091926 11.024896  9.798813 11.063369 10.090666 10.061917 12.053501  6.464252 10.851964
-##  [11] 10.289622  8.070289 10.176615  8.363219 11.458448 11.345107 10.502564  9.834592 14.395046  7.401356
-##  [21] 12.553471 11.599006 11.734332 10.855869  7.931718  6.147823 12.822970  9.327855  7.533605 10.207438
-##  [31]  7.188160  6.884650  7.052746  7.356367 10.413460 11.066741  9.149533 10.974869 13.821806  9.639065
-##  [41] 12.584829  9.457652  9.820674  7.847794 10.065034 10.808316  9.479562  8.065385  8.345370  9.085086
-##  [51]  7.001852 11.759984  7.855169 10.138854 13.619839  9.658445 10.204825 10.288301  7.552558  9.831651
-##  [61]  9.850320  5.721891 10.795348 10.700873 10.392914  9.737703 12.188454 10.649880  9.633929 11.081053
-##  [71] 10.120688 10.757622  8.337686 10.799026  6.723943 12.487169 10.968319  9.105938 10.246816 10.177904
-##  [81] 10.996746 13.015468  8.184030 10.084964  7.771991  9.148841 10.711149 10.606403  8.362808 10.175767
-##  [91]  9.970659 14.658216  8.427472 10.738310  7.864409  9.400493 10.426358  8.374732  8.079189  9.449285
+##   [1]  7.757799 12.206113  8.901451  7.870332  8.883776 11.910142 12.514281  5.935526  9.317173
+##  [10] 11.219978  7.824952  6.736964  9.934141  9.845122  8.794760 12.857123  8.303293 10.133299
+##  [19] 11.236423 10.786913  9.360802 10.940260 12.888700 10.720070  8.752528  9.667650 10.961918
+##  [28]  6.014715  7.607440 10.883380  9.808860  9.380238 14.165859 11.409820  9.102842 11.344196
+##  [37]  4.733262  8.052144  8.706415  9.984768  9.657567 11.016998  9.081681 13.916888  9.655016
+##  [46] 12.469129 11.600748 11.046985 12.531164  7.473822  9.432760 10.097622  9.505661 11.060017
+##  [55] 11.498995  9.498498  8.497768 10.845492 10.542679 10.167784  9.866246 11.872059 10.752527
+##  [64] 12.273814 12.280425  8.110882 10.759409  9.487523 10.733394 10.223162 10.289509 10.419553
+##  [73] 11.224591 12.350866  6.503920 10.057593  9.464111  7.479428 11.370087  5.276807  9.511174
+##  [82]  8.236705  9.391218 10.208235  7.303411 10.294634  9.889141  6.295165 10.091415 10.559610
+##  [91]  9.630571  8.118609  7.120526  8.671232  9.361788 10.260492 11.281352  5.807862  8.965048
+## [100] 10.476042
 ```
 
 ```r
@@ -74,7 +77,7 @@ mean(rnorm(100))
 ```
 
 ```
-## [1] 0.1319391
+## [1] -0.1013211
 ```
 
 ```r
@@ -83,7 +86,7 @@ sum(rnorm(100))
 ```
 
 ```
-## [1] 6.009717
+## [1] 2.955547
 ```
 
 ### A few side notes 
@@ -105,7 +108,7 @@ The base install of R is quite powerful, but you will soon have a need or desire
 
 ### CRAN
 
-One of the reasons for R's popularity is CRAN, [The Comprehensive R Archive Network](http://cran.r-project.org/).  This is where you download R and also where most will gain access to packages (there are other places, but that is for later).  Not much else to say about this now other than to be aware of it.  As of 2022-11-21, there are 18841 packages on CRAN! 
+One of the reasons for R's popularity is CRAN, [The Comprehensive R Archive Network](http://cran.r-project.org/).  This is where you download R and also where most will gain access to packages (there are other places, but that is for later).  Not much else to say about this now other than to be aware of it.  As of 2022-12-12, there are 18875 packages on CRAN! 
 
 ### Installing packages
 
@@ -144,7 +147,7 @@ dplyr::mutate
 ## {
 ##     UseMethod("mutate")
 ## }
-## <bytecode: 0x000001fc0893fcd8>
+## <bytecode: 0x0000024cce8c31b0>
 ## <environment: namespace:dplyr>
 ```
 

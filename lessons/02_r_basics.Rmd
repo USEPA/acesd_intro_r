@@ -34,10 +34,11 @@ Let's start off by making sure we are in the correct project and create a script
 
 1. Open your `acesd_intro_r_class` project.  
 2. Create a new R script.
-3. Save the (currently empty) R script as `r_basics.R`
-4. Look at the file tab.  You should be in a `acesd_intro_r_class` folder and there should now be a `r_basics.R` file there.
-5. When this is finished, just say "done" in the Teams chat. 
-6. As I am showing examples, you can follow along, type the same functions and code in your script, and run the code to see what happens.
+3. Save the (currently empty) R script as `r_basics.R` into the `R` folder.
+4. Look at the file tab.  You should be in a `acesd_intro_r_class` folder and there should now be a R folder there.  Click on the R folder and there should be the `r_basics.R` file there.
+5. When you have this finished, raise your hand in Teams. 
+
+We will do this for each of the lessons. As I am showing examples, you can follow along, type the same functions and code in your script, and run the code to see what happens.  You will use the script to save the code we are working on.  This should also reinforce the idea of working on an R script and running that code in the R console.
 
 ## Functions and basic syntax 
 
