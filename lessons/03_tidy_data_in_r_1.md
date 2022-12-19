@@ -243,13 +243,13 @@ nla_2017_chem
 
 ### Other ways to read in data
 
-There are many ways to read in data with R.  If you have questions about this, please let Jeff know.  He's happy to chat more about it.  Before we move on though, I will show an example of one other way we can do this.   Since Excel spreadsheets are so ubiquitous we need a reliable way to read in data stored in an excel spreadsheet.  There are a variety of packages that provide this capability, but by far the best (IMHO) is `readxl` which is part of the Tidyverse.  You can download this file from [ne_nerrs_wq_2020.xlsx](https://github.com/jhollist/nerrs_r/blob/master/lessons/nla2007_wq.xlsx?raw=true) and once it is downloaded into the `data` folder, this is how we would read it in:
+There are many ways to read in data with R.  If you have questions about this, please let Jeff know.  He's happy to chat more about it.  Before we move on though, I will show an example of one other way we can do this.   Since Excel spreadsheets are so ubiquitous we need a reliable way to read in data stored in an excel spreadsheet.  There are a variety of packages that provide this capability, but by far the best (IMHO) is `readxl` which is part of the Tidyverse.  You can download this file from [nla2007_wq.xlsx](https://github.com/usepa/acesd_intro_r/blob/main/lessons/nla2007_wq.xlsx?raw=true) and once it is downloaded into the `data` folder, this is how we would read it in:
 
 
 ```r
 # You'll very likely need to install it first!!! How would we do that?
 library(readxl)
-nla_2017_excel <- read_excel("data/nla2007_wq.xlsx", guess_max = 600000)
+nla_2007_excel <- read_excel("data/nla2007_wq.xlsx", guess_max = 600000)
 ```
 
 This is the simplest case, but lets dig into the options to see what's possible
@@ -270,9 +270,9 @@ If you are new to R and coming from mostly and Excel background, then you may wa
 
 ## Homework 3.1
 
-For this Homework, let's read in a new dataset but this time, directly from a URL.  We are still working on the `nerrs_analysis.R` Script
+For this Homework, let's read in a new dataset but this time, directly from a URL.  We are still working on the `acesd_analysis.R` Script
 
 1. Add a new line of code, starting after the `read_csv` line we looked at above (on or around line 43).  
-2. Use the `read_csv()` function to read in "https://raw.githubusercontent.com/jhollist/nerrs_r/master/data/ne_nerrs_sites.csv", and assign the output to a data frame named `ne_nerrs_sites`.
-3. How many rows and columns do we have in the `ne_nerrs_sites` data frame?  
+2. Use the `read_csv()` function to read in "https://www.epa.gov/sites/default/files/2021-04/nla_2017_site_information-data.csv", and assign the output to a data frame named `nla_2017_sites`.
+3. How many rows and columns do we have in the `nla_2017_sites` data frame?  
 4. What is stored in the third column of this data frame?
