@@ -132,23 +132,24 @@ For today's workshop we will focus on both grabbing data from a local file and f
 For your convenience, it looks like:
 
 ```{r read_csv, message=FALSE}
-ne_nerrs_wq <- read_csv("ne_nerrs_wq_2020.csv", guess_max = 600000)
+nla_2017_chem <- read_csv("data/nla_2017_water_chemistry_chla-data.csv", 
+                          guess_max = 23000)
 ```
 
 And now we can take a look at our data frame
 
 ```{r look_at}
-ne_nerrs_wq
+nla_2017_chem
 ```
 
 ### Other ways to read in data
 
-There are many ways to read in data with R.  If you have questions about this, please let Jeff know.  He's happy to chat more about it.  Before we move on though, I will show an example of one other way we can do this.   Since Excel spreadsheets are so ubiquitous we need a reliable way to read in data stored in an excel spreadsheet.  There are a variety of packages that provide this capability, but by far the best (IMHO) is `readxl` which is part of the Tidyverse.  You can download this file from [ne_nerrs_wq_2020.xlsx](https://github.com/jhollist/nerrs_r/blob/master/lessons/ne_nerrs_wq_2020.xlsx?raw=true) and once it is downloaded, this is how we would read it in:
+There are many ways to read in data with R.  If you have questions about this, please let Jeff know.  He's happy to chat more about it.  Before we move on though, I will show an example of one other way we can do this.   Since Excel spreadsheets are so ubiquitous we need a reliable way to read in data stored in an excel spreadsheet.  There are a variety of packages that provide this capability, but by far the best (IMHO) is `readxl` which is part of the Tidyverse.  You can download this file from [ne_nerrs_wq_2020.xlsx](https://github.com/jhollist/nerrs_r/blob/master/lessons/nla2007_wq.xlsx?raw=true) and once it is downloaded into the `data` folder, this is how we would read it in:
 
 ```{r readxl, eval=FALSE}
-# You'll very likely need to install it first!!!  How'd we do that?
+# You'll very likely need to install it first!!! How would we do that?
 library(readxl)
-ne_nerrs_wq_excel <- read_excel("ne_nerrs_wq_2020.xlsx", guess_max = 600000)
+nla_2017_excel <- read_excel("data/nla2007_wq.xlsx", guess_max = 600000)
 ```
 
 This is the simplest case, but lets dig into the options to see what's possible
