@@ -140,6 +140,61 @@ At this point, we have:
 
 The purpose of all this was to introduce the concept of the data frame.  Moving forward we will use other tools to read in data, but the end result will be the same: a data frame with rows (i.e. observations) and columns (i.e. variables).
 
+### The tibble
+
+Another, very closely related concept to a data frame is the "tibble."  The pithy definition, is that a tibble is the `tidyverse` version of data frame.  It is a data frame, but with some additional features added.
+
+For instance, our old school data frame:
+
+
+```r
+my_df
+```
+
+```
+##   names age knows_r
+## 1   joe  45   FALSE
+## 2 jenny  27    TRUE
+## 3   bob  38    TRUE
+## 4   sue  51   FALSE
+```
+
+```r
+class(my_tibble)
+```
+
+```
+## [1] "tbl_df"     "tbl"        "data.frame"
+```
+
+And that old school data frame, now as a tibble:
+
+
+```r
+my_tibble <- tibble(my_df)
+my_tibble
+```
+
+```
+## # A tibble: 4 × 3
+##   names   age knows_r
+##   <chr> <dbl> <lgl>  
+## 1 joe      45 FALSE  
+## 2 jenny    27 TRUE   
+## 3 bob      38 TRUE   
+## 4 sue      51 FALSE
+```
+
+```r
+class(my_tibble)
+```
+
+```
+## [1] "tbl_df"     "tbl"        "data.frame"
+```
+
+The tibble is the default data frame created by the `tidyverse` and so as we move forward you will notice a few subtle differences and this is why.
+
 ## Reading in data
 
 Completely creating a data frame from scratch is useful (especially when you start writing your own functions), but more often than not data is stored in an external file that you need to read into R.  These may be delimited text files, spreadsheets, relational databases, SAS files ...  You get the idea.  Instead of treating this subject exhaustively, we will focus just on a single file type, the `.csv` file, that is very commonly encountered and (usually) easy to create from other file types.  For this, we will use the Tidyverse way to do this and use  `read_csv()` from the `readr` pacakge.
