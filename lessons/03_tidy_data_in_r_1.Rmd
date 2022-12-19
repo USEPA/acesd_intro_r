@@ -129,7 +129,7 @@ Source files for `read_csv()` can either be on a local hard drive or, and this i
 
 For today's workshop we will focus on both grabbing data from a local file and from a URL, we already have an example of this in our `acesd_analysis.R`.  In that file look for the line where we use `read_csv()`
 
-For your convenience, it looks like:
+For your convenience, it looks like: 
 
 ```{r read_csv, message=FALSE}
 nla_2017_chem <- read_csv("data/nla_2017_water_chemistry_chla-data.csv", 

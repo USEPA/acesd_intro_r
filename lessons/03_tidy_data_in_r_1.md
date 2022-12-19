@@ -150,13 +150,74 @@ Source files for `read_csv()` can either be on a local hard drive or, and this i
 
 For today's workshop we will focus on both grabbing data from a local file and from a URL, we already have an example of this in our `acesd_analysis.R`.  In that file look for the line where we use `read_csv()`
 
-For your convenience, it looks like:
+For your convenience, it looks like: 
 
 
+```r
+nla_2017_chem <- read_csv("data/nla_2017_water_chemistry_chla-data.csv", 
+                          guess_max = 23000)
+```
+
+And now we can take a look at our data frame
 
 
+```r
+nla_2017_chem
+```
+
+```
+## # A tibble: 22,873 × 23
+##    PUBLICATIO…¹    UID SITE_ID DATE_…² VISIT…³ STUDY STATE LAB   SAMPL…⁴ MATRIX BATCH…⁵ ANALYTE
+##    <chr>         <dbl> <chr>   <chr>     <dbl> <chr> <chr> <chr> <chr>   <chr>  <chr>   <chr>  
+##  1 4/9/2021     2.01e6 NLA17_… 30-May…       1 NLA   NV    WRS   CHEM    WATER  180301… MAGNES…
+##  2 4/9/2021     2.01e6 NLA17_… 30-May…       1 NLA   NV    WRS   CHEM    WATER  170608… DOC    
+##  3 4/9/2021     2.01e6 NLA17_… 30-May…       1 NLA   NV    WRS   CHEM    WATER  170601… SILICA 
+##  4 4/9/2021     2.01e6 NLA17_… 30-May…       1 NLA   NV    WRS   CHEM    WATER  170601… CHLORI…
+##  5 4/9/2021     2.01e6 NLA17_… 30-May…       1 NLA   NV    WRS   CHEM    WATER  170531… COND   
+##  6 4/9/2021     2.01e6 NLA17_… 30-May…       1 NLA   NV    WRS   CHEM    WATER  170601… NITRAT…
+##  7 4/9/2021     2.01e6 NLA17_… 30-May…       1 NLA   NV    WRS   CHEM    WATER  170531… PH     
+##  8 4/9/2021     2.01e6 NLA17_… 30-May…       1 NLA   NV    WRS   CHLX    WATER  170608… CHLA   
+##  9 4/9/2021     2.01e6 NLA17_… 30-May…       1 NLA   NV    WRS   CHEM    WATER  170622… NTL    
+## 10 4/9/2021     2.01e6 NLA17_… 30-May…       1 NLA   NV    WRS   CHEM    WATER  170531… TURB   
+## # … with 22,863 more rows, 11 more variables: SAM_CODE <chr>, RESULT <chr>,
+## #   RESULT_UNITS <chr>, MDL <dbl>, RL <dbl>, NARS_FLAG <chr>, DATE_RECEIVED <chr>,
+## #   DATE_ANALYZED <chr>, HOLDING_TIME <dbl>, LAB_SAMPLE_ID <dbl>, LAB_COMMENT <chr>, and
+## #   abbreviated variable names ¹​PUBLICATION_DATE, ²​DATE_COL, ³​VISIT_NO, ⁴​SAMPLE_TYPE,
+## #   ⁵​BATCH_ID
+```
+
+### Other ways to read in data
+
+There are many ways to read in data with R.  If you have questions about this, please let Jeff know.  He's happy to chat more about it.  Before we move on though, I will show an example of one other way we can do this.   Since Excel spreadsheets are so ubiquitous we need a reliable way to read in data stored in an excel spreadsheet.  There are a variety of packages that provide this capability, but by far the best (IMHO) is `readxl` which is part of the Tidyverse.  You can download this file from [ne_nerrs_wq_2020.xlsx](https://github.com/jhollist/nerrs_r/blob/master/lessons/nla2007_wq.xlsx?raw=true) and once it is downloaded into the `data` folder, this is how we would read it in:
 
 
+```r
+# You'll very likely need to install it first!!! How would we do that?
+library(readxl)
+nla_2017_excel <- read_excel("data/nla2007_wq.xlsx", guess_max = 600000)
+```
+
+This is the simplest case, but lets dig into the options to see what's possible
 
 
+```
+## function (path, sheet = NULL, range = NULL, col_names = TRUE, 
+##     col_types = NULL, na = "", trim_ws = TRUE, skip = 0, n_max = Inf, 
+##     guess_max = min(1000, n_max), progress = readxl_progress(), 
+##     .name_repair = "unique") 
+## NULL
+```
 
+### An aside on colum names
+
+If you are new to R and coming from mostly and Excel background, then you may want to think a bit more about column names than you usually might.  Excel is very flexible when it comes to naming columns and this certainly has its advantages when the end user of that data is a human.  However, humans don't do data analysis.  Computers do.  So at some point the data in that spreadsheet will likely need to be read into software that can do this analysis.  To ease this process it is best to keep column names simple, without spaces, and without special characters (e.g. !, @, &, $, etc.).  While it is possible to deal with these cases, it is not straightforward, especially for new users.  So, when working with your data (or other people's data) take a close look at the column names if you are running into problems reading that data into R.  I suggest using all lower case with separate words indicated by and underscore.  Things like "chlorophyll_a" or "total_nitrogen" are good examples of decent column names.
+
+
+## Homework 3.1
+
+For this Homework, let's read in a new dataset but this time, directly from a URL.  We are still working on the `nerrs_analysis.R` Script
+
+1. Add a new line of code, starting after the `read_csv` line we looked at above (on or around line 43).  
+2. Use the `read_csv()` function to read in "https://raw.githubusercontent.com/jhollist/nerrs_r/master/data/ne_nerrs_sites.csv", and assign the output to a data frame named `ne_nerrs_sites`.
+3. How many rows and columns do we have in the `ne_nerrs_sites` data frame?  
+4. What is stored in the third column of this data frame?
