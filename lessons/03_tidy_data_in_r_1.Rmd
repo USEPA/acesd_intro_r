@@ -86,7 +86,9 @@ In other words, if the last digit is a 5, and the digit we are rounding is even,
 </details>
 
 ### Build a data frame
-Best way to learn what a data frame is is to look at one.  Let's now build a simple data frame from scratch with the `data.frame()` function.  This is mostly a teaching excercise as we will use the function very little in the excercises to come.  
+Best way to learn what a data frame is is to look at one.  Let's now build a simple data frame from scratch with the `data.frame()` function.  This is mostly a teaching excercise as we will use the function very little in the exercises to come.  
+
+First, let's create a new script to work on for these tidy data lessons and call it, "tidy_data.R" and save it in the "R" folder.
 
 ```{r dataframe}
 # Our first data frame

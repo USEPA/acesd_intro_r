@@ -27,9 +27,8 @@ We will meet every Monday from 11am to 12pm via [Teams](https://teams.microsoft.
 | Class 2 (2022-12-05):  | [RStudio and The Punchline](lessons/01_rstudio.md)                    |[Video](https://usepa-my.sharepoint.com/:v:/g/personal/hollister_jeff_epa_gov/EYpjW84-XZdEsvOzwLdORpoB4YKd1lBG4qyipi3JLzRMPg)       |
 | Class 3 (2022-12-012): | [R Basics: Functions, Syntax, and Packages](lessons/02_r_basics.md)   |[Video](https://usepa-my.sharepoint.com/:v:/g/personal/hollister_jeff_epa_gov/EYNJMKX70zhOmxFubHflwzMBRq8CoBqoubk45NyfpksG0A)|
 | Class 4 (2022-12-19):  | [Tidy Data: Part 1](lessons/03_tidy_data_in_r_1.md)                   |       |
-| Class 5 (2022-01-09):  | [Finish Up Tidy Data: Part 1](lessons/03_tidy_data_in_r_1.md)         |       |
-| Class 6 (2023-01-23):  | [Homework 3.1 - In Class](lessons/03_tidy_data_in_r_1.md#homework-31) |       |
-|                        | [Tidy Data: Part 2](lessons/03_tidy_data_in_r_2.md)                   |       |
+| Class 5 (2022-01-09):  | Review of Data Frames and Reading Data                                |       |
+| Class 6 (2023-01-23):  | [Tidy Data: Part 2](lessons/03_tidy_data_in_r_2.md)                   |       |
 | Class 7 (2023-01-30):  | [Piping Chapter from R4DS](https://r4ds.had.co.nz/pipes.html)         |       |
 |                        | [Tidy Data: Part 2 (cont)](lessons/03_tidy_data_in_r_2.md#mutate)     |       |
 | Class 8 (2023-02-06):  | [Pivoting](lessons/03_tidy_data_in_r_2.md#pivoting)                   |       |
