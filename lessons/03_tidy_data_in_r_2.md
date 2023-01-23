@@ -1,5 +1,4 @@
 ---
-output: html_document
 editor_options: 
   chunk_output_type: console
 ---
@@ -18,7 +17,7 @@ In this lesson we will cover the basics of data in R and will do so from a somew
 
 ## Tidy data
 
-We have learned about data frames, how to create them, and about several ways to read in external data into a data.frame.   At this point there have been only a few rules applied to our data frames (which already separates them from spreadsheets) and that is our datasets must be rectangular.  Beyond that we haven't disscussed how best to organize that data so that subsequent analyses are easier to accomplish. This is, in my opinion, the biggest decision we make as data analysts and it takes a lot of time to think about how best to organize data and to actually re-organize that data.  Luckily, we can use an existing concept for this that will help guide our decisions and re-organization.  The best concept I know of to do this is the concept of [tidy data](http://r4ds.had.co.nz/tidy-data.html).  The essence of which can be summed up as:
+We have learned about data frames, how to create them, and about several ways to read in external data into a data.frame.   At this point there have been only a few rules applied to our data frames (which already separates them from spreadsheets) and that is our datasets must be rectangular.  Beyond that we haven't discussed how best to organize that data so that subsequent analyses are easier to accomplish. This is, in my opinion, the biggest decision we make as data analysts and it takes a lot of time to think about how best to organize data and to actually re-organize that data.  Luckily, we can use an existing concept for this that will help guide our decisions and re-organization.  The best concept I know of to do this is the concept of [tidy data](http://r4ds.had.co.nz/tidy-data.html).  The essence of which can be summed up as:
 
 1. Each column is a variable
 2. Each row is an observation
@@ -33,7 +32,7 @@ Lastly, if you want to read more about this there are several good sources:
 - Really anything on the [Tidyverse page](https://www.tidyverse.org/)
 - A lot of what is in the [Data Carpentry Ecology Spreadsheet Lesson](https://datacarpentry.org/spreadsheet-ecology-lesson/) is also very relevant.
 
-Let's now see some of the basic tools for tidying data using the `tidyr` and `dplyr` packages.
+Let's now see some of the basic tools for tidying data using the `dplyr` and `tidyr` packages.
 
 ### Data manipulation with `dplyr`
 
@@ -42,6 +41,15 @@ There are a lot of different ways to manipulate data in R, but one that is part 
 #### select
 
 Often we get datasets that have many columns or columns that need to be re-ordered.  We can accomplish both of these with `select`.  Here's a quick example with the `penguins` dataset.  We will also be introducing the concept of the pipe: `%>%` which we will be using going forward.  Let's look at some code that we can dissect.
+
+For these examples we are going to use a the Palmer Penguins dataset:
+
+
+```r
+# Install and load palmer penguins
+install.packages("palmerpenguins")
+library("palmerpenguins")
+```
 
 First, without the pipe:
 
@@ -52,7 +60,7 @@ penguin_bill
 ```
 
 ```
-## # A tibble: 344 x 3
+## # A tibble: 344 × 3
 ##    species bill_depth_mm bill_length_mm
 ##    <fct>           <dbl>          <dbl>
 ##  1 Adelie           18.7           39.1
@@ -65,7 +73,7 @@ penguin_bill
 ##  8 Adelie           19.6           39.2
 ##  9 Adelie           18.1           34.1
 ## 10 Adelie           20.2           42  
-## # ... with 334 more rows
+## # … with 334 more rows
 ```
 
 Then the same thing, but using the pipe instead:
@@ -78,7 +86,7 @@ penguin_bill
 ```
 
 ```
-## # A tibble: 344 x 3
+## # A tibble: 344 × 3
 ##    species bill_depth_mm bill_length_mm
 ##    <fct>           <dbl>          <dbl>
 ##  1 Adelie           18.7           39.1
@@ -91,7 +99,7 @@ penguin_bill
 ##  8 Adelie           19.6           39.2
 ##  9 Adelie           18.1           34.1
 ## 10 Adelie           20.2           42  
-## # ... with 334 more rows
+## # … with 334 more rows
 ```
 
 The end result of this is a data frame, `penguin_bill` that has three columns: species,  bill_depth_mm and bill_length_mm in the order that we specified.  And the syntax we are now using is "piped" in that we use the `%>%` operator to send something from before the operator (a.k.a. "to the left") to the first argument of the function after the operator (a.k.a. "to the right").  This allows us to write our code in the same order as we think of it.  The best explanation of this is (again) from R For Data Science in the [Piping chapter](http://r4ds.had.co.nz/pipes.html).
@@ -109,7 +117,7 @@ penguin_bill_gentoo_adelie
 ```
 
 ```
-## # A tibble: 276 x 3
+## # A tibble: 276 × 3
 ##    species bill_depth bill_length
 ##    <fct>        <dbl>       <dbl>
 ##  1 Adelie        18.7        39.1
@@ -122,7 +130,7 @@ penguin_bill_gentoo_adelie
 ##  8 Adelie        19.6        39.2
 ##  9 Adelie        18.1        34.1
 ## 10 Adelie        20.2        42  
-## # ... with 266 more rows
+## # … with 266 more rows
 ```
 
 And we can combine steps to get just Gentoo and big bills:
@@ -137,7 +145,7 @@ penguin_bill_gentoo_big
 ```
 
 ```
-## # A tibble: 62 x 3
+## # A tibble: 62 × 3
 ##    species bill_depth bill_length
 ##    <fct>        <dbl>       <dbl>
 ##  1 Gentoo        16.3        50  
@@ -150,7 +158,7 @@ penguin_bill_gentoo_big
 ##  8 Gentoo        15.2        49.2
 ##  9 Gentoo        15.1        48.7
 ## 10 Gentoo        14.3        50.2
-## # ... with 52 more rows
+## # … with 52 more rows
 ```
 
 Pay attention to a few things here.  First, what happened to our column names as we worked our way through the piped workflow (e.g. look at what we did to `bill_length`).  Also, see how we were able to nest some other functions here.
@@ -168,7 +176,7 @@ penguin_bill_ratio
 ```
 
 ```
-## # A tibble: 344 x 4
+## # A tibble: 344 × 4
 ##    species bill_depth bill_length bill_ratio
 ##    <fct>        <dbl>       <dbl>      <dbl>
 ##  1 Adelie        18.7        39.1      0.478
@@ -181,7 +189,7 @@ penguin_bill_ratio
 ##  8 Adelie        19.6        39.2      0.5  
 ##  9 Adelie        18.1        34.1      0.531
 ## 10 Adelie        20.2        42        0.481
-## # ... with 334 more rows
+## # … with 334 more rows
 ```
 
 #### group_by and summarize
@@ -201,7 +209,7 @@ penguin_bill_ratio_species
 ```
 
 ```
-## # A tibble: 3 x 4
+## # A tibble: 3 × 4
 ##   species   mean_bill_ratio sd_bill_ratio median_bill_ratio
 ##   <fct>               <dbl>         <dbl>             <dbl>
 ## 1 Adelie              0.474        0.0357             0.468
@@ -285,7 +293,7 @@ left_right_table_long
 ```
 
 ```
-## # A tibble: 18 x 5
+## # A tibble: 18 × 5
 ##    left_id names right_id parameters values
 ##      <dbl> <chr>    <int> <chr>       <dbl>
 ##  1       1 Bob          2 age          26  
@@ -317,7 +325,7 @@ left_right_table_wide
 ```
 
 ```
-## # A tibble: 6 x 6
+## # A tibble: 6 × 6
 ##   left_id names right_id   age height weight
 ##     <dbl> <chr>    <int> <dbl>  <dbl>  <dbl>
 ## 1       1 Bob          2    26   70      175
@@ -331,15 +339,15 @@ left_right_table_wide
 
 ## Homework 3.2
 
-For this homework we will work on tidying up our datasets dig into our datasets and find ways to tidy them up.  We first need to clean up the new data frame,`ne_nerrs_sites`, that we loaded up in Homework 3.1.  Add new lines of code after the section of code that cleans up the `ne_nerrs_wq` data frame (e.g. right before the commented lines about visualizing data, approximately line 85). Add some comments to your script that describe what we are doing.  I fully acknowledge that this is a lot and should challenge you.  I can set up "office hours" ahead of time if you need help.  We will discuss in class (or via email if I forget).
+For this homework we will work on tidying up our datasets dig into our datasets and find ways to tidy them up.  We first need to clean up the new data frame,`nla_2017_sites`, that we loaded up in Homework 3.1.  Add new lines of code after the section of code that cleans up the `nla_2017_sites` data frame (e.g. right before the commented lines about visualizing data, approximately line 64). Add some comments to your script that describe what we are doing.  I fully acknowledge that this is a lot and should challenge you.  I can set up "office hours" ahead of time if you need help.  We will discuss in class (or via email if I forget).
 
-1. All of this work should be stored to a new data frame called `ne_nerrs_wq_sites`.
-2. Let's select some columns:  `nerr_site_id`, `latitude`, `longitude`, `reserve_name`.  When you do the select rename `nerr_site_id` to `reserve`.
-3. Now lets filter out just the northeast reserves.  They are: "grb",  "nar", "wel", and "wqb".  Look at the Gentoo and Adelie example above for some hints.  
-4. Now group by reserve and summarize the latitude and longitude by calculating the mean for those. The newly created column names should be, `lat_mean` and `long_mean`.
-5. Join all of this with the `ne_nerrs_wq` data frame. 
-6. This would result in a long format data table.  We want to convert that to wide.  Use the appropriate function from `tidyr` and spread the `param` and `measurement` columns out wide. 
-7. The end result should be a data frame with all of our water quality variables, plus the average coordinates for each reserve in a wide format with a column for each of the variables. 
+1. All of this work should be stored to a new data frame called `nla_wq_sites`.
+2. Let's select some columns:  `UID`, `SITE_ID`,`CNTYNAME`, `LON_DD83`, `LAT_DD83`.  When you do the select rename all the columns so that they are lowercase, but with the same spelling.
+3. Join the selected columns with the `nla_2017_chem_clean` data frame.
+4. Now lets filter out just the lakes from the New England states.  They are: "ME", "NH", "VT", "MA", "RI", and "CT".  Look at the Gentoo and Adelie example above for some hints.  
+5. Now group by state and analyte, then summarize the result, longitude, and latitude by calculating the mean for those. The newly created column names should be, `result_mean`, `long_mean` and `lat_mean`.
+6. This would result in a long format data table.  We want to convert that to wide.  Use the appropriate function from `tidyr` and spread the `analyte` and `result_mean`` columns out wide. 
+7. The end result should be a data frame with all of our water quality variables, plus the average coordinates for each New England state in a wide format with a column for each of the variables. 
 
 
   
