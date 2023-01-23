@@ -1,7 +1,4 @@
----
-editor_options: 
-  chunk_output_type: console
----
+
 ```{r setup, echo=FALSE, warning=FALSE, purl=FALSE, message=FALSE}
 library(knitr)
 options(repos="http://cran.rstudio.com/")
