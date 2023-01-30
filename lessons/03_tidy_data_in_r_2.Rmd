@@ -187,8 +187,8 @@ For this homework we will work on tidying up our datasets dig into our datasets 
 2. Let's select some columns from `nla_2017_sites`:  `UID`, `SITE_ID`,`CNTYNAME`, `LON_DD83`, `LAT_DD83`.  When you do the select rename all the columns so that they are lowercase, but with the same spelling.
 3. Join the selected columns from `nla_2017_sites` with the `nla_2017_chem_clean` data frame.
 4. Now lets filter out just the lakes from the New England states.  They are: "ME", "NH", "VT", "MA", "RI", and "CT".  Look at the Gentoo and Adelie example above for some hints.  
-5. Now group by state and analyte, then summarize the `result`, `lon_dd83`, and `lat_dd83` by calculating the mean for those. The newly created column names should be, `result_mean`, `long_mean` and `lat_mean`.
-6. This would result in a long format data table.  We want to convert that to wide.  Use the appropriate function from `tidyr` and spread the `analyte` and `result_mean`` columns out wide. 
+5. Now group by state and analyte, then summarize the `result` by calculating the mean. The newly created column names should be, `result_mean`. Use the `na.rm = TRUE` argument in the `mean()` function so that `NAs` are not included in the mean calculation.
+6. This would result in a long format data table.  We want to convert that to wide.  Use the appropriate function from `tidyr` and spread the `analyte` and `result_mean` columns out wide. Trick on this is figuring out which column the `names_from` comes from and which column provides the `values_from`.
 7. The end result should be a data frame with all of our water quality variables, plus the average coordinates for each New England state in a wide format with a column for each of the variables. 
 
 
