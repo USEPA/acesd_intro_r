@@ -29,9 +29,8 @@ We will meet every Monday from 11am to 12pm via [Teams](https://teams.microsoft.
 | Class 4 (2022-12-19):  | [Tidy Data: Part 1](lessons/03_tidy_data_in_r_1.md)                   |       |
 | Class 5 (2022-01-09):  | Review of Data Frames and Reading Data                                |       |
 | Class 6 (2023-01-23):  | [Tidy Data: Part 2](lessons/03_tidy_data_in_r_2.md)                   |       |
-| Class 7 (2023-01-30):  | [Piping Chapter from R4DS](https://r4ds.had.co.nz/pipes.html)         |       |
-|                        | [Tidy Data: Part 2 (cont)](lessons/03_tidy_data_in_r_2.md#mutate)     |       |
-| Class 8 (2023-02-06):  | [Pivoting](lessons/03_tidy_data_in_r_2.md#pivoting)                   |       |
+| Class 7 (2023-01-30):  | [Tidy Data: Part 2 (cont)](lessons/03_tidy_data_in_r_2.md#mutate)     |       |
+| Class 8 (2023-02-06):  | [In Class Exercise](lessons/03_tidy_data_in_r_2.md#homework-32)                   |       |
 |                        | [Data Viz: Part 1](lessons/04_data_viz_with_ggplot2.md)               |       |
 | Class 9 (2023-02-13):  | [Data Viz: Part 2](lessons/04_data_viz_with_ggplot2.md)               |       |
 | Class 10 (2023-02-27): | Final Data Viz                                                        |       |
