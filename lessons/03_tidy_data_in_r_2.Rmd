@@ -184,10 +184,10 @@ left_right_table_wide
 For this homework we will work on tidying up our datasets dig into our datasets and find ways to tidy them up.  We first need to clean up the new data frame,`nla_2017_sites`, that we loaded up in Homework 3.1.  Add new lines of code after the section of code that cleans up the `nla_2017_sites` data frame (e.g. right before the commented lines about visualizing data, approximately line 64). Add some comments to your script that describe what we are doing.  I fully acknowledge that this is a lot and should challenge you.  I can set up "office hours" ahead of time if you need help.  We will discuss in class (or via email if I forget).
 
 1. All of this work should be stored to a new data frame called `nla_wq_sites`.
-2. Let's select some columns:  `UID`, `SITE_ID`,`CNTYNAME`, `LON_DD83`, `LAT_DD83`.  When you do the select rename all the columns so that they are lowercase, but with the same spelling.
-3. Join the selected columns with the `nla_2017_chem_clean` data frame.
+2. Let's select some columns from `nla_2017_sites`:  `UID`, `SITE_ID`,`CNTYNAME`, `LON_DD83`, `LAT_DD83`.  When you do the select rename all the columns so that they are lowercase, but with the same spelling.
+3. Join the selected columns from `nla_2017_sites` with the `nla_2017_chem_clean` data frame.
 4. Now lets filter out just the lakes from the New England states.  They are: "ME", "NH", "VT", "MA", "RI", and "CT".  Look at the Gentoo and Adelie example above for some hints.  
-5. Now group by state and analyte, then summarize the result, longitude, and latitude by calculating the mean for those. The newly created column names should be, `result_mean`, `long_mean` and `lat_mean`.
+5. Now group by state and analyte, then summarize the `result`, `lon_dd83`, and `lat_dd83` by calculating the mean for those. The newly created column names should be, `result_mean`, `long_mean` and `lat_mean`.
 6. This would result in a long format data table.  We want to convert that to wide.  Use the appropriate function from `tidyr` and spread the `analyte` and `result_mean`` columns out wide. 
 7. The end result should be a data frame with all of our water quality variables, plus the average coordinates for each New England state in a wide format with a column for each of the variables. 
 
