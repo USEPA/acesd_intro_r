@@ -26,11 +26,11 @@ We will meet every Monday from 11am to 12pm via [Teams](https://teams.microsoft.
 | Class 1 (2022-11-28):  | [Course Details, introductions, and Rstudio](lessons/00_first_class.md)|[Video](https://usepa-my.sharepoint.com/:v:/g/personal/hollister_jeff_epa_gov/EeN1V7Ylsu9FktnXb8_rEZoBuGdQ-2yAP8Vck8os_d42SQ)       |
 | Class 2 (2022-12-05):  | [RStudio and The Punchline](lessons/01_rstudio.md)                    |[Video](https://usepa-my.sharepoint.com/:v:/g/personal/hollister_jeff_epa_gov/EYpjW84-XZdEsvOzwLdORpoB4YKd1lBG4qyipi3JLzRMPg)       |
 | Class 3 (2022-12-012): | [R Basics: Functions, Syntax, and Packages](lessons/02_r_basics.md)   |[Video](https://usepa-my.sharepoint.com/:v:/g/personal/hollister_jeff_epa_gov/EYNJMKX70zhOmxFubHflwzMBRq8CoBqoubk45NyfpksG0A)|
-| Class 4 (2022-12-19):  | [Tidy Data: Part 1](lessons/03_tidy_data_in_r_1.md)                   |       |
-| Class 5 (2022-01-09):  | Review of Data Frames and Reading Data                                |       |
-| Class 6 (2023-01-23):  | [Tidy Data: Part 2](lessons/03_tidy_data_in_r_2.md)                   |       |
-| Class 7 (2023-01-30):  | [Tidy Data: Part 2 (cont)](lessons/03_tidy_data_in_r_2.md#mutate)     |       |
-| Class 8 (2023-02-06):  | [In Class Exercise](lessons/03_tidy_data_in_r_2.md#homework-32)                   |       |
+| Class 4 (2022-12-19):  | [Tidy Data: Part 1](lessons/03_tidy_data_in_r_1.md)                   |[Video](https://usepa-my.sharepoint.com/:v:/g/personal/hollister_jeff_epa_gov/EbSszKCK1JlIljzvmRNZRf8BUekA1AfCmSzpCK5Wsuevhg)|
+| Class 5 (2022-01-09):  | Review of Data Frames and Reading Data                                |[Video](https://usepa-my.sharepoint.com/:v:/g/personal/hollister_jeff_epa_gov/EXPsZname4hDkwA-VidmdJ4BbpWZv4A1-4Fp2gYyCIlS9w)|
+| Class 6 (2023-01-23):  | [Tidy Data: Part 2](lessons/03_tidy_data_in_r_2.md)                   |[Video](https://usepa-my.sharepoint.com/:v:/g/personal/hollister_jeff_epa_gov/ERg3AuYADNVHly_ASQ2c7Y4BWx2KMqS8UhJWGL_VSB_6TQ)|
+| Class 7 (2023-01-30):  | [Tidy Data: Part 2 (cont)](lessons/03_tidy_data_in_r_2.md#mutate)     |[Video](https://usepa-my.sharepoint.com/:v:/g/personal/hollister_jeff_epa_gov/EX3_twgFq9hNq0jfPA9FzlIBe-yTFNsHb8JNUFrewpwXCA)|
+| Class 8 (2023-02-06):  | [In Class Exercise](lessons/03_tidy_data_in_r_2.md#homework-32)       |       |
 |                        | [Data Viz: Part 1](lessons/04_data_viz_with_ggplot2.md)               |       |
 | Class 9 (2023-02-13):  | [Data Viz: Part 2](lessons/04_data_viz_with_ggplot2.md)               |       |
 | Class 10 (2023-02-27): | Final Data Viz                                                        |       |
