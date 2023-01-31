@@ -149,14 +149,130 @@ Another, very closely related concept to a data frame is the "tibble."  The pith
 For instance, our old school data frame:
 
 
+```r
+my_df
+```
+
+```
+##   names age knows_r
+## 1   joe  45   FALSE
+## 2 jenny  27    TRUE
+## 3   bob  38    TRUE
+## 4   sue  51   FALSE
+```
+
+```r
+class(my_df)
+```
+
+```
+## [1] "data.frame"
+```
+
+And that old school data frame, now as a tibble:
 
 
+```r
+my_tibble <- tibble(my_df)
+my_tibble
+```
+
+```
+## # A tibble: 4 × 3
+##   names   age knows_r
+##   <chr> <dbl> <lgl>  
+## 1 joe      45 FALSE  
+## 2 jenny    27 TRUE   
+## 3 bob      38 TRUE   
+## 4 sue      51 FALSE
+```
+
+```r
+class(my_tibble)
+```
+
+```
+## [1] "tbl_df"     "tbl"        "data.frame"
+```
+
+The tibble is the default data frame created by the `tidyverse` and so as we move forward you will notice a few subtle differences and this is why.
+
+## Reading in data
+
+Completely creating a data frame from scratch is useful (especially when you start writing your own functions), but more often than not data is stored in an external file that you need to read into R.  These may be delimited text files, spreadsheets, relational databases, SAS files ...  You get the idea.  Instead of treating this subject exhaustively, we will focus just on a single file type, the `.csv` file, that is very commonly encountered and (usually) easy to create from other file types.  For this, we will use the Tidyverse way to do this and use  `read_csv()` from the `readr` pacakge.
+
+The `read_csv()` function is a re-imagined version of the base R fucntion, `read.csv()`.  This command assumes a header row with column names and that the delimiter is a comma. The expected no data value is NA and by default, strings are NOT converted to factors.  This is a big benefit to using `read_csv()` as opposed to `read.csv()`.  Additionally, `read_csv()` has some performance enhancements that make it preferrable when working with larger data sets.  In my limited experience it is about 45% faster than the base R options.  For instance a ~200 MB file with hundreds of columns and a couple hundred thousand rows took ~14 seconds to read in with `read_csv()` and about 24 seconds with `read.csv()`.  As a comparison at 45 seconds Excel had only opened 25% of the file!
+
+Source files for `read_csv()` can either be on a local hard drive or, and this is pretty cool, on the web. We will be using the former for our examples and exercises. If you had a file available from a URL it would be accessed like `mydf <- read.csv("https://example.com/my_cool_file.csv")`. As an aside, paths and the use of forward vs back slash is important. R is looking for forward slashes ("/"), or unix-like paths. You can use these in place of the back slash and be fine. You can use a back slash but it needs to be a double back slash ("\\\\"). This is becuase the single backslash in an escape character that is used to indicate things like newlines or tabs. 
+
+For today's workshop we will focus on both grabbing data from a local file and from a URL, we already have an example of this in our `acesd_analysis.R`.  In that file look for the line where we use `read_csv()`
+
+For your convenience, it looks like: 
 
 
+```r
+nla_2017_chem <- read_csv("data/nla_2017_water_chemistry_chla-data.csv", 
+                          guess_max = 23000)
+```
+
+And now we can take a look at our data frame
 
 
+```r
+nla_2017_chem
+```
+
+```
+## # A tibble: 22,873 × 23
+##    PUBLIC…¹    UID SITE_ID DATE_…² VISIT…³ STUDY STATE LAB   SAMPL…⁴ MATRIX BATCH…⁵ ANALYTE SAM_C…⁶ RESULT RESUL…⁷     MDL
+##    <chr>     <dbl> <chr>   <chr>     <dbl> <chr> <chr> <chr> <chr>   <chr>  <chr>   <chr>   <chr>   <chr>  <chr>     <dbl>
+##  1 4/9/2021 2.01e6 NLA17_… 30-May…       1 NLA   NV    WRS   CHEM    WATER  180301… MAGNES… REGULAR 109.9… MG/L     0.003 
+##  2 4/9/2021 2.01e6 NLA17_… 30-May…       1 NLA   NV    WRS   CHEM    WATER  170608… DOC     REGULAR 7.72   MG/L     0.008 
+##  3 4/9/2021 2.01e6 NLA17_… 30-May…       1 NLA   NV    WRS   CHEM    WATER  170601… SILICA  REGULAR 6.996  MG/L     0.003 
+##  4 4/9/2021 2.01e6 NLA17_… 30-May…       1 NLA   NV    WRS   CHEM    WATER  170601… CHLORI… REGULAR 101.6… MG/L     0.006 
+##  5 4/9/2021 2.01e6 NLA17_… 30-May…       1 NLA   NV    WRS   CHEM    WATER  170531… COND    REGULAR 2172.4 US/CM … NA     
+##  6 4/9/2021 2.01e6 NLA17_… 30-May…       1 NLA   NV    WRS   CHEM    WATER  170601… NITRAT… REGULAR 0.1623 MG N/L   0.0004
+##  7 4/9/2021 2.01e6 NLA17_… 30-May…       1 NLA   NV    WRS   CHEM    WATER  170531… PH      REGULAR 7.95   STD. U… NA     
+##  8 4/9/2021 2.01e6 NLA17_… 30-May…       1 NLA   NV    WRS   CHLX    WATER  170608… CHLA    REGULAR 5.19   UG/L     0.39  
+##  9 4/9/2021 2.01e6 NLA17_… 30-May…       1 NLA   NV    WRS   CHEM    WATER  170622… NTL     REGULAR 1.343  MG/L     0.003 
+## 10 4/9/2021 2.01e6 NLA17_… 30-May…       1 NLA   NV    WRS   CHEM    WATER  170531… TURB    REGULAR 3.16   NTU     NA     
+## # … with 22,863 more rows, 7 more variables: RL <dbl>, NARS_FLAG <chr>, DATE_RECEIVED <chr>, DATE_ANALYZED <chr>,
+## #   HOLDING_TIME <dbl>, LAB_SAMPLE_ID <dbl>, LAB_COMMENT <chr>, and abbreviated variable names ¹​PUBLICATION_DATE,
+## #   ²​DATE_COL, ³​VISIT_NO, ⁴​SAMPLE_TYPE, ⁵​BATCH_ID, ⁶​SAM_CODE, ⁷​RESULT_UNITS
+```
+
+### Other ways to read in data
+
+There are many ways to read in data with R.  If you have questions about this, please let Jeff know.  He's happy to chat more about it.  Before we move on though, I will show an example of one other way we can do this.   Since Excel spreadsheets are so ubiquitous we need a reliable way to read in data stored in an excel spreadsheet.  There are a variety of packages that provide this capability, but by far the best (IMHO) is `readxl` which is part of the Tidyverse.  You can download this file from [nla2007_wq.xlsx](https://github.com/usepa/acesd_intro_r/blob/main/lessons/nla2007_wq.xlsx?raw=true) and once it is downloaded into the `data` folder, this is how we would read it in:
 
 
+```r
+# You'll very likely need to install it first!!! How would we do that?
+library(readxl)
+nla_2007_excel <- read_excel("data/nla2007_wq.xlsx", guess_max = 600000)
+```
+
+This is the simplest case, but lets dig into the options to see what's possible
 
 
+```
+## function (path, sheet = NULL, range = NULL, col_names = TRUE, 
+##     col_types = NULL, na = "", trim_ws = TRUE, skip = 0, n_max = Inf, 
+##     guess_max = min(1000, n_max), progress = readxl_progress(), 
+##     .name_repair = "unique") 
+## NULL
+```
 
+### An aside on colum names
+
+If you are new to R and coming from mostly and Excel background, then you may want to think a bit more about column names than you usually might.  Excel is very flexible when it comes to naming columns and this certainly has its advantages when the end user of that data is a human.  However, humans don't do data analysis.  Computers do.  So at some point the data in that spreadsheet will likely need to be read into software that can do this analysis.  To ease this process it is best to keep column names simple, without spaces, and without special characters (e.g. !, @, &, $, etc.).  While it is possible to deal with these cases, it is not straightforward, especially for new users.  So, when working with your data (or other people's data) take a close look at the column names if you are running into problems reading that data into R.  I suggest using all lower case with separate words indicated by and underscore.  Things like "chlorophyll_a" or "total_nitrogen" are good examples of decent column names.
+
+
+## Homework 3.1
+
+For this Homework, let's read in a new dataset but this time, directly from a URL.  We are still working on the `acesd_analysis.R` Script
+
+1. Add a new line of code, starting after the `read_csv` line we looked at above (on or around line 43).  
+2. Use the `read_csv()` function to read in "https://www.epa.gov/sites/default/files/2021-04/nla_2017_site_information-data.csv", and assign the output to a data frame named `nla_2017_sites`.
+3. How many rows and columns do we have in the `nla_2017_sites` data frame?  
+4. What is stored in the third column of this data frame?

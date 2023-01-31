@@ -129,7 +129,7 @@ For instance, our old school data frame:
 
 ```{r old_school}
 my_df
-class(my_tibble)
+class(my_df)
 ```
 
 And that old school data frame, now as a tibble:
