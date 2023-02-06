@@ -18,7 +18,7 @@ Before we get started, I do like to show what is possible.
 
 A few examples of maps built with R show this:
 
-![Trophic State Modeling Results](https://wol-prod-cdn.literatumonline.com/cms/attachment/02405da6-dcc0-438e-93fb-36e6c36f190a/ecs21321-fig-0011-m.jpg)
+![Trophic State Modeling Results](https://esajournals.onlinelibrary.wiley.com/cms/asset/efac1082-66db-4328-b7e6-e701c41b429e/ecs21321-fig-0011-m.jpg)
 
 
 ![Facebook Users](http://media.economist.com/sites/default/files/imagecache/original-size/FbMap.jpg)
@@ -231,17 +231,18 @@ The above material is A LOT!!  In short, we've seen that some of the initial set
 Lastly, we have only looked at one geometry, but there are tons.  Lets look at some of those.  The best place to do this is excellent `ggplot2` documentation of the [geom functions](http://docs.ggplot2.org/current/).
 
 ## Punchline Example Explained
-Now that we have the basics of `ggplot2` down, let's take a closer look at our example in `nerrs_analysis.R`.
+Now that we have the basics of `ggplot2` down, let's take a closer look at our example in `acesd_analysis.R`.
 
 ## Homework 4.1
-For this homework we will work on creating a new plot from scratch.  Add some new code at the end of our `neers_anlaysis.R` that does the following
+For this homework we will work on creating a new plot from scratch.  Add some new code at the end of our `acesd_anlaysis.R` that does the following
 
-1. Data visualization is as much data manipulation as it is figuring how to create a plot.  We have already taken care of that with our prior homework.  Lets use the `ne_nerrs_wq_sites` data frame to create the new plot 
-2. Let's plot pH on the x-axis, dissolved oxygen on the y-axis, and color the points based on the `reserve_name`.
-3. Use a theme other than the default.
-4. And label your axes with good labels and add a meaningful title.
-3. Try to use `ggplotly` from the `plotly` package to create an interactive version of this plot.
-4. Don't forget to comment your code.
+1. Data visualization is as much data manipulation as it is figuring how to create a plot.  We have already taken care of that with our prior homework.  Lets use the `nla_wq_sites` data frame to create a new plot. 
+2. Let's create a scatterplot with total nitrogen (`ntl`) on the x-axis, total phosphorus (`ptl`) on the y-axis, and color the points based on the `state`.
+3. Set the size of all points to 5.
+4. Use a theme other than the default.
+5. And label your axes with good labels and add a meaningful title.
+6. Try to use `ggplotly` from the `plotly` package to create an interactive version of this plot.
+7. Don't forget to comment your code.
 
 As always, I am available to help if needed, just send me an email!
 
