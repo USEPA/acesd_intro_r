@@ -18,9 +18,7 @@ Before we get started, I do like to show what is possible.
 
 A few examples of maps built with R show this:
 
-![Trophic State Modeling Results](https://esajournals.onlinelibrary.wiley.com/cms/asset/efac1082-66db-4328-b7e6-e701c41b429e/ecs21321-fig-0011-m.jpg)
-
-
+![Trophic State Modeling Results](ecs21321-fig-0011-m.jpg)
 
 
 ![Facebook Users](http://media.economist.com/sites/default/files/imagecache/original-size/FbMap.jpg)
@@ -29,7 +27,7 @@ A few examples of maps built with R show this:
 
 Another examples from work I did with Kenny Raposa.
 
-![histos](https://dfzljdn9uc3pi.cloudfront.net/2018/4876/1/fig-2-full.png)
+![histos](fig-2-full.png)
 
 from: Raposa et al. (2018). Top-down and bottom-up controls on overabundant New England salt marsh crab populations. PeerJ. https://doi.org/10.7717/peerj.4876
 
