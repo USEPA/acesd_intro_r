@@ -31,6 +31,8 @@ Visualizing data is an area where R really shines.  There are many ways to plot 
 ## Examples
 Before we get started, I do like to show what is possible.
 
+Before I show some of the pedestrian things I do, this link has really fantastic examples...  All done in R.  https://github.com/z3tt/TidyTuesday.
+
 A few examples of maps built with R show this:
 
 ![Trophic State Modeling Results](ecs21321-fig-0011-m.jpg)
