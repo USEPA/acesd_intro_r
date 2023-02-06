@@ -21,18 +21,22 @@ A few examples of maps built with R show this:
 ![Trophic State Modeling Results](https://esajournals.onlinelibrary.wiley.com/cms/asset/efac1082-66db-4328-b7e6-e701c41b429e/ecs21321-fig-0011-m.jpg)
 
 
+
+
 ![Facebook Users](http://media.economist.com/sites/default/files/imagecache/original-size/FbMap.jpg)
 
-And some fairly complicated figures:
 
-![psych_repro](https://d2ufo47lrtsv5s.cloudfront.net/content/sci/349/6251/aac4716/F1.large.jpg?width=800&height=600&carousel=1)
 
-More examples from Jeff's (and Kenny's!) work
+Another examples from work I did with Kenny Raposa.
 
 ![histos](https://dfzljdn9uc3pi.cloudfront.net/2018/4876/1/fig-2-full.png)
+
 from: Raposa et al. (2018). Top-down and bottom-up controls on overabundant New England salt marsh crab populations. PeerJ. https://doi.org/10.7717/peerj.4876
 
+
 ![heatmaps](https://www.mdpi.com/water/water-10-00604/article_deploy/html/images/water-10-00604-g006.png)
+
+
 from: Kuhn et al. (2018) Performance of national maps of watershed integrity at watershed scales. Water. https://doi.org/10.3390/w10050604
 
 And some cool examples using `ggplot2` with `plotly`.
