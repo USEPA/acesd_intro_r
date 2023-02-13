@@ -242,7 +242,7 @@ For this homework we will work on creating a new plot from scratch.  Add some ne
 
 1. Data visualization is as much data manipulation as it is figuring how to create a plot.  We have already taken care of that with our prior homework.  Lets use the `nla_wq_sites` data frame to create a new plot. 
 2. Let's create a scatterplot with total nitrogen (`ntl`) on the x-axis, total phosphorus (`ptl`) on the y-axis, and color the points based on the `state`.
-3. Set the size of all points to 5.
+3. Set the size of all points to 3.
 4. Use a theme other than the default.
 5. And label your axes with good labels and add a meaningful title.
 6. Try to use `ggplotly` from the `plotly` package to create an interactive version of this plot.
