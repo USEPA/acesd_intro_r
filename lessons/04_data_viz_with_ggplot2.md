@@ -7,7 +7,7 @@ Visualizing data is an area where R really shines.  There are many ways to plot 
 
 ## Lesson Outline
 - [Examples](#examples)
-- [Basics of `ggplot2`](#basics-of-ggplot2)
+- [Basics of `ggplot2`](#introduction-to-ggplot2-scatterplot)
 - [Example explained](#example-explained)
 
 ## Exercise
