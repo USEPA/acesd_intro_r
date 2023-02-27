@@ -34,7 +34,7 @@ We will meet every Monday from 11am to 12pm via [Teams](https://teams.microsoft.
 |                        | [Data Viz: Part 1](lessons/04_data_viz_with_ggplot2.md)               |[Video](https://usepa-my.sharepoint.com/:v:/g/personal/hollister_jeff_epa_gov/ESuFOOYzrwBFrq4TlScuRbsBe7zwLfet3RaE0nkJawoisw)       |
 | Class 9 (2023-02-13):  | [Data Viz: Part 2](lessons/04_data_viz_with_ggplot2.md#introduction-to-ggplot2-scatterplot)               |[Video](https://usepa-my.sharepoint.com/:v:/g/personal/hollister_jeff_epa_gov/EVrJnWYz7MVGvF6_9rSdDWcBmIlSsBrI5yK7gftdENV9YQ)       |
 | Class 10 (2023-02-27): | Final Data Viz                                                        |       |
-| Class 11 (2023-03-06): | [Basic Stats, Random Forest](lessons/06_basic_stats.md)               |       |
+| Class 11 (2023-03-06): | [Basic Stats](lessons/06_basic_stats.md)               |       |
 | Class 12 (2023-03-13): | Geospatial in R                                                       |       |
 
 ## EPA Disclaimer

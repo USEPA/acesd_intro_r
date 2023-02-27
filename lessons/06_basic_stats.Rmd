@@ -131,7 +131,7 @@ t.test(nla$chla ~ nla$lake_origin)
 #Wide Format - need to do some work to get there - tidyr is handy!
 wide_nla <- nla %>%
   select(site_id, chla, lake_origin) %>%
-  spread(lake_origin, chla)
+  pivot_wider(names_from = lake_origin, values_from = chla)
 names(wide_nla)<-c("site_id","man_made", "natural")
 t.test(wide_nla$man_made, wide_nla$natural)
 ```
