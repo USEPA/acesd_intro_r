@@ -31,8 +31,8 @@ We will meet every Monday from 11am to 12pm via [Teams](https://teams.microsoft.
 | Class 6 (2023-01-23):  | [Tidy Data: Part 2](lessons/03_tidy_data_in_r_2.md)                   |[Video](https://usepa-my.sharepoint.com/:v:/g/personal/hollister_jeff_epa_gov/ERg3AuYADNVHly_ASQ2c7Y4BWx2KMqS8UhJWGL_VSB_6TQ)|
 | Class 7 (2023-01-30):  | [Tidy Data: Part 2 (cont)](lessons/03_tidy_data_in_r_2.md#mutate)     |[Video](https://usepa-my.sharepoint.com/:v:/g/personal/hollister_jeff_epa_gov/EX3_twgFq9hNq0jfPA9FzlIBe-yTFNsHb8JNUFrewpwXCA)|
 | Class 8 (2023-02-06):  | [In Class Exercise](lessons/03_tidy_data_in_r_2.md#homework-32)       |       |
-|                        | [Data Viz: Part 1](lessons/04_data_viz_with_ggplot2.md)               |       |
-| Class 9 (2023-02-13):  | [Data Viz: Part 2](lessons/04_data_viz_with_ggplot2.md#introduction-to-ggplot2-scatterplot)               |       |
+|                        | [Data Viz: Part 1](lessons/04_data_viz_with_ggplot2.md)               |[Video](https://usepa-my.sharepoint.com/:v:/g/personal/hollister_jeff_epa_gov/ESuFOOYzrwBFrq4TlScuRbsBe7zwLfet3RaE0nkJawoisw)       |
+| Class 9 (2023-02-13):  | [Data Viz: Part 2](lessons/04_data_viz_with_ggplot2.md#introduction-to-ggplot2-scatterplot)               |[Video](https://usepa-my.sharepoint.com/:v:/g/personal/hollister_jeff_epa_gov/EVrJnWYz7MVGvF6_9rSdDWcBmIlSsBrI5yK7gftdENV9YQ)       |
 | Class 10 (2023-02-27): | Final Data Viz                                                        |       |
 | Class 11 (2023-03-06): | [Basic Stats, Random Forest](lessons/06_basic_stats.md)               |       |
 | Class 12 (2023-03-13): | Geospatial in R                                                       |       |
