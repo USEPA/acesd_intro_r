@@ -36,7 +36,7 @@ We will meet every Monday from 11am to 12pm via [Teams](https://teams.microsoft.
 | Class 10 (2023-02-27): | [Basic Stats](lessons/06_basic_stats.md)                                                        |[Video](https://usepa-my.sharepoint.com/:v:/g/personal/hollister_jeff_epa_gov/EVO_e_WoUmlMpzZ3X1-klT8BVhcx9463aVofGSRV2f9__w)|
 | Class 11 (2023-03-06): |[Random Forest, Logistic Regression, and broom](lessons/07_rf_log_broom.md)|Video|
 | Class 12 (2023-03-13): |[Geospatial in R](lessons/08_gis_in_r.md)|Video|
-| Class 13 (2023-03-20): |[R, Rmd, Quarto and EPA Products](lessons/09_rmd_etc_and_products.md)|Video|
+| Class 13 (2023-03-20): |[Reproducible Research: Closing the loop with QA and Products!](lessons/09_rmd_etc_and_products.md)|Video|
 | Class 14 (2023-03-27): |[Data Science Tools at USEPA](lessons/10_ds_tools_epa.md)|Video|
 
 ## EPA Disclaimer
