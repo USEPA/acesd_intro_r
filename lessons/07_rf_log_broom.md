@@ -78,21 +78,21 @@ summary(nla_chla_lm)
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -331.72   -8.38   -2.32    3.75  484.30 
+## -393.38   -9.16   -4.31    3.13  500.48 
 ## 
 ## Coefficients:
-##               Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)  0.0898626  1.9165816   0.047    0.963    
-## ptl         -0.0005152  0.0066856  -0.077    0.939    
-## ntl          0.0299220  0.0010806  27.690  < 2e-16 ***
-## turb         0.0015632  0.0485782   0.032    0.974    
-## doc         -0.5711113  0.1314703  -4.344 1.57e-05 ***
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  4.207893   2.012581   2.091   0.0369 *  
+## ptl         -0.003036   0.007193  -0.422   0.6731    
+## ntl          0.028340   0.001144  24.772  < 2e-16 ***
+## turb         0.107564   0.050095   2.147   0.0321 *  
+## doc         -1.048930   0.130761  -8.022 3.61e-15 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 45.45 on 817 degrees of freedom
-## Multiple R-squared:  0.6225,	Adjusted R-squared:  0.6206 
-## F-statistic: 336.8 on 4 and 817 DF,  p-value: < 2.2e-16
+## Residual standard error: 48.31 on 817 degrees of freedom
+## Multiple R-squared:  0.5572,	Adjusted R-squared:  0.555 
+## F-statistic:   257 on 4 and 817 DF,  p-value: < 2.2e-16
 ```
 
 Note the formula `chla ~ ptl + ntl + turb + doc`.  This is how we specify model formulas in R.  It represents this general regression formula.
@@ -114,7 +114,7 @@ plot(nla_test$chla, nla_test_predictions)
 abline(0, 1, col = "red")
 ```
 
-![plot of chunk unnamed-chunk-3](figures/unnamed-chunk-3-1.png)
+![plot of chunk lm_model_2](figures/lm_model_2-1.png)
 
 ```r
 nla_chla_lm_rmse <- sqrt(mean((nla_test_predictions - nla_test$chla)^2))
@@ -122,7 +122,7 @@ nla_chla_lm_rmse
 ```
 
 ```
-## [1] 50.8558
+## [1] 32.70161
 ```
 
 
@@ -153,7 +153,7 @@ Now lets plot it with some old school base R!
 plot(nla_rt_train$chla, nla_rt_train$rt_nla_bin)
 ```
 
-![plot of chunk unnamed-chunk-5](figures/unnamed-chunk-5-1.png)
+![plot of chunk logistic_data_plot](figures/logistic_data_plot-1.png)
 Now we have a dataset that lends itself nicely to logistic regression.  Here is how we do that.  Very similar to what we did with `lm`!
 
 
@@ -171,21 +171,21 @@ summary(nla_rt_logistic)
 ##     data = nla_rt_train)
 ## 
 ## Deviance Residuals: 
-##      Min        1Q    Median        3Q       Max  
-## -2.33544  -1.03055   0.07483   1.13039   1.37446  
+##     Min       1Q   Median       3Q      Max  
+## -2.2456  -1.0422   0.0685   1.1593   1.3588  
 ## 
 ## Coefficients:
 ##             Estimate Std. Error z value Pr(>|z|)    
-## (Intercept) -0.48666    0.18142  -2.682  0.00731 ** 
-## chla         0.05074    0.01161   4.370 1.24e-05 ***
+## (Intercept) -0.44859    0.17556  -2.555   0.0106 *  
+## chla         0.04655    0.01092   4.263 2.01e-05 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance: 332.75  on 244  degrees of freedom
-## Residual deviance: 270.48  on 243  degrees of freedom
-## AIC: 274.48
+##     Null deviance: 346.22  on 254  degrees of freedom
+## Residual deviance: 282.62  on 253  degrees of freedom
+## AIC: 286.62
 ## 
 ## Number of Fisher Scoring iterations: 8
 ```
@@ -202,7 +202,7 @@ plot(nla_rt_test$chla, nla_rt_test$rt_nla_bin)
 points(nla_rt_test$chla, predicted_rt_prob, col = "red")
 ```
 
-![plot of chunk unnamed-chunk-7](figures/unnamed-chunk-7-1.png)
+![plot of chunk logistic_model_plot](figures/logistic_model_plot-1.png)
 
 How well did this model do?  Lots(!!) of ways to look at this.  Here are two.
 
@@ -219,7 +219,7 @@ pR2(nla_rt_logistic)
 
 ```
 ##          llh      llhNull           G2     McFadden         r2ML         r2CU 
-## -135.2417384 -166.3742525   62.2650282    0.1871234    0.2244191    0.3020991
+## -141.3121054 -173.1096605   63.5951102    0.1836845    0.2207260    0.2971724
 ```
 
 And here is a way to look at prediction accuracy.  Assume a probability of less than 0.5 is Reference (i.e. 0) and greater than 0.5 is trashed. 
@@ -232,7 +232,7 @@ accuracy
 ```
 
 ```
-## [1] 0.6842105
+## [1] 0.7446809
 ```
 
 ```r
@@ -242,8 +242,8 @@ table(nla_rt_test$rt_nla_bin, predicted_rt_bin)
 ```
 ##    predicted_rt_bin
 ##      0  1
-##   0 20  2
-##   1 16 19
+##   0 17  1
+##   1 11 18
 ```
 
 Assuming reference condition is a function of productivity and/or trophic state we could probably do better by adding in more to our model.  
@@ -263,7 +263,7 @@ pR2(nla_rt_logistic)
 
 ```
 ##          llh      llhNull           G2     McFadden         r2ML         r2CU 
-##  -76.1981758 -166.3742525  180.3521534    0.5420074    0.5210367    0.7013873
+##  -88.9450928 -173.1096605  168.3291354    0.4861922    0.4832077    0.6505622
 ```
 
 ```r
@@ -271,7 +271,7 @@ accuracy
 ```
 
 ```
-## [1] 0.7192982
+## [1] 0.8723404
 ```
 
 ```r
@@ -281,8 +281,8 @@ table(nla_rt_test$rt_nla_bin, predicted_rt_bin)
 ```
 ##    predicted_rt_bin
 ##      0  1
-##   0 18  4
-##   1 12 23
+##   0 17  1
+##   1  5 24
 ```
 
 There is SO much more to go over with regards to logistic regression, but hopefully this will get you part of the way there.
@@ -301,7 +301,7 @@ nla_chla_tree <- rpart(chla ~ ., data = nla_just_wq)
 rpart.plot(nla_chla_tree)
 ```
 
-![plot of chunk unnamed-chunk-11](figures/unnamed-chunk-11-1.png)
+![plot of chunk rf_1](figures/rf_1-1.png)
 
 This is pretty cool, right?  One problem though is that this is very tuned to the dataset that we have.  We would likely get a different tree with a different dataset. So, for instance...
 
@@ -334,20 +334,20 @@ summary(nla_just_wq_2)
 ```
 
 ```
-##       ptl               ntl               turb              chla        
-##  Min.   :   1.00   Min.   :    5.0   Min.   :  0.237   Min.   :  0.070  
-##  1st Qu.:  10.00   1st Qu.:  317.8   1st Qu.:  1.490   1st Qu.:  2.888  
-##  Median :  24.00   Median :  546.5   Median :  3.710   Median :  8.020  
-##  Mean   :  93.14   Mean   : 1098.3   Mean   : 13.205   Mean   : 27.915  
-##  3rd Qu.:  78.25   3rd Qu.: 1099.2   3rd Qu.: 10.525   3rd Qu.: 23.913  
-##  Max.   :2670.00   Max.   :25663.0   Max.   :574.000   Max.   :936.000  
+##       ptl              ntl               turb              chla        
+##  Min.   :   1.0   Min.   :   28.0   Min.   :  0.278   Min.   :  0.110  
+##  1st Qu.:  10.0   1st Qu.:  337.8   1st Qu.:  1.558   1st Qu.:  2.995  
+##  Median :  30.0   Median :  624.5   Median :  4.240   Median :  8.750  
+##  Mean   : 121.5   Mean   : 1224.6   Mean   : 14.280   Mean   : 31.669  
+##  3rd Qu.: 102.0   3rd Qu.: 1235.0   3rd Qu.: 12.750   3rd Qu.: 28.580  
+##  Max.   :4679.0   Max.   :26100.0   Max.   :429.000   Max.   :871.200  
 ##       doc         
-##  Min.   :  0.340  
-##  1st Qu.:  3.330  
-##  Median :  5.170  
-##  Mean   :  7.985  
-##  3rd Qu.:  8.140  
-##  Max.   :252.190
+##  Min.   :  0.650  
+##  1st Qu.:  3.288  
+##  Median :  5.455  
+##  Mean   :  8.493  
+##  3rd Qu.:  8.820  
+##  Max.   :114.540
 ```
 
 ```r
@@ -355,7 +355,7 @@ nla_chla_tree_2 <- rpart(chla ~ ., data = nla_just_wq_2)
 rpart.plot(nla_chla_tree_2)
 ```
 
-![plot of chunk unnamed-chunk-12](figures/unnamed-chunk-12-1.png)
+![plot of chunk rf_2](figures/rf_2-1.png)
 
 Whoa!  Totally different tree!  Random forest takes advantage of this fact,  It generates many different bootstrapped datasets, with permuted variables (e.g., slightly different set of variables for each dataset), and creates many different trees.  It then uses all the trees to create a single prediction.  If the dependent variable is a category, it uses each tree to "vote" for a category and then the prediction is the category with the most votes.  If the dependent variable is a continuous value, the final models prediction is the average prediction for all trees.
 
@@ -377,11 +377,11 @@ nla_rt_rf
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 2
 ## 
-##         OOB estimate of  error rate: 13.88%
+##         OOB estimate of  error rate: 18.43%
 ## Confusion matrix:
 ##    0   1 class.error
-## 0 88  14   0.1372549
-## 1 20 123   0.1398601
+## 0 88  18   0.1698113
+## 1 29 120   0.1946309
 ```
 
 ```r
@@ -391,7 +391,7 @@ accuracy
 ```
 
 ```
-## [1] 0.8245614
+## [1] 0.9361702
 ```
 
 ```r
@@ -401,8 +401,8 @@ table(nla_rt_test$rt_nla_bin, predicted_rt_bin_rf)
 ```
 ##    predicted_rt_bin_rf
 ##      0  1
-##   0 17  5
-##   1  5 30
+##   0 17  1
+##   1  2 27
 ```
 
 
@@ -420,8 +420,8 @@ nla_chla_rf
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 1
 ## 
-##           Mean of squared residuals: 2010.495
-##                     % Var explained: 63.04
+##           Mean of squared residuals: 2084.272
+##                     % Var explained: 60.21
 ```
 
 ```r
@@ -430,7 +430,7 @@ plot(nla_test$chla, predicted_chla_rf)
 abline(0, 1, col = "red")
 ```
 
-![plot of chunk unnamed-chunk-14](figures/unnamed-chunk-14-1.png)
+![plot of chunk rf_4](figures/rf_4-1.png)
 
 ```r
 nla_chla_rf_rmse <- sqrt(mean((predicted_chla_rf - nla_test$chla)^2))
@@ -438,7 +438,7 @@ nla_chla_rf_rmse
 ```
 
 ```
-## [1] 35.79459
+## [1] 31.80912
 ```
 
 ## `broom`

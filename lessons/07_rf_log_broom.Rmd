@@ -25,7 +25,7 @@ The goal of this lesson is to show how to do some modeling, beyond what we have 
 
 Before we get started, there are probably a few packages that we will need to install.
 
-```{r, eval=FALSE}
+```{r install_packages, eval=FALSE}
 install.packages("pscl")
 install.packages("rpart")
 install.packages("rpart.plot")
@@ -77,7 +77,7 @@ nla_test <- slice(nla, test_index)
 
 Let's first revisit linear models.  This will helps us see some of the functions and syntax we will reuse later.  We will build a linear model to predict chlorophyll concentrations in the 2007 NLA lakes.
 
-```{r}
+```{r lm_model}
 nla_chla_lm <- lm(chla ~ ptl + ntl + turb + doc, data = nla_train)
 summary(nla_chla_lm)
 ```
@@ -94,7 +94,7 @@ Also, there is usually some way to quickly get summary results for the model.  O
 
 Let's look a bit more closely at this `lm` object.  We can now use our testing dataset and create predicted values and then compare those back to the original.  This is another one of those approaches that usually transcends the type of model.
 
-```{r}
+```{r lm_model_2}
 nla_test_predictions <- predict(nla_chla_lm, newdata = nla_test)
 plot(nla_test$chla, nla_test_predictions)
 abline(0, 1, col = "red")
@@ -109,7 +109,7 @@ Logistic regression, for those who haven't done it yet (or in a long time (e.g. 
 
 We have already loaded up the NLA data, but let's think about which data might work for a logistic regression.  The `rt_nla` column contains information about reference class for each sampled lake.  Looking just at chlorophyll vs reference/trashed is not an awful approach here.  First we need to get our dataset filtered, but we also need to turn our dataset into something that logistic regressions will like, namely a binary vector with 0's and 1's.  
 
-```{r}
+```{r logistic_data}
 nla_rt <- nla %>%
   filter(rt_nla != "so-so") %>%
   mutate(rt_nla_bin = case_when(rt_nla == "ref" ~
@@ -124,12 +124,12 @@ nla_rt_test <- slice(nla_rt, test_index)
 
 Now lets plot it with some old school base R!
 
-```{r}
+```{r logistic_data_plot}
 plot(nla_rt_train$chla, nla_rt_train$rt_nla_bin)
 ```
 Now we have a dataset that lends itself nicely to logistic regression.  Here is how we do that.  Very similar to what we did with `lm`!
 
-```{r}
+```{r logistic_model}
 nla_rt_logistic <- glm(rt_nla_bin ~ chla, family = binomial(link = "logit"), 
                        data = nla_rt_train)
 
@@ -140,7 +140,7 @@ With our model run and saved as `nla_rt_logistic`, we can now use that to evalua
 
 To plot the original data and the predicted data from the model we can do this, again with base R.
 
-```{r}
+```{r logistic_model_plot}
 predicted_rt_prob <- predict(nla_rt_logistic, newdata = nla_rt_test, 
                              type = "response")
 plot(nla_rt_test$chla, nla_rt_test$rt_nla_bin)
@@ -149,7 +149,7 @@ points(nla_rt_test$chla, predicted_rt_prob, col = "red")
 
 How well did this model do?  Lots(!!) of ways to look at this.  Here are two.
 
-```{r}
+```{r logistic_eval}
 # Psuedo R2
 library(pscl)
 pR2(nla_rt_logistic)
@@ -157,7 +157,7 @@ pR2(nla_rt_logistic)
 
 And here is a way to look at prediction accuracy.  Assume a probability of less than 0.5 is Reference (i.e. 0) and greater than 0.5 is trashed. 
 
-```{r}
+```{r logistic_eval_2}
 predicted_rt_bin <- ifelse(predicted_rt_prob < 0.5, 0, 1)
 accuracy <- sum(predicted_rt_bin == nla_rt_test$rt_nla_bin)/nrow(nla_rt_test)
 accuracy
@@ -166,7 +166,7 @@ table(nla_rt_test$rt_nla_bin, predicted_rt_bin)
 
 Assuming reference condition is a function of productivity and/or trophic state we could probably do better by adding in more to our model.  
 
-```{r}
+```{r logistic_model_2}
 nla_rt_logistic <- glm(rt_nla_bin ~ chla + ptl + ntl + turb + doc, family = binomial(link = "logit"), data = nla_rt_train)
 predicted_rt_prob <- predict(nla_rt_logistic, newdata = nla_rt_test, type = "response")
 predicted_rt_bin <- ifelse(predicted_rt_prob < 0.5, 0, 1)
@@ -182,7 +182,7 @@ There is SO much more to go over with regards to logistic regression, but hopefu
 
 Random forest is a modelling approach the relies on tree-based models, aka Classification and Regression Trees (CART). Typical CART builds a single tree to predict a category, a classification tree, or predict a continuous variable with a regression tree.  Let's look at a CART approach for predicting chlorophyll from the variables in the 2007 NLA we have been using.  We will use the rpart and rpart.plot package for this.
 
-```{r}
+```{r rf_1}
 library(rpart)
 library(rpart.plot)
 nla_just_wq <- select(nla, ptl:doc)
@@ -193,7 +193,7 @@ rpart.plot(nla_chla_tree)
 
 This is pretty cool, right?  One problem though is that this is very tuned to the dataset that we have.  We would likely get a different tree with a different dataset. So, for instance...
 
-```{r}
+```{r rf_2}
 bootstrapped_index <- sample(1:1028, 1028, replace = TRUE)
 nla_just_wq_2 <- nla_just_wq[bootstrapped_index,]
 summary(nla_just_wq)
@@ -206,7 +206,7 @@ Whoa!  Totally different tree!  Random forest takes advantage of this fact,  It 
 
 Now, lets build a classification random forest.  We will model the same thing we did with logistic regression, predicting reference vs trashed lakes using the water chemistry data.
 
-```{r}
+```{r rf_3}
 library(randomForest)
 nla_rt_rf <- randomForest(factor(rt_nla_bin) ~ chla + ptl + ntl + turb + doc, 
                           data = nla_rt_train, importance = TRUE)
@@ -217,7 +217,7 @@ accuracy
 table(nla_rt_test$rt_nla_bin, predicted_rt_bin_rf)
 ```
 
-```{r}
+```{r rf_4}
 nla_chla_rf <- randomForest(chla ~ ptl + ntl + turb + doc, 
                           data = nla_train, importance = TRUE)
 nla_chla_rf
