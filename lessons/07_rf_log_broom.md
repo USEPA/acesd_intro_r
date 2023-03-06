@@ -136,11 +136,9 @@ summary(nla_chla_lm)
 
 Note the formula `chla ~ ptl + ntl + turb + doc`.  This is how we specify model formulas in R.  It represents this general regression formula.
 
-```{=latex}
-\begin{equation}
-Y_i = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \beta_4 X_4 + \epsilon_i
-\end{equation}
-``` 
+$$
+Y \sim \beta_0 + X\beta_1 + X\beta_2 + X\beta_3 + X\beta_4 + \epsilon
+$$
 
 We will see it used in the other modelling functions as well.
 
@@ -655,7 +653,7 @@ str(nla_chla_lm)
 ##   .. ..- attr(*, "order")= int [1:4] 1 1 1 1
 ##   .. ..- attr(*, "intercept")= int 1
 ##   .. ..- attr(*, "response")= int 1
-##   .. ..- attr(*, ".Environment")=<environment: 0x0000026ab7479a80> 
+##   .. ..- attr(*, ".Environment")=<environment: 0x0000026abd5e30b8> 
 ##   .. ..- attr(*, "predvars")= language list(chla, ptl, ntl, turb, doc)
 ##   .. ..- attr(*, "dataClasses")= Named chr [1:5] "numeric" "numeric" "numeric" "numeric" ...
 ##   .. .. ..- attr(*, "names")= chr [1:5] "chla" "ptl" "ntl" "turb" ...
@@ -675,7 +673,7 @@ str(nla_chla_lm)
 ##   .. .. ..- attr(*, "order")= int [1:4] 1 1 1 1
 ##   .. .. ..- attr(*, "intercept")= int 1
 ##   .. .. ..- attr(*, "response")= int 1
-##   .. .. ..- attr(*, ".Environment")=<environment: 0x0000026ab7479a80> 
+##   .. .. ..- attr(*, ".Environment")=<environment: 0x0000026abd5e30b8> 
 ##   .. .. ..- attr(*, "predvars")= language list(chla, ptl, ntl, turb, doc)
 ##   .. .. ..- attr(*, "dataClasses")= Named chr [1:5] "numeric" "numeric" "numeric" "numeric" ...
 ##   .. .. .. ..- attr(*, "names")= chr [1:5] "chla" "ptl" "ntl" "turb" ...
@@ -710,7 +708,7 @@ str(summary(nla_chla_lm))
 ##   .. ..- attr(*, "order")= int [1:4] 1 1 1 1
 ##   .. ..- attr(*, "intercept")= int 1
 ##   .. ..- attr(*, "response")= int 1
-##   .. ..- attr(*, ".Environment")=<environment: 0x0000026ab7479a80> 
+##   .. ..- attr(*, ".Environment")=<environment: 0x0000026abd5e30b8> 
 ##   .. ..- attr(*, "predvars")= language list(chla, ptl, ntl, turb, doc)
 ##   .. ..- attr(*, "dataClasses")= Named chr [1:5] "numeric" "numeric" "numeric" "numeric" ...
 ##   .. .. ..- attr(*, "names")= chr [1:5] "chla" "ptl" "ntl" "turb" ...
