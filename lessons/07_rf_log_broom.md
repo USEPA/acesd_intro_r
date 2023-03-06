@@ -54,6 +54,7 @@ nla <- left_join(nla_sites, nla_wq, by = "site_id") %>%
          !is.na(ptl))
 
 index <- 1:nrow(nla)
+set.seed(42)
 train_index <- sample(index, length(index) * 0.8)
 test_index <- index[!index %in% train_index]
 
@@ -78,21 +79,21 @@ summary(nla_chla_lm)
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -254.86  -10.00   -5.27    4.41  384.94 
+## -408.97   -9.37   -3.89    3.01  491.77 
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) 10.474442   1.737875   6.027 2.52e-09 ***
-## ptl          0.002766   0.006049   0.457    0.648    
-## ntl          0.039703   0.001274  31.160  < 2e-16 ***
-## turb         0.031549   0.043365   0.728    0.467    
-## doc         -3.261540   0.180712 -18.048  < 2e-16 ***
+## (Intercept)  3.479793   2.012643   1.729   0.0842 .  
+## ptl          0.001656   0.007430   0.223   0.8237    
+## ntl          0.028550   0.001152  24.785  < 2e-16 ***
+## turb         0.109053   0.052631   2.072   0.0386 *  
+## doc         -1.037193   0.132458  -7.830 1.51e-14 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 40.86 on 817 degrees of freedom
-## Multiple R-squared:  0.6523,	Adjusted R-squared:  0.6506 
-## F-statistic: 383.1 on 4 and 817 DF,  p-value: < 2.2e-16
+## Residual standard error: 48.78 on 817 degrees of freedom
+## Multiple R-squared:  0.5774,	Adjusted R-squared:  0.5753 
+## F-statistic: 279.1 on 4 and 817 DF,  p-value: < 2.2e-16
 ```
 
 Note the formula `chla ~ ptl + ntl + turb + doc`.  This is how we specify model formulas in R.  It represents this general regression formula.
@@ -122,7 +123,7 @@ nla_chla_lm_rmse
 ```
 
 ```
-## [1] 82.91506
+## [1] 29.82033
 ```
 
 
@@ -172,20 +173,20 @@ summary(nla_rt_logistic)
 ## 
 ## Deviance Residuals: 
 ##      Min        1Q    Median        3Q       Max  
-## -2.65192  -1.03229   0.03947   1.12511   1.38541  
+## -2.52633  -1.04086   0.05425   1.10405   1.36898  
 ## 
 ## Coefficients:
 ##             Estimate Std. Error z value Pr(>|z|)    
-## (Intercept) -0.52071    0.19332  -2.693  0.00707 ** 
-## chla         0.06463    0.01540   4.196 2.72e-05 ***
+## (Intercept) -0.46843    0.18340  -2.554   0.0106 *  
+## chla         0.05835    0.01342   4.349 1.37e-05 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance: 319.17  on 236  degrees of freedom
-## Residual deviance: 252.04  on 235  degrees of freedom
-## AIC: 256.04
+##     Null deviance: 341.40  on 253  degrees of freedom
+## Residual deviance: 272.56  on 252  degrees of freedom
+## AIC: 276.56
 ## 
 ## Number of Fisher Scoring iterations: 8
 ```
@@ -219,7 +220,7 @@ pR2(nla_rt_logistic)
 
 ```
 ##          llh      llhNull           G2     McFadden         r2ML         r2CU 
-## -126.0218319 -159.5845066   67.1253493    0.2103129    0.2466530    0.3333581
+## -136.2817019 -170.6987296   68.8340554    0.2016244    0.2373837    0.3211265
 ```
 
 And here is a way to look at prediction accuracy.  Assume a probability of less than 0.5 is Reference (i.e. 0) and greater than 0.5 is trashed. 
@@ -232,7 +233,7 @@ accuracy
 ```
 
 ```
-## [1] 0.6769231
+## [1] 0.6666667
 ```
 
 ```r
@@ -242,8 +243,8 @@ table(nla_rt_test$rt_nla_bin, predicted_rt_bin)
 ```
 ##    predicted_rt_bin
 ##      0  1
-##   0 22  7
-##   1 14 22
+##   0 18  5
+##   1 11 14
 ```
 
 Assuming reference condition is a function of productivity and/or trophic state we could probably do better by adding in more to our model.  
@@ -263,7 +264,7 @@ pR2(nla_rt_logistic)
 
 ```
 ##          llh      llhNull           G2     McFadden         r2ML         r2CU 
-##  -77.9318264 -159.5845066  163.3053604    0.5116579    0.4979483    0.6729903
+##  -83.5223915 -170.6987296  174.3526762    0.5107029    0.4966290    0.6718269
 ```
 
 ```r
@@ -271,7 +272,7 @@ accuracy
 ```
 
 ```
-## [1] 0.8307692
+## [1] 0.8125
 ```
 
 ```r
@@ -281,8 +282,8 @@ table(nla_rt_test$rt_nla_bin, predicted_rt_bin)
 ```
 ##    predicted_rt_bin
 ##      0  1
-##   0 25  4
-##   1  7 29
+##   0 19  4
+##   1  5 20
 ```
 
 There is SO much more to go over with regards to logistic regression, but hopefully this will get you part of the way there.
@@ -335,19 +336,19 @@ summary(nla_just_wq_2)
 
 ```
 ##       ptl              ntl               turb              chla       
-##  Min.   :   1.0   Min.   :   27.0   Min.   :  0.241   Min.   :  0.11  
-##  1st Qu.:  12.0   1st Qu.:  329.0   1st Qu.:  1.610   1st Qu.:  3.01  
-##  Median :  29.0   Median :  611.5   Median :  3.795   Median :  7.41  
-##  Mean   : 113.8   Mean   : 1235.0   Mean   : 15.244   Mean   : 31.94  
-##  3rd Qu.: 108.0   3rd Qu.: 1263.8   3rd Qu.: 12.300   3rd Qu.: 26.16  
-##  Max.   :4679.0   Max.   :25663.0   Max.   :574.000   Max.   :936.00  
-##       doc        
-##  Min.   :  0.34  
-##  1st Qu.:  3.38  
-##  Median :  5.65  
-##  Mean   :  9.08  
-##  3rd Qu.:  9.39  
-##  Max.   :290.57
+##  Min.   :   1.0   Min.   :   18.0   Min.   :  0.241   Min.   :  0.11  
+##  1st Qu.:  11.0   1st Qu.:  334.8   1st Qu.:  1.490   1st Qu.:  2.97  
+##  Median :  29.0   Median :  601.0   Median :  3.660   Median :  7.47  
+##  Mean   : 106.2   Mean   : 1165.4   Mean   : 13.020   Mean   : 26.74  
+##  3rd Qu.:  86.0   3rd Qu.: 1161.5   3rd Qu.: 10.600   3rd Qu.: 24.88  
+##  Max.   :4679.0   Max.   :25663.0   Max.   :429.000   Max.   :542.40  
+##       doc         
+##  Min.   :  0.340  
+##  1st Qu.:  3.430  
+##  Median :  5.610  
+##  Mean   :  9.572  
+##  3rd Qu.:  8.252  
+##  Max.   :290.570
 ```
 
 ```r
@@ -377,11 +378,11 @@ nla_rt_rf
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 2
 ## 
-##         OOB estimate of  error rate: 16.88%
+##         OOB estimate of  error rate: 15.35%
 ## Confusion matrix:
 ##    0   1 class.error
-## 0 76  19   0.2000000
-## 1 21 121   0.1478873
+## 0 83  18   0.1782178
+## 1 21 132   0.1372549
 ```
 
 ```r
@@ -391,7 +392,7 @@ accuracy
 ```
 
 ```
-## [1] 0.8153846
+## [1] 0.8125
 ```
 
 ```r
@@ -401,8 +402,8 @@ table(nla_rt_test$rt_nla_bin, predicted_rt_bin_rf)
 ```
 ##    predicted_rt_bin_rf
 ##      0  1
-##   0 26  3
-##   1  9 27
+##   0 18  5
+##   1  4 21
 ```
 
 
@@ -420,8 +421,8 @@ nla_chla_rf
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 1
 ## 
-##           Mean of squared residuals: 1862.891
-##                     % Var explained: 60.96
+##           Mean of squared residuals: 2169.655
+##                     % Var explained: 61.22
 ```
 
 ```r
@@ -438,7 +439,7 @@ nla_chla_rf_rmse
 ```
 
 ```
-## [1] 40.57333
+## [1] 26.60555
 ```
 
 ## `broom`

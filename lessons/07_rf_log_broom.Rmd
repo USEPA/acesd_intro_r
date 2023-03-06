@@ -66,6 +66,7 @@ nla <- left_join(nla_sites, nla_wq, by = "site_id") %>%
          !is.na(ptl))
 
 index <- 1:nrow(nla)
+set.seed(42)
 train_index <- sample(index, length(index) * 0.8)
 test_index <- index[!index %in% train_index]
 
