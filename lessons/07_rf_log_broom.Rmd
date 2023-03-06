@@ -85,9 +85,11 @@ summary(nla_chla_lm)
 
 Note the formula `chla ~ ptl + ntl + turb + doc`.  This is how we specify model formulas in R.  It represents this general regression formula.
 
+```{=latex}
 \begin{equation}
 Y_i = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \beta_4 X_4 + \epsilon_i
 \end{equation}
+``` 
 
 We will see it used in the other modelling functions as well.
 
@@ -195,6 +197,7 @@ rpart.plot(nla_chla_tree)
 This is pretty cool, right?  One problem though is that this is very tuned to the dataset that we have.  We would likely get a different tree with a different dataset. So, for instance...
 
 ```{r rf_2}
+set.seed(42)
 bootstrapped_index <- sample(1:1028, 1028, replace = TRUE)
 nla_just_wq_2 <- nla_just_wq[bootstrapped_index,]
 summary(nla_just_wq)
@@ -203,14 +206,15 @@ nla_chla_tree_2 <- rpart(chla ~ ., data = nla_just_wq_2)
 rpart.plot(nla_chla_tree_2)
 ```
 
-Whoa!  Totally different tree!  Random forest takes advantage of this fact,  It generates many different bootstrapped datasets, with permuted variables (e.g., slightly different set of variables for each dataset), and creates many different trees.  It then uses all the trees to create a single prediction.  If the dependent variable is a category, it uses each tree to "vote" for a category and then the prediction is the category with the most votes.  If the dependent variable is a continuous value, the final models prediction is the average prediction for all trees.
+Whoa!  Totally different tree!  Random forest takes advantage of this fact,  It generates many different bootstrapped datasets, with permuted variables (e.g., slightly different set of variables for each dataset), and creates many different trees (default with `randomForest` is 1000).  It then uses all the trees to create a single prediction.  If the dependent variable is a category, it uses each tree to "vote" for a category and then the prediction is the category with the most votes.  If the dependent variable is a continuous value, the final models prediction is the average prediction for all trees.
 
 Now, lets build a classification random forest.  We will model the same thing we did with logistic regression, predicting reference vs trashed lakes using the water chemistry data.
 
 ```{r rf_3}
 library(randomForest)
+set.seed(42)
 nla_rt_rf <- randomForest(factor(rt_nla_bin) ~ chla + ptl + ntl + turb + doc, 
-                          data = nla_rt_train, importance = TRUE)
+                          data = nla_rt_train, importance = TRUE, ntree = 5000)
 nla_rt_rf
 predicted_rt_bin_rf <- predict(nla_rt_rf, newdata = nla_rt_test)
 accuracy <- sum(predicted_rt_bin_rf == nla_rt_test$rt_nla_bin)/nrow(nla_rt_test)
@@ -218,9 +222,20 @@ accuracy
 table(nla_rt_test$rt_nla_bin, predicted_rt_bin_rf)
 ```
 
+In this case the random forest had better overall performance than the logistic regression.  It is usually the case that random forests will out perform many other modelling approaches.  Given this and the **relative** simplicity, I find random forests to be a really good first approach with most modelling problems.  Especially when prediction is the goal.  That being said, we can also use random forest to tease out some information about what is going on with the variables.  One way to do this is with variable importance plots.
+
+```{r var_imp_plot}
+varImpPlot(nla_rt_rf)
+```
+
+This shows us two measures of accuracy for each of the variables in our model.  We will focus on Mean Decrease in Accuracy.  If you remember, not all variables are included in each of our random forest trees.  Variable importance uses this fact to calculate how well trees without a variable perform vs how well they perform when that variable is included.  So, trees without `ntl` and `ptl` had the biggest drop in accuracy, suggesting the nitrogen and phosphorus are pretty important when it comes to predicting chlorophyll.  Who knew?!?
+
+Finally, let's look at a regression case of random forest and re-run the same model we did initially, predicting chlorophyll with nutrients, turbidity, and dissolved organic carbon.
+
 ```{r rf_4}
+set.seed(42)
 nla_chla_rf <- randomForest(chla ~ ptl + ntl + turb + doc, 
-                          data = nla_train, importance = TRUE)
+                          data = nla_train, importance = TRUE, ntree = 5000)
 nla_chla_rf
 predicted_chla_rf <- predict(nla_chla_rf, newdata = nla_test)
 plot(nla_test$chla, predicted_chla_rf)
@@ -231,8 +246,8 @@ nla_chla_rf_rmse
 
 ## `broom`
  
-## Tidy Models
+## P.S.: Tidy Models and Non-linear models
 
-## P.S.: Non-linear models
+We have spent most of this class with a focus on the Tidyverse.  There is a a set of packages in the Tidyverse for modelling.  I haven't used these yet but they look promising.  If you have an interest in trying these out, take a look at <https://www.tidymodels.org/>.  There is also a book, [Tidy Modelling with R](https://www.tmwr.org/) written by the folks who created many of the Tidy Modelling Packages.  I haven't looked closely at it, but I would expect it to be of pretty high quqality as well.
 
-I didn't have time to add non linear models to this, but we can do those too. Look at `nls`, `loess`, and `gam` from the `mgcv` package.  Noam Ross has a fantastic self-paced coarse about GAMs: https://noamross.github.io/gams-in-r-course/.
+Lastly, I didn't have time to add non linear models to this, but we can do those too. Look at `nls`, `loess`, and `gam` from the `mgcv` package.  Noam Ross has a fantastic self-paced coarse about GAMs: https://noamross.github.io/gams-in-r-course/.

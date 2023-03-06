@@ -98,9 +98,11 @@ summary(nla_chla_lm)
 
 Note the formula `chla ~ ptl + ntl + turb + doc`.  This is how we specify model formulas in R.  It represents this general regression formula.
 
+```{=latex}
 \begin{equation}
 Y_i = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \beta_4 X_4 + \epsilon_i
 \end{equation}
+``` 
 
 We will see it used in the other modelling functions as well.
 
@@ -308,6 +310,7 @@ This is pretty cool, right?  One problem though is that this is very tuned to th
 
 
 ```r
+set.seed(42)
 bootstrapped_index <- sample(1:1028, 1028, replace = TRUE)
 nla_just_wq_2 <- nla_just_wq[bootstrapped_index,]
 summary(nla_just_wq)
@@ -335,20 +338,13 @@ summary(nla_just_wq_2)
 ```
 
 ```
-##       ptl              ntl               turb              chla       
-##  Min.   :   1.0   Min.   :   18.0   Min.   :  0.241   Min.   :  0.11  
-##  1st Qu.:  11.0   1st Qu.:  334.8   1st Qu.:  1.490   1st Qu.:  2.97  
-##  Median :  29.0   Median :  601.0   Median :  3.660   Median :  7.47  
-##  Mean   : 106.2   Mean   : 1165.4   Mean   : 13.020   Mean   : 26.74  
-##  3rd Qu.:  86.0   3rd Qu.: 1161.5   3rd Qu.: 10.600   3rd Qu.: 24.88  
-##  Max.   :4679.0   Max.   :25663.0   Max.   :429.000   Max.   :542.40  
-##       doc         
-##  Min.   :  0.340  
-##  1st Qu.:  3.430  
-##  Median :  5.610  
-##  Mean   :  9.572  
-##  3rd Qu.:  8.252  
-##  Max.   :290.570
+##       ptl            ntl             turb              chla              doc         
+##  Min.   :   1   Min.   :    5   Min.   :  0.237   Min.   :  0.070   Min.   :  0.340  
+##  1st Qu.:  10   1st Qu.:  331   1st Qu.:  1.468   1st Qu.:  2.958   1st Qu.:  3.408  
+##  Median :  25   Median :  578   Median :  3.690   Median :  7.720   Median :  5.410  
+##  Mean   : 121   Mean   : 1272   Mean   : 15.330   Mean   : 31.456   Mean   :  8.954  
+##  3rd Qu.:  94   3rd Qu.: 1223   3rd Qu.: 10.800   3rd Qu.: 26.165   3rd Qu.:  8.805  
+##  Max.   :4679   Max.   :26100   Max.   :574.000   Max.   :936.000   Max.   :252.190
 ```
 
 ```r
@@ -358,31 +354,32 @@ rpart.plot(nla_chla_tree_2)
 
 ![plot of chunk rf_2](figures/rf_2-1.png)
 
-Whoa!  Totally different tree!  Random forest takes advantage of this fact,  It generates many different bootstrapped datasets, with permuted variables (e.g., slightly different set of variables for each dataset), and creates many different trees.  It then uses all the trees to create a single prediction.  If the dependent variable is a category, it uses each tree to "vote" for a category and then the prediction is the category with the most votes.  If the dependent variable is a continuous value, the final models prediction is the average prediction for all trees.
+Whoa!  Totally different tree!  Random forest takes advantage of this fact,  It generates many different bootstrapped datasets, with permuted variables (e.g., slightly different set of variables for each dataset), and creates many different trees (default with `randomForest` is 1000).  It then uses all the trees to create a single prediction.  If the dependent variable is a category, it uses each tree to "vote" for a category and then the prediction is the category with the most votes.  If the dependent variable is a continuous value, the final models prediction is the average prediction for all trees.
 
 Now, lets build a classification random forest.  We will model the same thing we did with logistic regression, predicting reference vs trashed lakes using the water chemistry data.
 
 
 ```r
 library(randomForest)
+set.seed(42)
 nla_rt_rf <- randomForest(factor(rt_nla_bin) ~ chla + ptl + ntl + turb + doc, 
-                          data = nla_rt_train, importance = TRUE)
+                          data = nla_rt_train, importance = TRUE, ntree = 5000)
 nla_rt_rf
 ```
 
 ```
 ## 
 ## Call:
-##  randomForest(formula = factor(rt_nla_bin) ~ chla + ptl + ntl +      turb + doc, data = nla_rt_train, importance = TRUE) 
+##  randomForest(formula = factor(rt_nla_bin) ~ chla + ptl + ntl +      turb + doc, data = nla_rt_train, importance = TRUE, ntree = 5000) 
 ##                Type of random forest: classification
-##                      Number of trees: 500
+##                      Number of trees: 5000
 ## No. of variables tried at each split: 2
 ## 
-##         OOB estimate of  error rate: 15.35%
+##         OOB estimate of  error rate: 16.14%
 ## Confusion matrix:
 ##    0   1 class.error
-## 0 83  18   0.1782178
-## 1 21 132   0.1372549
+## 0 82  19   0.1881188
+## 1 22 131   0.1437908
 ```
 
 ```r
@@ -392,7 +389,7 @@ accuracy
 ```
 
 ```
-## [1] 0.8125
+## [1] 0.7916667
 ```
 
 ```r
@@ -402,27 +399,41 @@ table(nla_rt_test$rt_nla_bin, predicted_rt_bin_rf)
 ```
 ##    predicted_rt_bin_rf
 ##      0  1
-##   0 18  5
-##   1  4 21
+##   0 19  4
+##   1  6 19
 ```
+
+In this case the random forest had better overall performance than the logistic regression.  It is usually the case that random forests will out perform many other modelling approaches.  Given this and the **relative** simplicity, I find random forests to be a really good first approach with most modelling problems.  Especially when prediction is the goal.  That being said, we can also use random forest to tease out some information about what is going on with the variables.  One way to do this is with variable importance plots.
 
 
 ```r
+varImpPlot(nla_rt_rf)
+```
+
+![plot of chunk var_imp_plot](figures/var_imp_plot-1.png)
+
+This shows us two measures of accuracy for each of the variables in our model.  We will focus on Mean Decrease in Accuracy.  If you remember, not all variables are included in each of our random forest trees.  Variable importance uses this fact to calculate how well trees without a variable perform vs how well they perform when that variable is included.  So, trees without `ntl` and `ptl` had the biggest drop in accuracy, suggesting the nitrogen and phosphorus are pretty important when it comes to predicting chlorophyll.  Who knew?!?
+
+Finally, let's look at a regression case of random forest and re-run the same model we did initially, predicting chlorophyll with nutrients, turbidity, and dissolved organic carbon.
+
+
+```r
+set.seed(42)
 nla_chla_rf <- randomForest(chla ~ ptl + ntl + turb + doc, 
-                          data = nla_train, importance = TRUE)
+                          data = nla_train, importance = TRUE, ntree = 5000)
 nla_chla_rf
 ```
 
 ```
 ## 
 ## Call:
-##  randomForest(formula = chla ~ ptl + ntl + turb + doc, data = nla_train,      importance = TRUE) 
+##  randomForest(formula = chla ~ ptl + ntl + turb + doc, data = nla_train,      importance = TRUE, ntree = 5000) 
 ##                Type of random forest: regression
-##                      Number of trees: 500
+##                      Number of trees: 5000
 ## No. of variables tried at each split: 1
 ## 
-##           Mean of squared residuals: 2169.655
-##                     % Var explained: 61.22
+##           Mean of squared residuals: 2135.727
+##                     % Var explained: 61.83
 ```
 
 ```r
@@ -439,13 +450,13 @@ nla_chla_rf_rmse
 ```
 
 ```
-## [1] 26.60555
+## [1] 26.43092
 ```
 
 ## `broom`
  
-## Tidy Models
+## P.S.: Tidy Models and Non-linear models
 
-## P.S.: Non-linear models
+We have spent most of this class with a focus on the Tidyverse.  There is a a set of packages in the Tidyverse for modelling.  I haven't used these yet but they look promising.  If you have an interest in trying these out, take a look at <https://www.tidymodels.org/>.  There is also a book, [Tidy Modelling with R](https://www.tmwr.org/) written by the folks who created many of the Tidy Modelling Packages.  I haven't looked closely at it, but I would expect it to be of pretty high quqality as well.
 
-I didn't have time to add non linear models to this, but we can do those too. Look at `nls`, `loess`, and `gam` from the `mgcv` package.  Noam Ross has a fantastic self-paced coarse about GAMs: https://noamross.github.io/gams-in-r-course/.
+Lastly, I didn't have time to add non linear models to this, but we can do those too. Look at `nls`, `loess`, and `gam` from the `mgcv` package.  Noam Ross has a fantastic self-paced coarse about GAMs: https://noamross.github.io/gams-in-r-course/.
