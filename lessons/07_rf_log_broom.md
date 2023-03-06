@@ -157,6 +157,7 @@ plot(nla_rt_train$chla, nla_rt_train$rt_nla_bin)
 ```
 
 ![plot of chunk logistic_data_plot](figures/logistic_data_plot-1.png)
+
 Now we have a dataset that lends itself nicely to logistic regression.  Here is how we do that.  Very similar to what we did with `lm`!
 
 
@@ -617,7 +618,7 @@ str(nla_chla_lm)
 ##   .. ..- attr(*, "order")= int [1:4] 1 1 1 1
 ##   .. ..- attr(*, "intercept")= int 1
 ##   .. ..- attr(*, "response")= int 1
-##   .. ..- attr(*, ".Environment")=<environment: 0x0000026ac0e8c9f8> 
+##   .. ..- attr(*, ".Environment")=<environment: 0x0000026abe1fd838> 
 ##   .. ..- attr(*, "predvars")= language list(chla, ptl, ntl, turb, doc)
 ##   .. ..- attr(*, "dataClasses")= Named chr [1:5] "numeric" "numeric" "numeric" "numeric" ...
 ##   .. .. ..- attr(*, "names")= chr [1:5] "chla" "ptl" "ntl" "turb" ...
@@ -637,7 +638,7 @@ str(nla_chla_lm)
 ##   .. .. ..- attr(*, "order")= int [1:4] 1 1 1 1
 ##   .. .. ..- attr(*, "intercept")= int 1
 ##   .. .. ..- attr(*, "response")= int 1
-##   .. .. ..- attr(*, ".Environment")=<environment: 0x0000026ac0e8c9f8> 
+##   .. .. ..- attr(*, ".Environment")=<environment: 0x0000026abe1fd838> 
 ##   .. .. ..- attr(*, "predvars")= language list(chla, ptl, ntl, turb, doc)
 ##   .. .. ..- attr(*, "dataClasses")= Named chr [1:5] "numeric" "numeric" "numeric" "numeric" ...
 ##   .. .. .. ..- attr(*, "names")= chr [1:5] "chla" "ptl" "ntl" "turb" ...
@@ -672,7 +673,7 @@ str(summary(nla_chla_lm))
 ##   .. ..- attr(*, "order")= int [1:4] 1 1 1 1
 ##   .. ..- attr(*, "intercept")= int 1
 ##   .. ..- attr(*, "response")= int 1
-##   .. ..- attr(*, ".Environment")=<environment: 0x0000026ac0e8c9f8> 
+##   .. ..- attr(*, ".Environment")=<environment: 0x0000026abe1fd838> 
 ##   .. ..- attr(*, "predvars")= language list(chla, ptl, ntl, turb, doc)
 ##   .. ..- attr(*, "dataClasses")= Named chr [1:5] "numeric" "numeric" "numeric" "numeric" ...
 ##   .. .. ..- attr(*, "names")= chr [1:5] "chla" "ptl" "ntl" "turb" ...
