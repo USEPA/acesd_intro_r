@@ -1,12 +1,7 @@
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
 
 
-# Modeling grab bag: Re-visit linear models, Logistic Regression, Random 
-Forests, and Broom
+
+# Modeling grab bag: Re-visit linear models, Logistic Regression, Random Forests, and Broom
 
 The goal of this lesson is to show how to do some modeling, beyond what we have seen with linear models.  The idea is to show the basics such as formulas, model objects, and model evaluation.  You should be able to run these examples, maybe extend their use to other data.  What we won't be covering is the details of how best to use these modelling approaches.  That is for the statisticians, which I am not!!
 
@@ -60,6 +55,49 @@ test_index <- index[!index %in% train_index]
 
 nla_train <- slice(nla, train_index)
 nla_test <- slice(nla, test_index)
+
+# New dplyr function!
+glimpse(nla_train)
+```
+
+```
+## Rows: 822
+## Columns: 13
+## $ site_id     <chr> "nla06608-1091", "nla06608-0599", "nla06608-1256", "nla06608-007…
+## $ state_name  <chr> "north dakota", "texas", "kansas", "north dakota", "indiana", "n…
+## $ cntyname    <chr> "kidder", "burleson", "greenwood", "mchenry", "noble", "santa fe…
+## $ lake_origin <chr> "natural", "man-made", "man-made", "natural", "natural", "man-ma…
+## $ rt_nla      <chr> "so-so", "so-so", "ref", "so-so", "so-so", "ref", "ref", "so-so"…
+## $ st          <chr> "nd", "tx", "ks", "nd", "in", "nm", "il", "ga", "nc", "il", "ok"…
+## $ epa_reg     <chr> "region_8", "region_6", "region_7", "region_8", "region_5", "reg…
+## $ wsa_eco9    <chr> "npl", "cpl", "tpl", "tpl", "umw", "xer", "tpl", "cpl", "cpl", "…
+## $ ptl         <dbl> 90, 90, 20, 136, 36, 14, 8, 20, 1, 133, 79, 8, 77, 819, 78, 277,…
+## $ ntl         <dbl> 2503, 1012, 346, 4747, 1826, 217, 178, 420, 86, 2741, 865, 487, …
+## $ turb        <dbl> 9.06, 6.31, 3.47, 20.20, 22.10, 3.69, 1.57, 5.13, 1.88, 22.00, 1…
+## $ chla        <dbl> 12.67, 50.26, 2.58, 10.02, 55.58, 6.65, 5.07, 12.53, 2.50, 349.2…
+## $ doc         <dbl> 26.40, 8.49, 3.41, 49.81, 10.91, 4.09, 4.07, 2.93, 2.80, 15.76, …
+```
+
+```r
+glimpse(nla_test)
+```
+
+```
+## Rows: 206
+## Columns: 13
+## $ site_id     <chr> "nla06608-0005", "nla06608-0006", "nla06608-0019", "nla06608-004…
+## $ state_name  <chr> "idaho", "connecticut", "north dakota", "indiana", "north caroli…
+## $ cntyname    <chr> "blaine", "litchfield", "logan", "lagrange", "union", "kidder", …
+## $ lake_origin <chr> "natural", "man-made", "natural", "natural", "man-made", "natura…
+## $ rt_nla      <chr> "ref", "ref", "trash", "so-so", "trash", "so-so", "ref", "trash"…
+## $ st          <chr> "id", "ct", "nd", "in", "nc", "nd", "fl", "la", "mo", "nj", "co"…
+## $ epa_reg     <chr> "region_10", "region_1", "region_8", "region_5", "region_4", "re…
+## $ wsa_eco9    <chr> "wmt", "nap", "npl", "umw", "sap", "npl", "cpl", "cpl", "tpl", "…
+## $ ptl         <dbl> 4, 7, 801, 9, 218, 152, 39, 415, 24, 116, 4, 100, 22, 20, 3, 33,…
+## $ ntl         <dbl> 85, 184, 7047, 645, 1756, 2834, 420, 2441, 436, 1461, 97, 956, 7…
+## $ turb        <dbl> 0.475, 0.901, 45.500, 3.740, 15.400, 12.300, 2.740, 14.400, 3.88…
+## $ chla        <dbl> 1.21, 4.08, 4.03, 5.41, 125.40, 2.18, 7.41, 198.72, 10.88, 67.97…
+## $ doc         <dbl> 1.45, 3.16, 44.99, 7.22, 9.70, 28.53, 13.24, 8.15, 5.10, 7.25, 1…
 ```
 
 ## Least squares linear models
@@ -162,7 +200,7 @@ Now we have a dataset that lends itself nicely to logistic regression.  Here is 
 
 
 ```r
-nla_rt_logistic <- glm(rt_nla_bin ~ chla, family = binomial(link = "logit"), 
+nla_rt_logistic <- glm(rt_nla_bin ~ chla, family = binomial, 
                        data = nla_rt_train)
 
 summary(nla_rt_logistic)
@@ -171,8 +209,7 @@ summary(nla_rt_logistic)
 ```
 ## 
 ## Call:
-## glm(formula = rt_nla_bin ~ chla, family = binomial(link = "logit"), 
-##     data = nla_rt_train)
+## glm(formula = rt_nla_bin ~ chla, family = binomial, data = nla_rt_train)
 ## 
 ## Deviance Residuals: 
 ##      Min        1Q    Median        3Q       Max  
@@ -618,7 +655,7 @@ str(nla_chla_lm)
 ##   .. ..- attr(*, "order")= int [1:4] 1 1 1 1
 ##   .. ..- attr(*, "intercept")= int 1
 ##   .. ..- attr(*, "response")= int 1
-##   .. ..- attr(*, ".Environment")=<environment: 0x0000026abe1fd838> 
+##   .. ..- attr(*, ".Environment")=<environment: 0x0000026ab7479a80> 
 ##   .. ..- attr(*, "predvars")= language list(chla, ptl, ntl, turb, doc)
 ##   .. ..- attr(*, "dataClasses")= Named chr [1:5] "numeric" "numeric" "numeric" "numeric" ...
 ##   .. .. ..- attr(*, "names")= chr [1:5] "chla" "ptl" "ntl" "turb" ...
@@ -638,7 +675,7 @@ str(nla_chla_lm)
 ##   .. .. ..- attr(*, "order")= int [1:4] 1 1 1 1
 ##   .. .. ..- attr(*, "intercept")= int 1
 ##   .. .. ..- attr(*, "response")= int 1
-##   .. .. ..- attr(*, ".Environment")=<environment: 0x0000026abe1fd838> 
+##   .. .. ..- attr(*, ".Environment")=<environment: 0x0000026ab7479a80> 
 ##   .. .. ..- attr(*, "predvars")= language list(chla, ptl, ntl, turb, doc)
 ##   .. .. ..- attr(*, "dataClasses")= Named chr [1:5] "numeric" "numeric" "numeric" "numeric" ...
 ##   .. .. .. ..- attr(*, "names")= chr [1:5] "chla" "ptl" "ntl" "turb" ...
@@ -673,7 +710,7 @@ str(summary(nla_chla_lm))
 ##   .. ..- attr(*, "order")= int [1:4] 1 1 1 1
 ##   .. ..- attr(*, "intercept")= int 1
 ##   .. ..- attr(*, "response")= int 1
-##   .. ..- attr(*, ".Environment")=<environment: 0x0000026abe1fd838> 
+##   .. ..- attr(*, ".Environment")=<environment: 0x0000026ab7479a80> 
 ##   .. ..- attr(*, "predvars")= language list(chla, ptl, ntl, turb, doc)
 ##   .. ..- attr(*, "dataClasses")= Named chr [1:5] "numeric" "numeric" "numeric" "numeric" ...
 ##   .. .. ..- attr(*, "names")= chr [1:5] "chla" "ptl" "ntl" "turb" ...
@@ -707,7 +744,7 @@ summary(nla_chla_lm)$adj.r.squared
 ## [1] 0.5753366
 ```
 
-I never find this stuff that intuitive or easy to remember.  Luckily, there is a tidy-adjacent (officially apart of Tidy Models) package that lets us more consistently get important info from these kinds of statistical objects.  It is `broom` (and a GitHub only package, `njtierney/broomstick` for random forest).  There are many things you can do with `broom`, but the one I use the most are `glance()` and `tidy()`.
+I never find this stuff that intuitive or easy to remember.  Luckily, there is a tidy-adjacent (officially apart of Tidy Models) package that lets us more consistently get important info from these kinds of statistical objects.  It is `broom` (and a GitHub only package, `njtierney/broomstick` for random forest).  The `broom` package has three main functions:`glance()`, `augment()`, and `tidy()`.  We will look at `glance()` and `tidy()`.  For more, the [`broom` website](https://broom.tidymodels.org) has what you need, and the [Intro vignette](https://broom.tidymodels.org/articles/broom.html) is a good starting place.
 
 
 ```r
@@ -835,6 +872,6 @@ nla_chla_rf_model_info
 
 ## P.S.: Tidy Models and Non-linear models
 
-We have spent most of this class with a focus on the Tidyverse.  There is a a set of packages in the Tidyverse for modelling.  I haven't used these yet but they look promising.  If you have an interest in trying these out, take a look at <https://www.tidymodels.org/>.  There is also a book, [Tidy Modelling with R](https://www.tmwr.org/) written by the folks who created many of the Tidy Modelling Packages.  I haven't looked closely at it, but I would expect it to be of pretty high quqality as well.
+We have spent most of this class with a focus on the Tidyverse.  There is a a set of packages in the Tidyverse for modelling.  I haven't used these much but they look promising.  If you have an interest in trying these out, take a look at <https://www.tidymodels.org/>.  The `broom` package is part of Tidy Models. There is also a book, [Tidy Modelling with R](https://www.tmwr.org/) written by the folks who created many of the Tidy Modelling Packages.  I haven't looked closely at it, but I would expect it to be of pretty high quqality as well.
 
 Lastly, I didn't have time to add non linear models to this, but we can do those too. Look at `nls`, `loess`, and `gam` from the `mgcv` package.  Noam Ross has a fantastic self-paced coarse about GAMs: https://noamross.github.io/gams-in-r-course/.
