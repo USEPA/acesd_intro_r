@@ -412,7 +412,7 @@ varImpPlot(nla_rt_rf)
 
 ![plot of chunk var_imp_plot](figures/var_imp_plot-1.png)
 
-This shows us two measures of accuracy for each of the variables in our model.  We will focus on Mean Decrease in Accuracy.  If you remember, not all variables are included in each of our random forest trees.  Variable importance uses this fact to calculate how well trees without a variable perform vs how well they perform when that variable is included.  So, trees without `ntl` and `ptl` had the biggest drop in accuracy, suggesting the nitrogen and phosphorus are pretty important when it comes to predicting chlorophyll.  Who knew?!?
+This shows us two measures of accuracy for each of the variables in our model.  We will focus on Mean Decrease in Accuracy.  If you remember, not all variables are included in each of our random forest trees.  Variable importance uses this fact to calculate how well trees without a variable perform vs how well they perform when that variable is included.  So, trees without `ntl` and `ptl` had the biggest drop in accuracy, suggesting the nitrogen and phosphorus are pretty important when it comes to predicting the NLA condition classes.
 
 Finally, let's look at a regression case of random forest and re-run the same model we did initially, predicting chlorophyll with nutrients, turbidity, and dissolved organic carbon.
 
@@ -420,14 +420,15 @@ Finally, let's look at a regression case of random forest and re-run the same mo
 ```r
 set.seed(42)
 nla_chla_rf <- randomForest(chla ~ ptl + ntl + turb + doc, 
-                          data = nla_train, importance = TRUE, ntree = 5000)
+                          data = nla_train, importance = TRUE, ntree = 5000,
+                          keep.forest = TRUE)
 nla_chla_rf
 ```
 
 ```
 ## 
 ## Call:
-##  randomForest(formula = chla ~ ptl + ntl + turb + doc, data = nla_train,      importance = TRUE, ntree = 5000) 
+##  randomForest(formula = chla ~ ptl + ntl + turb + doc, data = nla_train,      importance = TRUE, ntree = 5000, keep.forest = TRUE) 
 ##                Type of random forest: regression
 ##                      Number of trees: 5000
 ## No. of variables tried at each split: 1
@@ -453,8 +454,384 @@ nla_chla_rf_rmse
 ## [1] 26.43092
 ```
 
-## `broom`
- 
+Similar performance to the linear model (i.e. not great in both cases!) but a bit better for the random forest.  We can also look at the variable importance plots as well.
+
+
+```r
+varImpPlot(nla_chla_rf)
+```
+
+![plot of chunk unnamed-chunk-1](figures/unnamed-chunk-1-1.png)
+
+There are other ways we can explore these random forest models, but we don't have time today to do that.  One thing you can look at on your own are partial dependency plots.  They let us examine a bit more of what is going on with prediction and individual variables.
+
+## Getting information from model object: base and `broom`
+
+Last thing we should cover is how to get key pieces of information out of these different models.  
+
+Each of the models provide information differently and we access it in different ways.
+
+
+```r
+# Linear Models
+summary(nla_chla_lm)
+```
+
+```
+## 
+## Call:
+## lm(formula = chla ~ ptl + ntl + turb + doc, data = nla_train)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -408.97   -9.37   -3.89    3.01  491.77 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  3.479793   2.012643   1.729   0.0842 .  
+## ptl          0.001656   0.007430   0.223   0.8237    
+## ntl          0.028550   0.001152  24.785  < 2e-16 ***
+## turb         0.109053   0.052631   2.072   0.0386 *  
+## doc         -1.037193   0.132458  -7.830 1.51e-14 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 48.78 on 817 degrees of freedom
+## Multiple R-squared:  0.5774,	Adjusted R-squared:  0.5753 
+## F-statistic: 279.1 on 4 and 817 DF,  p-value: < 2.2e-16
+```
+
+```r
+# Logistic
+summary(nla_rt_logistic)
+```
+
+```
+## 
+## Call:
+## glm(formula = rt_nla_bin ~ chla + ptl + ntl + turb + doc, family = binomial(link = "logit"), 
+##     data = nla_rt_train)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -2.12397  -0.65833   0.00001   0.12062   1.99965  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(>|z|)    
+## (Intercept) -1.512777   0.302180  -5.006 5.55e-07 ***
+## chla        -0.007052   0.016700  -0.422 0.672828    
+## ptl          0.015518   0.005903   2.629 0.008572 ** 
+## ntl          0.004132   0.001046   3.949 7.85e-05 ***
+## turb         0.066791   0.080583   0.829 0.407188    
+## doc         -0.253288   0.073387  -3.451 0.000558 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 341.40  on 253  degrees of freedom
+## Residual deviance: 167.04  on 248  degrees of freedom
+## AIC: 179.04
+## 
+## Number of Fisher Scoring iterations: 10
+```
+
+```r
+# Classification RF
+nla_rt_rf
+```
+
+```
+## 
+## Call:
+##  randomForest(formula = factor(rt_nla_bin) ~ chla + ptl + ntl +      turb + doc, data = nla_rt_train, importance = TRUE, ntree = 5000) 
+##                Type of random forest: classification
+##                      Number of trees: 5000
+## No. of variables tried at each split: 2
+## 
+##         OOB estimate of  error rate: 16.14%
+## Confusion matrix:
+##    0   1 class.error
+## 0 82  19   0.1881188
+## 1 22 131   0.1437908
+```
+
+```r
+# Regression RF
+nla_chla_rf
+```
+
+```
+## 
+## Call:
+##  randomForest(formula = chla ~ ptl + ntl + turb + doc, data = nla_train,      importance = TRUE, ntree = 5000, keep.forest = TRUE) 
+##                Type of random forest: regression
+##                      Number of trees: 5000
+## No. of variables tried at each split: 1
+## 
+##           Mean of squared residuals: 2135.727
+##                     % Var explained: 61.83
+```
+
+This is useful, but at this point we are just printing these results to the screen.  It would be better if we could programatically access different parts of the model output.  Say we want to get some of the basic model information.  We can dig into the summary objects and pluck out what we need.  Let's look at one example, linear model.
+
+
+```r
+# Structure of a linear model
+str(nla_chla_lm)
+```
+
+```
+## List of 12
+##  $ coefficients : Named num [1:5] 3.47979 0.00166 0.02855 0.10905 -1.03719
+##   ..- attr(*, "names")= chr [1:5] "(Intercept)" "ptl" "ntl" "turb" ...
+##  $ residuals    : Named num [1:822] -36.02 25.86 -7.65 -79.75 8.81 ...
+##   ..- attr(*, "names")= chr [1:822] "1" "2" "3" "4" ...
+##  $ effects      : Named num [1:822] -890 874 1312 159 -382 ...
+##   ..- attr(*, "names")= chr [1:822] "(Intercept)" "ptl" "ntl" "turb" ...
+##  $ rank         : int 5
+##  $ fitted.values: Named num [1:822] 48.7 24.4 10.2 89.8 46.8 ...
+##   ..- attr(*, "names")= chr [1:822] "1" "2" "3" "4" ...
+##  $ assign       : int [1:5] 0 1 2 3 4
+##  $ qr           :List of 5
+##   ..$ qr   : num [1:822, 1:5] -28.6705 0.0349 0.0349 0.0349 0.0349 ...
+##   .. ..- attr(*, "dimnames")=List of 2
+##   .. .. ..$ : chr [1:822] "1" "2" "3" "4" ...
+##   .. .. ..$ : chr [1:5] "(Intercept)" "ptl" "ntl" "turb" ...
+##   .. ..- attr(*, "assign")= int [1:5] 0 1 2 3 4
+##   ..$ qraux: num [1:5] 1.03 1 1.01 1.01 1
+##   ..$ pivot: int [1:5] 1 2 3 4 5
+##   ..$ tol  : num 1e-07
+##   ..$ rank : int 5
+##   ..- attr(*, "class")= chr "qr"
+##  $ df.residual  : int 817
+##  $ xlevels      : Named list()
+##  $ call         : language lm(formula = chla ~ ptl + ntl + turb + doc, data = nla_train)
+##  $ terms        :Classes 'terms', 'formula'  language chla ~ ptl + ntl + turb + doc
+##   .. ..- attr(*, "variables")= language list(chla, ptl, ntl, turb, doc)
+##   .. ..- attr(*, "factors")= int [1:5, 1:4] 0 1 0 0 0 0 0 1 0 0 ...
+##   .. .. ..- attr(*, "dimnames")=List of 2
+##   .. .. .. ..$ : chr [1:5] "chla" "ptl" "ntl" "turb" ...
+##   .. .. .. ..$ : chr [1:4] "ptl" "ntl" "turb" "doc"
+##   .. ..- attr(*, "term.labels")= chr [1:4] "ptl" "ntl" "turb" "doc"
+##   .. ..- attr(*, "order")= int [1:4] 1 1 1 1
+##   .. ..- attr(*, "intercept")= int 1
+##   .. ..- attr(*, "response")= int 1
+##   .. ..- attr(*, ".Environment")=<environment: 0x0000026ac0e8c9f8> 
+##   .. ..- attr(*, "predvars")= language list(chla, ptl, ntl, turb, doc)
+##   .. ..- attr(*, "dataClasses")= Named chr [1:5] "numeric" "numeric" "numeric" "numeric" ...
+##   .. .. ..- attr(*, "names")= chr [1:5] "chla" "ptl" "ntl" "turb" ...
+##  $ model        :'data.frame':	822 obs. of  5 variables:
+##   ..$ chla: num [1:822] 12.67 50.26 2.58 10.02 55.58 ...
+##   ..$ ptl : num [1:822] 90 90 20 136 36 14 8 20 1 133 ...
+##   ..$ ntl : num [1:822] 2503 1012 346 4747 1826 ...
+##   ..$ turb: num [1:822] 9.06 6.31 3.47 20.2 22.1 3.69 1.57 5.13 1.88 22 ...
+##   ..$ doc : num [1:822] 26.4 8.49 3.41 49.81 10.91 ...
+##   ..- attr(*, "terms")=Classes 'terms', 'formula'  language chla ~ ptl + ntl + turb + doc
+##   .. .. ..- attr(*, "variables")= language list(chla, ptl, ntl, turb, doc)
+##   .. .. ..- attr(*, "factors")= int [1:5, 1:4] 0 1 0 0 0 0 0 1 0 0 ...
+##   .. .. .. ..- attr(*, "dimnames")=List of 2
+##   .. .. .. .. ..$ : chr [1:5] "chla" "ptl" "ntl" "turb" ...
+##   .. .. .. .. ..$ : chr [1:4] "ptl" "ntl" "turb" "doc"
+##   .. .. ..- attr(*, "term.labels")= chr [1:4] "ptl" "ntl" "turb" "doc"
+##   .. .. ..- attr(*, "order")= int [1:4] 1 1 1 1
+##   .. .. ..- attr(*, "intercept")= int 1
+##   .. .. ..- attr(*, "response")= int 1
+##   .. .. ..- attr(*, ".Environment")=<environment: 0x0000026ac0e8c9f8> 
+##   .. .. ..- attr(*, "predvars")= language list(chla, ptl, ntl, turb, doc)
+##   .. .. ..- attr(*, "dataClasses")= Named chr [1:5] "numeric" "numeric" "numeric" "numeric" ...
+##   .. .. .. ..- attr(*, "names")= chr [1:5] "chla" "ptl" "ntl" "turb" ...
+##  - attr(*, "class")= chr "lm"
+```
+
+```r
+# To get model coefficients
+nla_chla_lm$coefficients
+```
+
+```
+##  (Intercept)          ptl          ntl         turb          doc 
+##  3.479792621  0.001656135  0.028549649  0.109053315 -1.037192593
+```
+
+```r
+# Structure of a linear model summary
+str(summary(nla_chla_lm))
+```
+
+```
+## List of 11
+##  $ call         : language lm(formula = chla ~ ptl + ntl + turb + doc, data = nla_train)
+##  $ terms        :Classes 'terms', 'formula'  language chla ~ ptl + ntl + turb + doc
+##   .. ..- attr(*, "variables")= language list(chla, ptl, ntl, turb, doc)
+##   .. ..- attr(*, "factors")= int [1:5, 1:4] 0 1 0 0 0 0 0 1 0 0 ...
+##   .. .. ..- attr(*, "dimnames")=List of 2
+##   .. .. .. ..$ : chr [1:5] "chla" "ptl" "ntl" "turb" ...
+##   .. .. .. ..$ : chr [1:4] "ptl" "ntl" "turb" "doc"
+##   .. ..- attr(*, "term.labels")= chr [1:4] "ptl" "ntl" "turb" "doc"
+##   .. ..- attr(*, "order")= int [1:4] 1 1 1 1
+##   .. ..- attr(*, "intercept")= int 1
+##   .. ..- attr(*, "response")= int 1
+##   .. ..- attr(*, ".Environment")=<environment: 0x0000026ac0e8c9f8> 
+##   .. ..- attr(*, "predvars")= language list(chla, ptl, ntl, turb, doc)
+##   .. ..- attr(*, "dataClasses")= Named chr [1:5] "numeric" "numeric" "numeric" "numeric" ...
+##   .. .. ..- attr(*, "names")= chr [1:5] "chla" "ptl" "ntl" "turb" ...
+##  $ residuals    : Named num [1:822] -36.02 25.86 -7.65 -79.75 8.81 ...
+##   ..- attr(*, "names")= chr [1:822] "1" "2" "3" "4" ...
+##  $ coefficients : num [1:5, 1:4] 3.47979 0.00166 0.02855 0.10905 -1.03719 ...
+##   ..- attr(*, "dimnames")=List of 2
+##   .. ..$ : chr [1:5] "(Intercept)" "ptl" "ntl" "turb" ...
+##   .. ..$ : chr [1:4] "Estimate" "Std. Error" "t value" "Pr(>|t|)"
+##  $ aliased      : Named logi [1:5] FALSE FALSE FALSE FALSE FALSE
+##   ..- attr(*, "names")= chr [1:5] "(Intercept)" "ptl" "ntl" "turb" ...
+##  $ sigma        : num 48.8
+##  $ df           : int [1:3] 5 817 5
+##  $ r.squared    : num 0.577
+##  $ adj.r.squared: num 0.575
+##  $ fstatistic   : Named num [1:3] 279 4 817
+##   ..- attr(*, "names")= chr [1:3] "value" "numdf" "dendf"
+##  $ cov.unscaled : num [1:5, 1:5] 1.70e-03 -3.24e-07 -1.10e-07 -6.29e-06 -2.45e-05 ...
+##   ..- attr(*, "dimnames")=List of 2
+##   .. ..$ : chr [1:5] "(Intercept)" "ptl" "ntl" "turb" ...
+##   .. ..$ : chr [1:5] "(Intercept)" "ptl" "ntl" "turb" ...
+##  - attr(*, "class")= chr "summary.lm"
+```
+
+```r
+# To get adjusted R2
+summary(nla_chla_lm)$adj.r.squared
+```
+
+```
+## [1] 0.5753366
+```
+
+I never find this stuff that intuitive or easy to remember.  Luckily, there is a tidy-adjacent (officially apart of Tidy Models) package that lets us more consistently get important info from these kinds of statistical objects.  It is `broom` (and a GitHub only package, `njtierney/broomstick` for random forest).  There are many things you can do with `broom`, but the one I use the most are `glance()` and `tidy()`.
+
+
+```r
+library(broom)
+library(broomstick)
+
+nla_chla_lm_results <- glance(nla_chla_lm)
+nla_chla_lm_model_info <- tidy(nla_chla_lm)
+nla_rt_logistic_results <- glance(nla_rt_logistic)
+nla_rt_logistic_model_info <- tidy(nla_rt_logistic)
+nla_rt_rf_results <- glance(nla_rt_rf)
+nla_rt_rf_model_info <- tidy(nla_rt_rf)
+nla_chla_rf_results <- glance(nla_chla_rf)
+nla_chla_rf_model_info <- tidy(nla_chla_rf)
+```
+
+These are nice because instead of having unique lists that we need to dig through from key pieces of information, we now have a data frame that holds all of this!
+
+
+```r
+nla_chla_lm_results
+```
+
+```
+## # A tibble: 1 × 12
+##   r.squared adj.r.s…¹ sigma stati…²   p.value    df logLik   AIC   BIC devia…³ df.re…⁴
+##       <dbl>     <dbl> <dbl>   <dbl>     <dbl> <dbl>  <dbl> <dbl> <dbl>   <dbl>   <int>
+## 1     0.577     0.575  48.8    279. 3.67e-151     4 -4359. 8730. 8759.  1.94e6     817
+## # … with 1 more variable: nobs <int>, and abbreviated variable names ¹​adj.r.squared,
+## #   ²​statistic, ³​deviance, ⁴​df.residual
+```
+
+```r
+nla_chla_lm_model_info
+```
+
+```
+## # A tibble: 5 × 5
+##   term        estimate std.error statistic   p.value
+##   <chr>          <dbl>     <dbl>     <dbl>     <dbl>
+## 1 (Intercept)  3.48      2.01        1.73  8.42e-  2
+## 2 ptl          0.00166   0.00743     0.223 8.24e-  1
+## 3 ntl          0.0285    0.00115    24.8   1.44e-101
+## 4 turb         0.109     0.0526      2.07  3.86e-  2
+## 5 doc         -1.04      0.132      -7.83  1.51e- 14
+```
+
+```r
+nla_rt_logistic_results
+```
+
+```
+## # A tibble: 1 × 8
+##   null.deviance df.null logLik   AIC   BIC deviance df.residual  nobs
+##           <dbl>   <int>  <dbl> <dbl> <dbl>    <dbl>       <int> <int>
+## 1          341.     253  -83.5  179.  200.     167.         248   254
+```
+
+```r
+nla_rt_logistic_model_info
+```
+
+```
+## # A tibble: 6 × 5
+##   term        estimate std.error statistic     p.value
+##   <chr>          <dbl>     <dbl>     <dbl>       <dbl>
+## 1 (Intercept) -1.51      0.302      -5.01  0.000000555
+## 2 chla        -0.00705   0.0167     -0.422 0.673      
+## 3 ptl          0.0155    0.00590     2.63  0.00857    
+## 4 ntl          0.00413   0.00105     3.95  0.0000785  
+## 5 turb         0.0668    0.0806      0.829 0.407      
+## 6 doc         -0.253     0.0734     -3.45  0.000558
+```
+
+```r
+nla_rt_rf_results 
+```
+
+```
+## # A tibble: 2 × 5
+##   class precision recall accuracy f_measure
+##   <chr>     <dbl>  <dbl>    <dbl>     <dbl>
+## 1 0         0.788  0.812    0.839     0.8  
+## 2 1         0.873  0.856    0.839     0.865
+```
+
+```r
+nla_rt_rf_model_info 
+```
+
+```
+## # A tibble: 5 × 5
+##   term  MeanDecreaseAccuracy MeanDecreaseGini MeanDecreaseAccuracy_sd classwise_impo…¹
+##   <chr>                <dbl>            <dbl>                   <dbl> <list>          
+## 1 chla                0.0142             12.9                0.000550 <tibble [2 × 3]>
+## 2 ptl                 0.103              34.5                0.00117  <tibble [2 × 3]>
+## 3 ntl                 0.0899             31.4                0.00101  <tibble [2 × 3]>
+## 4 turb                0.0407             23.4                0.000800 <tibble [2 × 3]>
+## 5 doc                 0.0338             19.0                0.000593 <tibble [2 × 3]>
+## # … with abbreviated variable name ¹​classwise_importance
+```
+
+```r
+nla_chla_rf_results
+```
+
+```
+##   mean_mse  mean_rsq
+## 1 2169.792 0.6122173
+```
+
+```r
+nla_chla_rf_model_info
+```
+
+```
+## # A tibble: 4 × 4
+##   term  X.IncMSE IncNodePurity imp_sd
+##   <chr>    <dbl>         <dbl>  <dbl>
+## 1 ptl       574.       963652.   21.1
+## 2 ntl      2192.      1437413.   32.3
+## 3 turb     1327.      1065557.   23.1
+## 4 doc       516.       790523.   18.9
+```
+
 ## P.S.: Tidy Models and Non-linear models
 
 We have spent most of this class with a focus on the Tidyverse.  There is a a set of packages in the Tidyverse for modelling.  I haven't used these yet but they look promising.  If you have an interest in trying these out, take a look at <https://www.tidymodels.org/>.  There is also a book, [Tidy Modelling with R](https://www.tmwr.org/) written by the folks who created many of the Tidy Modelling Packages.  I haven't looked closely at it, but I would expect it to be of pretty high quqality as well.

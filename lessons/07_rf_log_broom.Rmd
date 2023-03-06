@@ -228,14 +228,15 @@ In this case the random forest had better overall performance than the logistic 
 varImpPlot(nla_rt_rf)
 ```
 
-This shows us two measures of accuracy for each of the variables in our model.  We will focus on Mean Decrease in Accuracy.  If you remember, not all variables are included in each of our random forest trees.  Variable importance uses this fact to calculate how well trees without a variable perform vs how well they perform when that variable is included.  So, trees without `ntl` and `ptl` had the biggest drop in accuracy, suggesting the nitrogen and phosphorus are pretty important when it comes to predicting chlorophyll.  Who knew?!?
+This shows us two measures of accuracy for each of the variables in our model.  We will focus on Mean Decrease in Accuracy.  If you remember, not all variables are included in each of our random forest trees.  Variable importance uses this fact to calculate how well trees without a variable perform vs how well they perform when that variable is included.  So, trees without `ntl` and `ptl` had the biggest drop in accuracy, suggesting the nitrogen and phosphorus are pretty important when it comes to predicting the NLA condition classes.
 
 Finally, let's look at a regression case of random forest and re-run the same model we did initially, predicting chlorophyll with nutrients, turbidity, and dissolved organic carbon.
 
 ```{r rf_4}
 set.seed(42)
 nla_chla_rf <- randomForest(chla ~ ptl + ntl + turb + doc, 
-                          data = nla_train, importance = TRUE, ntree = 5000)
+                          data = nla_train, importance = TRUE, ntree = 5000,
+                          keep.forest = TRUE)
 nla_chla_rf
 predicted_chla_rf <- predict(nla_chla_rf, newdata = nla_test)
 plot(nla_test$chla, predicted_chla_rf)
@@ -244,8 +245,79 @@ nla_chla_rf_rmse <- sqrt(mean((predicted_chla_rf - nla_test$chla)^2))
 nla_chla_rf_rmse
 ```
 
-## `broom`
- 
+Similar performance to the linear model (i.e. not great in both cases!) but a bit better for the random forest.  We can also look at the variable importance plots as well.
+
+```{r}
+varImpPlot(nla_chla_rf)
+```
+
+There are other ways we can explore these random forest models, but we don't have time today to do that.  One thing you can look at on your own are partial dependency plots.  They let us examine a bit more of what is going on with prediction and individual variables.
+
+## Getting information from model object: base and `broom`
+
+Last thing we should cover is how to get key pieces of information out of these different models.  
+
+Each of the models provide information differently and we access it in different ways.
+
+```{r}
+# Linear Models
+summary(nla_chla_lm)
+
+# Logistic
+summary(nla_rt_logistic)
+
+# Classification RF
+nla_rt_rf
+
+# Regression RF
+nla_chla_rf
+```
+
+This is useful, but at this point we are just printing these results to the screen.  It would be better if we could programatically access different parts of the model output.  Say we want to get some of the basic model information.  We can dig into the summary objects and pluck out what we need.  Let's look at one example, linear model.
+
+```{r}
+# Structure of a linear model
+str(nla_chla_lm)
+
+# To get model coefficients
+nla_chla_lm$coefficients
+
+# Structure of a linear model summary
+str(summary(nla_chla_lm))
+
+# To get adjusted R2
+summary(nla_chla_lm)$adj.r.squared
+```
+
+I never find this stuff that intuitive or easy to remember.  Luckily, there is a tidy-adjacent (officially apart of Tidy Models) package that lets us more consistently get important info from these kinds of statistical objects.  It is `broom` (and a GitHub only package, `njtierney/broomstick` for random forest).  There are many things you can do with `broom`, but the one I use the most are `glance()` and `tidy()`.
+
+```{r}
+library(broom)
+library(broomstick)
+
+nla_chla_lm_results <- glance(nla_chla_lm)
+nla_chla_lm_model_info <- tidy(nla_chla_lm)
+nla_rt_logistic_results <- glance(nla_rt_logistic)
+nla_rt_logistic_model_info <- tidy(nla_rt_logistic)
+nla_rt_rf_results <- glance(nla_rt_rf)
+nla_rt_rf_model_info <- tidy(nla_rt_rf)
+nla_chla_rf_results <- glance(nla_chla_rf)
+nla_chla_rf_model_info <- tidy(nla_chla_rf)
+```
+
+These are nice because instead of having unique lists that we need to dig through from key pieces of information, we now have a data frame that holds all of this!
+
+```{r}
+nla_chla_lm_results
+nla_chla_lm_model_info
+nla_rt_logistic_results
+nla_rt_logistic_model_info
+nla_rt_rf_results 
+nla_rt_rf_model_info 
+nla_chla_rf_results
+nla_chla_rf_model_info
+```
+
 ## P.S.: Tidy Models and Non-linear models
 
 We have spent most of this class with a focus on the Tidyverse.  There is a a set of packages in the Tidyverse for modelling.  I haven't used these yet but they look promising.  If you have an interest in trying these out, take a look at <https://www.tidymodels.org/>.  There is also a book, [Tidy Modelling with R](https://www.tmwr.org/) written by the folks who created many of the Tidy Modelling Packages.  I haven't looked closely at it, but I would expect it to be of pretty high quqality as well.
