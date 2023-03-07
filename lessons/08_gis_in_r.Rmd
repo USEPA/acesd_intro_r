@@ -1,16 +1,28 @@
-```{r setup, echo=FALSE, warning=FALSE, purl=FALSE, message=FALSE}
-library(knitr)
-options(repos="http://cran.rstudio.com/")
-opts_chunk$set(fig.path="figures/",R.options=list(max.print=100),message = FALSE,
-               warning = FALSE, error = FALSE)
-if(!require("ggplot2")){
-  install.packages("ggplot2")
-}
-if(!require("dplyr")){
-  install.packages("dplyr")
-}
-library("ggplot2")
-library("dplyr")
-```
 
 # Geospatial Analysis (aka GIS) in R
+
+Believe it or not, you can meet all your GIS and geospatial analysis needs using only R! We will introduce this today and we will cover the basics of how to read in and write spatial data with R, geospatial data packages, basic geospatial analysis, and options for making maps.  This will be a very high level overview but should at least get you started on the right path to learn more.
+
+Like all things in the R community, there are many options for learning about geospatial work in R.  One that I find particularly good is [Geocomputation with R](https://r.geocompx.org/index.html).  For an annotated list of spatial packages, the [CRAN Task View: Analysis of Spatial Data](https://cran.r-project.org/web/views/Spatial.html) is still a good, if a bit overwhelming, resource.
+
+None of these capabilities are part of base R, as such you will need to make sure that all of the packages have been installed.  The code block below will take care of that for you.
+
+```{r spatial_pkgs eval=FALSE}
+install.packages("sf")
+install.packages("terra")
+install.packages("tidycensus")
+install.packages("elevatr")
+install.packages("USAboundaries")
+install.packages("mapview")
+install.pacakges("ggspatial")
+```
+
+## Vector data with `sf`
+
+## Raster data with `terra`
+
+## Geospatial data packages
+
+## Static maps with `ggplot2` and `ggspatial`
+
+## Interactive maps with `mapview`
