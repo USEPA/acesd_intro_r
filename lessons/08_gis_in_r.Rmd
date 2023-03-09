@@ -6,13 +6,13 @@ editor_options:
 
 # Geospatial Analysis (aka GIS) in R
 
-Believe it or not, you can meet all your GIS and geospatial analysis needs using only R! We will introduce this today and we will cover the basics of how to read in and write spatial data with R, geospatial data packages, basic geospatial analysis, and options for making maps.  This will be a very high level overview but should at least get you started on the right path to learn more.
+Believe it or not, you can meet all your GIS and geospatial analysis needs using only R! We will introduce this today and we will cover the basics of how to read in and write spatial data with R, geospatial data packages, basic geospatial analysis, and options for making maps. This will be a very high level overview but should at least get you started on the right path to learn more.
 
-Like all things in the R community, there are many options for learning about geospatial work in R.  One that I find particularly good is [Geocomputation with R](https://r.geocompx.org/index.html).  For an annotated list of spatial packages, the [CRAN Task View: Analysis of Spatial Data](https://cran.r-project.org/web/views/Spatial.html) is still a good, if a bit overwhelming, resource.
+Like all things in the R community, there are many options for learning about geospatial work in R. One that I find particularly good is [Geocomputation with R](https://r.geocompx.org/index.html). For an annotated list of spatial packages, the [CRAN Task View: Analysis of Spatial Data](https://cran.r-project.org/web/views/Spatial.html) is still a good, if a bit overwhelming, resource.
 
-I also won't be spending too much time on covering the basics of spatial data and the rest of this lesson assumes you know the basics of vector data (e.g.,  points, lines, and polygons) and raster data (e.g., pixels, images, etc.)
+I also won't be spending too much time on covering the basics of spatial data and the rest of this lesson assumes you know the basics of vector data (e.g., points, lines, and polygons) and raster data (e.g., pixels, images, etc.).
 
-None of these capabilities are part of base R, as such you will need to make sure that all of the packages have been installed.  The code block below will take care of that for you.
+None of these capabilities are part of base R, as such you will need to make sure that all of the packages have been installed. The code block below will take care of that for you.
 
 ```{r spatial_pkgs, eval=FALSE}
 install.packages("sf")
@@ -20,15 +20,18 @@ install.packages("terra")
 install.packages("tidycensus")
 install.packages("elevatr")
 install.packages("USAboundaries")
+install.packages("USAboundariesData", repos = "https://ropensci.r-universe.dev", 
+                 type = "source")
 install.packages("mapview")
-install.pacakges("ggspatial")
+install.packages("ggspatial")
+install.packages("FedData")
 ```
 
 ## Vector data with `sf`
 
-The main package for working with vectore data in the R Spatial ecosystem is the `sf` package.  With `sf` we can read in a wide variety of vector data types.  We will see one common example that folks at EPA will encounter:  the venerable shapefile.  We will also see how to turn data (e.g., x and y locations) into an `sf` object.  
+The main package for working with vectore data in the R Spatial ecosystem is the `sf` package. With `sf` we can read in a wide variety of vector data types. We will see one common example that folks at EPA will encounter: the venerable shapefile. We will also see how to turn data (e.g., x and y locations) into an `sf` object.
 
-A shapefile is actually a collection of files.  We can get one from <https://www.epa.gov/system/files/other-files/2022-07/NLA17_polgons.zip>.  This is the 2017 lakes  The code below includes a function that will download these files for you.
+A shapefile is actually a collection of files. We can get one from <https://www.epa.gov/system/files/other-files/2022-07/NLA17_polgons.zip>. This is the 2017 lakes The code below includes a function that will download these files for you.
 
 ```{r st_read}
 # Download data
@@ -42,7 +45,7 @@ nla17_lakes <- st_read("NLA_2017_Lake_Polygon.shp")
 nla17_lakes
 ```
 
-Another common thing is to have a tabular dataset with Longitude and Latitude columns.  We can take that data and turn it into an `sf` object that we can then do spatial analysis with.  We have this with the 2017 NLA that we used as part of the `acesd_analysis.R` script.  Here is that code (with a few small changes).
+Another common thing is to have a tabular dataset with Longitude and Latitude columns. We can take that data and turn it into an `sf` object that we can then do spatial analysis with. We have this with the 2017 NLA that we used as part of the `acesd_analysis.R` script. Here is that code (with a few small changes).
 
 ```{r nladatar}
 library(readr)
@@ -61,7 +64,7 @@ nla_2017_chem_clean <- nla_2017_chem |>
   mutate(date_col = dmy(date_col), 
          analyte = tolower(analyte),
          result = as(result, "numeric")) |>
-  select(uid:date_col, year, month, day, state:result)
+  select(uid:date_col, state:result)
 
 nla_2017_sites <- read_csv("https://www.epa.gov/sites/default/files/2021-04/nla_2017_site_information-data.csv")
 
@@ -71,13 +74,30 @@ nla_wq_sites <- nla_2017_sites |>
   filter(!is.na(uid)) |>
   left_join(nla_2017_chem_clean, by = c("uid" = "uid"), multiple = "all") |>
   pivot_wider(names_from = "analyte", values_from = "result")
+glimpse(nla_wq_sites)
 ```
+
+So we now have our full NLA dataset and it has two columns, `lon_dd83` and `lat_dd83`, that we can use to create an `sf` object.  We can do that with the following
+
+```{r}
+nla_wq_sites <- st_as_sf(nla_wq_sites, 
+                         coords = c("lon_dd83", "lat_dd83"),
+                         crs = 4326)
+nla_wq_sites
+glimpse(nla_wq_sites)
+```
+
+So, we have now created some objects in R that hold vector data by reading in an external shapefile and by using longitude and latitude columns.
 
 ### Note on coordinate reference systems
 
-I gloss over the details of a coordinate reference system (CRS) in this lesson, but choosing and managing the CRS for a given analysis is something that should not be taken lightly.  The CRS will impact all of your spatial measurements (area, distance, shape, etc.) and whichever you choose will need to be appropriate to the goals of your analysis.  Furthermore, you will need to manage the CRS such that all of your spatial data have one defined and have been transformed into the same CRS.  I suggest you consult a GIS person for advice on this and I am happy to provide options and walk you through managing the CRS in R.
+I gloss over the details of a coordinate reference system (CRS) in this lesson, but choosing and managing the CRS for a given analysis is something that should not be taken lightly. The CRS will impact all of your spatial measurements (area, distance, shape, etc.) and whichever you choose will need to be appropriate to the goals of your analysis. Furthermore, you will need to manage the CRS such that all of your spatial data have one defined and have been transformed into the same CRS. I suggest you consult a GIS person for advice on this and I am happy to provide options and walk you through managing the CRS in R.
 
 ## Raster data with `terra`
+
+Let's now look at how to read in raster datasets in R.  These often are made available as image file formats and a very common one is the geotiff.
+
+rast("nlcd_2016/nlcd_2016_ri_NLCD_Land_Cover_2016.tif") -> x
 
 ## Geospatial data packages
 
