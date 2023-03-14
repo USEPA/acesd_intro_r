@@ -6,7 +6,7 @@ editor_options:
 
 # Geospatial Analysis (aka GIS) in R
 
-Believe it or not, you can meet all your GIS and geospatial analysis needs using only R! We will introduce this today and we will cover the basics of how to read in and write spatial data with R, geospatial data packages, basic geospatial analysis, and options for making maps. This will be a very high level overview but should at least get you started on the right path to learn more.
+Believe it or not, you can meet all your GIS and geospatial analysis needs using only R! We will introduce this today and we will cover the basics of how to read in and write spatial data with R, geospatial data packages, and options for making maps. This will be a very high level overview and we will only be scratching the surface, but should at least get you started on the right path to learn more.
 
 Like all things in the R community, there are many options for learning about geospatial work in R. One that I find particularly good is [Geocomputation with R](https://r.geocompx.org/index.html). For an annotated list of spatial packages, the [CRAN Task View: Analysis of Spatial Data](https://cran.r-project.org/web/views/Spatial.html) is still a good, if a bit overwhelming, resource.
 
@@ -17,7 +17,6 @@ None of these capabilities are part of base R, as such you will need to make sur
 ```{r spatial_pkgs, eval=FALSE}
 install.packages("sf")
 install.packages("terra")
-install.packages("tidycensus")
 install.packages("elevatr")
 install.packages("USAboundaries")
 install.packages("USAboundariesData", repos = "https://ropensci.r-universe.dev", 
@@ -25,6 +24,7 @@ install.packages("USAboundariesData", repos = "https://ropensci.r-universe.dev",
 install.packages("mapview")
 install.packages("ggspatial")
 install.packages("FedData")
+install.packages("tidyterra")
 ```
 
 ## Vector data with `sf`
@@ -34,6 +34,14 @@ The main package for working with vectore data in the R Spatial ecosystem is the
 A shapefile is actually a collection of files. We can get one from <https://www.epa.gov/system/files/other-files/2022-07/NLA17_polgons.zip>. This is the 2017 lakes The code below includes a function that will download these files for you.
 
 ```{r st_read}
+library(sf)
+# This is a bit of a rabbit hole/added complexity
+# Short answer, there a gazillion options that you
+# can control for all sorts of things.  This sets
+# options for plotting sf objects.
+options(sf_max.plot=1)
+
+
 # Download data
 download.file("https://www.epa.gov/system/files/other-files/2022-07/NLA17_polgons.zip", "nla17_lake_polygons.zip")
 
@@ -43,6 +51,7 @@ unzip("nla17_lake_polygons.zip", junkpaths = T)
 # Read in Vector
 nla17_lakes <- st_read("NLA_2017_Lake_Polygon.shp")
 nla17_lakes
+plot(nla17_lakes)
 ```
 
 Another common thing is to have a tabular dataset with Longitude and Latitude columns. We can take that data and turn it into an `sf` object that we can then do spatial analysis with. We have this with the 2017 NLA that we used as part of the `acesd_analysis.R` script. Here is that code (with a few small changes).
@@ -85,7 +94,10 @@ nla_wq_sites <- st_as_sf(nla_wq_sites,
                          crs = 4326)
 nla_wq_sites
 glimpse(nla_wq_sites)
+plot(st_geometry(nla_wq_sites))
 ```
+
+See that last column?  That is what makes this a spatial object.  All the geographic `POINT` information is held in this column.  Same applies if we had `LINESTRING`, `POLYGONS`, etc.  These are acceptable "Simple Features" which are a widely used spatial data format.
 
 So, we have now created some objects in R that hold vector data by reading in an external shapefile and by using longitude and latitude columns.
 
@@ -95,12 +107,69 @@ I gloss over the details of a coordinate reference system (CRS) in this lesson, 
 
 ## Raster data with `terra`
 
-Let's now look at how to read in raster datasets in R.  These often are made available as image file formats and a very common one is the geotiff.
+Let's now look at how to read in raster datasets in R.  These often are made available as image file formats and a very common one is the geotiff.  There is one in the classes repository on GitHub.  We can access that directly with:
 
-rast("nlcd_2016/nlcd_2016_ri_NLCD_Land_Cover_2016.tif") -> x
+```{r}
+library(terra)
+
+nlcd <- rast("https://github.com/USEPA/acesd_intro_r/raw/main/lessons/nlcd_2016/nlcd_2016_ri_NLCD_Land_Cover_2016.tif")
+plot(nlcd)
+```
+
+This creates a `terra` `SpatRaster` object.  There is a lot we can do with these via the `terra` package.  We will also use the `tidyterra` package later to help with plotting.  Unfortunately, we won't have time to delve into these objects too much.
 
 ## Geospatial data packages
 
-## Static maps with `ggplot2` and `ggspatial`
+In addition to reading in datasets directly from a file, there are many packages that have been written that provide access, through various methods, to spatial data.  We will talk about three: `USAboundaries`, `elevatr`, and `FedData`.
+
+The `USAboundaries` package provides access to, um, well, boundaries for the USA.  This package is a little unique in that we can install it directly from CRAN, but there is also another package, not on CRAN, that holds the data: `USAboundariesData`.  It is set up this way because the data itself is too large to be hosted on CRAN.  The extra package is hosted elsewhere.  When you load up `USAboundaries` it checks that you have `USAboundariesData` and will helpfully provide you the function needed to install it.  Once you have both, you can dig into the package.  Let's work on getting a Rhode Island boundary.
+
+```{r us}
+library(USAboundaries)
+
+us <- us_states(resolution = "high")
+plot(us)
+```
+
+This provides us an `sf` object of the polygons for all the state boundaries.  One of the neat things about `sf` is the objects are just a data frame with some extra bits.  Becuase they are data frames, we already know how to do a lot of stuff with them becuase we can use the Tidyverse tools that we have worked with, such as `dplyr`.  So to just get the Rhode Island boundary we can use `filter`.
+
+```{r ri}
+library(dplyr)
+ri <- filter(us, state_name == "Rhode Island")
+ri
+plot(ri)
+```
+
+Now that we have our Rhode Island boundary, we can use that to filter, spatially, our NLA sites and waterbodies.  We also need to deal with the CRS for this and our subsequent mapping to work out.
+
+```{r analysis}
+ri_alb <- st_transform(ri, crs = crs(nlcd))
+nla_wq_sites_alb <- st_transform(nla_wq_sites, crs = crs(nlcd))
+ri_nla_lakes <- st_intersection(ri_alb, nla17_lakes)
+ri_nla_sites <- st_intersection(ri_alb, nla_wq_sites_alb)
+ri_nlcd <- terra::mask(nlcd, ri_alb)
+```
+
+## Static maps with default plotting, `ggplot2` and `ggspatial`
+
+We have seen some simple plots so far using the generic plotting functions for `terra` and `sf` objects.  We can even adorn those a bit and get a passable map.  
+
+```{r generic}
+plot(nlcd, main = "Rhode Island Land Cover")
+plot(ri_alb, add = TRUE, col = NA, border = "grey30", lwd = 2)
+```
+
+But this is a syntax different than what we have already learned with `ggplot2` and if you want to get a bit more fancy with your plots, that will be much easier to accomplish with `ggplot2`.  In addition to `ggplot2`, we need to load up the `tidyterra` package.  The two packages we rely on for working with spatial data have had a bit of convergent evolution and have arrived at a somewhat similar place, albeit with some distinctions.  The `tidyterra` package should make it a little bit easier as we can use it to force `terra` `SpatRaster` objects into a tidy workflow.
+
+```{r fancy}
+library(tidyterra)
+library(ggplot2)
+ri_nlcd_gg <- ggplot(ri_nlcd) +
+  geom_spatraster(data = ri_nlcd, aes(fill = Class)) +
+  geom_sf(data = ri_alb) +
+  geom_sf(data = ri_nla_sites) +
+  geom_sf(data = ri_nla_lakes)
+ri_nlcd_gg
+```
 
 ## Interactive maps with `mapview`
