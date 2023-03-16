@@ -209,3 +209,6 @@ library(mapview)
 mapview(ri_wbd_alb) + mapview(ri_nla_sites, col.regions = "red") 
 ```
 
+Pretty cool!
+
+That is all we are going to cover today.  It is a TINY bit of what you can do with spatial data in R.  In fact, I think you can likely do more with spatial data in R than you can with a standalone GIS (e.g. spatial modelling is all inherent in R).

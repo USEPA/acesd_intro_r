@@ -166,38 +166,38 @@ glimpse(nla_wq_sites)
 ```
 ## Rows: 1,210
 ## Columns: 32
-## $ uid               [3m[38;5;246m<dbl>[39m[23m 2010177, 2010178, 2010179, 2010180, 2010181, 2010182, 2010183, 2010…
-## $ site_id.x         [3m[38;5;246m<chr>[39m[23m "NLA17_NV-10018", "NLA17_NV-10036", "NLA17_ND-10011", "NLA17_NV-102…
-## $ cntyname          [3m[38;5;246m<chr>[39m[23m "Washoe", "Washoe", "Kidder", "Mineral", "Geauga", "Maury", "Yavapa…
-## $ lon_dd83          [3m[38;5;246m<dbl>[39m[23m -119.77890, -119.78980, -99.77111, -118.71440, -81.17701, -87.03213…
-## $ lat_dd83          [3m[38;5;246m<dbl>[39m[23m 39.54188, 39.45780, 47.17341, 38.69493, 41.49185, 35.67353, 34.6043…
-## $ site_id.y         [3m[38;5;246m<chr>[39m[23m "NLA17_NV-10018", "NLA17_NV-10036", "NLA17_ND-10011", "NLA17_NV-102…
-## $ date_col          [3m[38;5;246m<date>[39m[23m 2017-05-30, 2017-05-31, 2017-06-01, 2017-06-01, 2017-06-01, 2017-0…
-## $ state             [3m[38;5;246m<chr>[39m[23m "NV", "NV", "ND", "NV", "OH", "TN", "AZ", "MI", "ND", "CA", "KY", "…
-## $ doc               [3m[38;5;246m<dbl>[39m[23m 7.72, 7.12, 27.17, 62.55, 6.92, 3.90, 10.59, 5.29, 17.13, 4.00, 1.9…
-## $ silica            [3m[38;5;246m<dbl>[39m[23m 6.996, 33.686, 14.273, 2.726, 1.310, 0.905, 6.445, 1.096, 12.919, 1…
-## $ chloride          [3m[38;5;246m<dbl>[39m[23m 101.625, 8.668, 119.687, 5693.816, 25.178, 1.945, 38.929, 13.267, 5…
-## $ cond              [3m[38;5;246m<dbl>[39m[23m 2172.4, 333.4, 3206.2, 29931.9, 223.5, 128.7, 468.6, 227.6, 666.3, …
-## $ nitrate_n         [3m[38;5;246m<dbl>[39m[23m 0.1623, 0.0196, 0.0507, 1.0637, 0.0995, 0.0000, 0.0000, NA, 0.0000,…
-## $ ph                [3m[38;5;246m<dbl>[39m[23m 7.95, 8.45, 8.92, 9.40, 7.90, 9.27, 8.38, 8.45, 8.87, 8.11, 7.22, 8…
-## $ chla              [3m[38;5;246m<dbl>[39m[23m 5.19, 12.16, 6.14, 0.60, 305.28, 52.16, 2.64, 2.74, 9.34, 9.95, 2.2…
-## $ ntl               [3m[38;5;246m<dbl>[39m[23m 1.343, 0.900, 2.750, 2.323, 1.735, 1.278, 0.615, 0.520, 1.866, 0.70…
-## $ turb              [3m[38;5;246m<dbl>[39m[23m 3.16, 2.72, 2.68, 0.68, 10.57, 19.97, 0.73, 1.05, 5.71, 6.95, 2.57,…
-## $ ammonia_n         [3m[38;5;246m<dbl>[39m[23m 0.599, 0.027, 0.014, 0.086, 0.051, 0.011, 0.019, 0.019, 0.019, 0.03…
-## $ sulfate           [3m[38;5;246m<dbl>[39m[23m 1004.914, 20.639, 1229.337, 5666.998, 6.150, 0.392, 11.077, 3.605, …
-## $ color             [3m[38;5;246m<dbl>[39m[23m 25, 27, 35, 5, 35, 3, 10, 5, 2, 5, 0, 20, 29, 35, 15, 0, 0, 8, 0, 4…
-## $ anc               [3m[38;5;246m<dbl>[39m[23m 2496.93, 2681.74, 9739.84, NA, 1125.87, 1063.05, 3023.51, 1914.31, …
-## $ ptl               [3m[38;5;246m<dbl>[39m[23m 92.32500, 234.69500, 63.34750, 700.47000, 170.41125, 463.12625, 192…
-## $ nitrite_n         [3m[38;5;246m<dbl>[39m[23m 0.020, 0.000, 0.000, 0.000, 0.003, 0.000, 0.000, 0.000, 0.000, 0.00…
-## $ magnesium         [3m[38;5;246m<dbl>[39m[23m NA, 12.867, 251.264, 160.715, 2.985, 1.802, 16.964, 9.528, 65.239, …
-## $ calcium           [3m[38;5;246m<dbl>[39m[23m NA, 30.447, 27.385, 11.668, 18.831, 21.002, 42.524, 23.928, 25.726,…
-## $ potassium         [3m[38;5;246m<dbl>[39m[23m NA, NA, 70.860, 397.076, 2.548, 3.148, 3.728, 0.308, 11.371, 145.05…
-## $ sodium            [3m[38;5;246m<dbl>[39m[23m NA, NA, NA, NA, NA, NA, NA, 8.729, NA, NA, 0.995, NA, 11.982, 7.563…
-## $ `NA`              [3m[38;5;246m<dbl>[39m[23m NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ aluminum          [3m[38;5;246m<dbl>[39m[23m NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ tkn               [3m[38;5;246m<dbl>[39m[23m NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ batch_id          [3m[38;5;246m<dbl>[39m[23m NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ nitrate_nitrite_n [3m[38;5;246m<dbl>[39m[23m NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ uid               <dbl> 2010177, 2010178, 2010179, 2010180, 2010181, 2010182, 2010183, 2010…
+## $ site_id.x         <chr> "NLA17_NV-10018", "NLA17_NV-10036", "NLA17_ND-10011", "NLA17_NV-102…
+## $ cntyname          <chr> "Washoe", "Washoe", "Kidder", "Mineral", "Geauga", "Maury", "Yavapa…
+## $ lon_dd83          <dbl> -119.77890, -119.78980, -99.77111, -118.71440, -81.17701, -87.03213…
+## $ lat_dd83          <dbl> 39.54188, 39.45780, 47.17341, 38.69493, 41.49185, 35.67353, 34.6043…
+## $ site_id.y         <chr> "NLA17_NV-10018", "NLA17_NV-10036", "NLA17_ND-10011", "NLA17_NV-102…
+## $ date_col          <date> 2017-05-30, 2017-05-31, 2017-06-01, 2017-06-01, 2017-06-01, 2017-0…
+## $ state             <chr> "NV", "NV", "ND", "NV", "OH", "TN", "AZ", "MI", "ND", "CA", "KY", "…
+## $ doc               <dbl> 7.72, 7.12, 27.17, 62.55, 6.92, 3.90, 10.59, 5.29, 17.13, 4.00, 1.9…
+## $ silica            <dbl> 6.996, 33.686, 14.273, 2.726, 1.310, 0.905, 6.445, 1.096, 12.919, 1…
+## $ chloride          <dbl> 101.625, 8.668, 119.687, 5693.816, 25.178, 1.945, 38.929, 13.267, 5…
+## $ cond              <dbl> 2172.4, 333.4, 3206.2, 29931.9, 223.5, 128.7, 468.6, 227.6, 666.3, …
+## $ nitrate_n         <dbl> 0.1623, 0.0196, 0.0507, 1.0637, 0.0995, 0.0000, 0.0000, NA, 0.0000,…
+## $ ph                <dbl> 7.95, 8.45, 8.92, 9.40, 7.90, 9.27, 8.38, 8.45, 8.87, 8.11, 7.22, 8…
+## $ chla              <dbl> 5.19, 12.16, 6.14, 0.60, 305.28, 52.16, 2.64, 2.74, 9.34, 9.95, 2.2…
+## $ ntl               <dbl> 1.343, 0.900, 2.750, 2.323, 1.735, 1.278, 0.615, 0.520, 1.866, 0.70…
+## $ turb              <dbl> 3.16, 2.72, 2.68, 0.68, 10.57, 19.97, 0.73, 1.05, 5.71, 6.95, 2.57,…
+## $ ammonia_n         <dbl> 0.599, 0.027, 0.014, 0.086, 0.051, 0.011, 0.019, 0.019, 0.019, 0.03…
+## $ sulfate           <dbl> 1004.914, 20.639, 1229.337, 5666.998, 6.150, 0.392, 11.077, 3.605, …
+## $ color             <dbl> 25, 27, 35, 5, 35, 3, 10, 5, 2, 5, 0, 20, 29, 35, 15, 0, 0, 8, 0, 4…
+## $ anc               <dbl> 2496.93, 2681.74, 9739.84, NA, 1125.87, 1063.05, 3023.51, 1914.31, …
+## $ ptl               <dbl> 92.32500, 234.69500, 63.34750, 700.47000, 170.41125, 463.12625, 192…
+## $ nitrite_n         <dbl> 0.020, 0.000, 0.000, 0.000, 0.003, 0.000, 0.000, 0.000, 0.000, 0.00…
+## $ magnesium         <dbl> NA, 12.867, 251.264, 160.715, 2.985, 1.802, 16.964, 9.528, 65.239, …
+## $ calcium           <dbl> NA, 30.447, 27.385, 11.668, 18.831, 21.002, 42.524, 23.928, 25.726,…
+## $ potassium         <dbl> NA, NA, 70.860, 397.076, 2.548, 3.148, 3.728, 0.308, 11.371, 145.05…
+## $ sodium            <dbl> NA, NA, NA, NA, NA, NA, NA, 8.729, NA, NA, 0.995, NA, 11.982, 7.563…
+## $ `NA`              <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ aluminum          <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ tkn               <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ batch_id          <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ nitrate_nitrite_n <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
 ```
 
 So we now have our full NLA dataset and it has two columns, `lon_dd83` and `lat_dd83`, that we can use to create an `sf` object.  We can do that with the following
@@ -487,12 +487,8 @@ library(mapview)
 mapview(ri_wbd_alb) + mapview(ri_nla_sites, col.regions = "red") 
 ```
 
-```
-## PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
-## PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
-```
+![plot of chunk mapview](figure/mapview-1.png)
 
-```
-## Error in path.expand(path): invalid 'path' argument
-```
+Pretty cool!
 
+That is all we are going to cover today.  It is a TINY bit of what you can do with spatial data in R.  In fact, I think you can likely do more with spatial data in R than you can with a standalone GIS (e.g. spatial modelling is all inherent in R).
