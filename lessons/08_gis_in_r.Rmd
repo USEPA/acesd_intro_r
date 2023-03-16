@@ -150,6 +150,25 @@ ri_nla_sites <- st_intersection(ri_alb, nla_wq_sites_alb)
 ri_nlcd <- terra::mask(nlcd, ri_alb)
 ```
 
+Next, let's get some elevation data with the `elevatr` package (full disclosure, this is one of mine!)  We can use the Rhode Island boundary and pull elevation data from the AWS Terrain Tiles.  The only trick we will have is that `elevatr` is still using the older spatial packages, most notable `raster`, but we can convert that easily to a `SpatRaster`.
+
+```{r elevation}
+library(elevatr)
+ri_elev <- get_elev_raster(ri_alb, z = 10, clip = "locations") |>
+  rast()
+plot(ri_elev)
+```
+
+Lastly, there is a very useful package for grabbing a whole lot of Federal spatial data, `FedData`.  This package was peer reviewed by and is now a part of the [rOpenSci](https://ropensci.org) project (if you are interested in rOpenSci software peer review, let me know).  I have used `FedData` to get SSURGO soils, NLCD land use/land cover, NLCD impervious surface, NHD, etc.  For today, we will use it to grab watershed boundaries.
+
+```{r feddata}
+library(FedData)
+ri_wbd <- get_wbd(ri, label = "ri", force.redo = TRUE) 
+ri_wbd_alb <- st_transform(ri_wbd, crs = crs(ri_alb))
+ri_wbd_alb <- st_intersection(ri_alb, ri_wbd_alb)
+plot(ri_wbd_alb)
+```
+
 ## Static maps with default plotting, `ggplot2` and `ggspatial`
 
 We have seen some simple plots so far using the generic plotting functions for `terra` and `sf` objects.  We can even adorn those a bit and get a passable map.  
@@ -159,17 +178,34 @@ plot(nlcd, main = "Rhode Island Land Cover")
 plot(ri_alb, add = TRUE, col = NA, border = "grey30", lwd = 2)
 ```
 
-But this is a syntax different than what we have already learned with `ggplot2` and if you want to get a bit more fancy with your plots, that will be much easier to accomplish with `ggplot2`.  In addition to `ggplot2`, we need to load up the `tidyterra` package.  The two packages we rely on for working with spatial data have had a bit of convergent evolution and have arrived at a somewhat similar place, albeit with some distinctions.  The `tidyterra` package should make it a little bit easier as we can use it to force `terra` `SpatRaster` objects into a tidy workflow.
+But this is a syntax different than what we have already learned with `ggplot2` and if you want to get a bit more fancy with your plots, that will be much easier to accomplish with `ggplot2`.  In addition to `ggplot2`, we need to load up the `tidyterra` package.  The two packages we rely on for working with spatial data have had a bit of convergent evolution and have arrived at a somewhat similar place, albeit with some distinctions. Becuase of this `terra` isn't immediately workable with our Tidy ways.  The `tidyterra` package should make it a little bit easier as we can use it to force `terra` `SpatRaster` objects into a tidy workflow.
 
 ```{r fancy}
 library(tidyterra)
 library(ggplot2)
-ri_nlcd_gg <- ggplot(ri_nlcd) +
-  geom_spatraster(data = ri_nlcd, aes(fill = Class)) +
-  geom_sf(data = ri_alb) +
+library(ggspatial)
+ri_nlcd_gg <- ggplot(ri_elev) +
+  geom_spatraster(data = ri_elev) +
+  geom_sf(data = ri_alb, alpha = 0.25, size = 3) +
   geom_sf(data = ri_nla_sites) +
-  geom_sf(data = ri_nla_lakes)
+  geom_sf(data = ri_wbd_alb, fill = "grey30", alpha = 0.1) +
+  scale_fill_continuous(na.value = NA) +
+  annotation_north_arrow(pad_y = unit(1, "cm")) +
+  annotation_scale() +
+  labs(title = "Rhode Island NLA Sites", x = "Longitude", y = "Latitude")
+  
 ri_nlcd_gg
 ```
 
+Not terribly pretty, but with some more tweaking we can easily get there.
+
 ## Interactive maps with `mapview`
+
+Static maps are great for figures, but often we need to be able to interact with our spatial data.  The best way to do that is utilize some of the great web based tools (i.e. javascript) to add our spatial data to something akin to an online map.  The easiet way to do that is with the `mapview` package.
+
+```{r mapview}
+library(mapview)
+
+mapview(ri_wbd_alb) + mapview(ri_nla_sites, col.regions = "red") 
+```
+

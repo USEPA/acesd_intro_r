@@ -110,9 +110,9 @@ nla_2017_chem <- read_csv("data/nla_2017_water_chemistry_chla-data.csv",
 
 ```
 ## Rows: 22873 Columns: 23
-## ── Column specification ───────────────────────────────────────────
+## ── Column specification ───────────────────────────────────────────────────────────────────────
 ## Delimiter: ","
-## chr (17): PUBLICATION_DATE, SITE_ID, DATE_COL, STUDY, STATE, LA...
+## chr (17): PUBLICATION_DATE, SITE_ID, DATE_COL, STUDY, STATE, LAB, SAMPLE_TYPE, MATRIX, BATC...
 ## dbl  (6): UID, VISIT_NO, MDL, RL, HOLDING_TIME, LAB_SAMPLE_ID
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
@@ -144,10 +144,10 @@ nla_2017_sites <- read_csv("https://www.epa.gov/sites/default/files/2021-04/nla_
 
 ```
 ## Rows: 5721 Columns: 80
-## ── Column specification ───────────────────────────────────────────
+## ── Column specification ───────────────────────────────────────────────────────────────────────
 ## Delimiter: ","
-## chr (60): PUBLICATION_DATE, SITE_ID, DATE_COL, SITESAMP, UNIQUE...
-## dbl (20): UID, VISIT_NO, AREA_HA, COMID, ELEVATION, FCODE, FEOW...
+## chr (60): PUBLICATION_DATE, SITE_ID, DATE_COL, SITESAMP, UNIQUE_ID, STUDY, AG_ECO3, AG_ECO3...
+## dbl (20): UID, VISIT_NO, AREA_HA, COMID, ELEVATION, FCODE, FEOW_ID, FRAME17_ID, GNIS_ID, LA...
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
@@ -166,38 +166,38 @@ glimpse(nla_wq_sites)
 ```
 ## Rows: 1,210
 ## Columns: 32
-## $ uid               [3m[38;5;246m<dbl>[39m[23m 2010177, 2010178, 2010179, 2010180, 201…
-## $ site_id.x         [3m[38;5;246m<chr>[39m[23m "NLA17_NV-10018", "NLA17_NV-10036", "NL…
-## $ cntyname          [3m[38;5;246m<chr>[39m[23m "Washoe", "Washoe", "Kidder", "Mineral"…
-## $ lon_dd83          [3m[38;5;246m<dbl>[39m[23m -119.77890, -119.78980, -99.77111, -118…
-## $ lat_dd83          [3m[38;5;246m<dbl>[39m[23m 39.54188, 39.45780, 47.17341, 38.69493,…
-## $ site_id.y         [3m[38;5;246m<chr>[39m[23m "NLA17_NV-10018", "NLA17_NV-10036", "NL…
-## $ date_col          [3m[38;5;246m<date>[39m[23m 2017-05-30, 2017-05-31, 2017-06-01, 20…
-## $ state             [3m[38;5;246m<chr>[39m[23m "NV", "NV", "ND", "NV", "OH", "TN", "AZ…
-## $ doc               [3m[38;5;246m<dbl>[39m[23m 7.72, 7.12, 27.17, 62.55, 6.92, 3.90, 1…
-## $ silica            [3m[38;5;246m<dbl>[39m[23m 6.996, 33.686, 14.273, 2.726, 1.310, 0.…
-## $ chloride          [3m[38;5;246m<dbl>[39m[23m 101.625, 8.668, 119.687, 5693.816, 25.1…
-## $ cond              [3m[38;5;246m<dbl>[39m[23m 2172.4, 333.4, 3206.2, 29931.9, 223.5, …
-## $ nitrate_n         [3m[38;5;246m<dbl>[39m[23m 0.1623, 0.0196, 0.0507, 1.0637, 0.0995,…
-## $ ph                [3m[38;5;246m<dbl>[39m[23m 7.95, 8.45, 8.92, 9.40, 7.90, 9.27, 8.3…
-## $ chla              [3m[38;5;246m<dbl>[39m[23m 5.19, 12.16, 6.14, 0.60, 305.28, 52.16,…
-## $ ntl               [3m[38;5;246m<dbl>[39m[23m 1.343, 0.900, 2.750, 2.323, 1.735, 1.27…
-## $ turb              [3m[38;5;246m<dbl>[39m[23m 3.16, 2.72, 2.68, 0.68, 10.57, 19.97, 0…
-## $ ammonia_n         [3m[38;5;246m<dbl>[39m[23m 0.599, 0.027, 0.014, 0.086, 0.051, 0.01…
-## $ sulfate           [3m[38;5;246m<dbl>[39m[23m 1004.914, 20.639, 1229.337, 5666.998, 6…
-## $ color             [3m[38;5;246m<dbl>[39m[23m 25, 27, 35, 5, 35, 3, 10, 5, 2, 5, 0, 2…
-## $ anc               [3m[38;5;246m<dbl>[39m[23m 2496.93, 2681.74, 9739.84, NA, 1125.87,…
-## $ ptl               [3m[38;5;246m<dbl>[39m[23m 92.32500, 234.69500, 63.34750, 700.4700…
-## $ nitrite_n         [3m[38;5;246m<dbl>[39m[23m 0.020, 0.000, 0.000, 0.000, 0.003, 0.00…
-## $ magnesium         [3m[38;5;246m<dbl>[39m[23m NA, 12.867, 251.264, 160.715, 2.985, 1.…
-## $ calcium           [3m[38;5;246m<dbl>[39m[23m NA, 30.447, 27.385, 11.668, 18.831, 21.…
-## $ potassium         [3m[38;5;246m<dbl>[39m[23m NA, NA, 70.860, 397.076, 2.548, 3.148, …
-## $ sodium            [3m[38;5;246m<dbl>[39m[23m NA, NA, NA, NA, NA, NA, NA, 8.729, NA, …
-## $ `NA`              [3m[38;5;246m<dbl>[39m[23m NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ aluminum          [3m[38;5;246m<dbl>[39m[23m NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ tkn               [3m[38;5;246m<dbl>[39m[23m NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ batch_id          [3m[38;5;246m<dbl>[39m[23m NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ nitrate_nitrite_n [3m[38;5;246m<dbl>[39m[23m NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ uid               [3m[38;5;246m<dbl>[39m[23m 2010177, 2010178, 2010179, 2010180, 2010181, 2010182, 2010183, 2010…
+## $ site_id.x         [3m[38;5;246m<chr>[39m[23m "NLA17_NV-10018", "NLA17_NV-10036", "NLA17_ND-10011", "NLA17_NV-102…
+## $ cntyname          [3m[38;5;246m<chr>[39m[23m "Washoe", "Washoe", "Kidder", "Mineral", "Geauga", "Maury", "Yavapa…
+## $ lon_dd83          [3m[38;5;246m<dbl>[39m[23m -119.77890, -119.78980, -99.77111, -118.71440, -81.17701, -87.03213…
+## $ lat_dd83          [3m[38;5;246m<dbl>[39m[23m 39.54188, 39.45780, 47.17341, 38.69493, 41.49185, 35.67353, 34.6043…
+## $ site_id.y         [3m[38;5;246m<chr>[39m[23m "NLA17_NV-10018", "NLA17_NV-10036", "NLA17_ND-10011", "NLA17_NV-102…
+## $ date_col          [3m[38;5;246m<date>[39m[23m 2017-05-30, 2017-05-31, 2017-06-01, 2017-06-01, 2017-06-01, 2017-0…
+## $ state             [3m[38;5;246m<chr>[39m[23m "NV", "NV", "ND", "NV", "OH", "TN", "AZ", "MI", "ND", "CA", "KY", "…
+## $ doc               [3m[38;5;246m<dbl>[39m[23m 7.72, 7.12, 27.17, 62.55, 6.92, 3.90, 10.59, 5.29, 17.13, 4.00, 1.9…
+## $ silica            [3m[38;5;246m<dbl>[39m[23m 6.996, 33.686, 14.273, 2.726, 1.310, 0.905, 6.445, 1.096, 12.919, 1…
+## $ chloride          [3m[38;5;246m<dbl>[39m[23m 101.625, 8.668, 119.687, 5693.816, 25.178, 1.945, 38.929, 13.267, 5…
+## $ cond              [3m[38;5;246m<dbl>[39m[23m 2172.4, 333.4, 3206.2, 29931.9, 223.5, 128.7, 468.6, 227.6, 666.3, …
+## $ nitrate_n         [3m[38;5;246m<dbl>[39m[23m 0.1623, 0.0196, 0.0507, 1.0637, 0.0995, 0.0000, 0.0000, NA, 0.0000,…
+## $ ph                [3m[38;5;246m<dbl>[39m[23m 7.95, 8.45, 8.92, 9.40, 7.90, 9.27, 8.38, 8.45, 8.87, 8.11, 7.22, 8…
+## $ chla              [3m[38;5;246m<dbl>[39m[23m 5.19, 12.16, 6.14, 0.60, 305.28, 52.16, 2.64, 2.74, 9.34, 9.95, 2.2…
+## $ ntl               [3m[38;5;246m<dbl>[39m[23m 1.343, 0.900, 2.750, 2.323, 1.735, 1.278, 0.615, 0.520, 1.866, 0.70…
+## $ turb              [3m[38;5;246m<dbl>[39m[23m 3.16, 2.72, 2.68, 0.68, 10.57, 19.97, 0.73, 1.05, 5.71, 6.95, 2.57,…
+## $ ammonia_n         [3m[38;5;246m<dbl>[39m[23m 0.599, 0.027, 0.014, 0.086, 0.051, 0.011, 0.019, 0.019, 0.019, 0.03…
+## $ sulfate           [3m[38;5;246m<dbl>[39m[23m 1004.914, 20.639, 1229.337, 5666.998, 6.150, 0.392, 11.077, 3.605, …
+## $ color             [3m[38;5;246m<dbl>[39m[23m 25, 27, 35, 5, 35, 3, 10, 5, 2, 5, 0, 20, 29, 35, 15, 0, 0, 8, 0, 4…
+## $ anc               [3m[38;5;246m<dbl>[39m[23m 2496.93, 2681.74, 9739.84, NA, 1125.87, 1063.05, 3023.51, 1914.31, …
+## $ ptl               [3m[38;5;246m<dbl>[39m[23m 92.32500, 234.69500, 63.34750, 700.47000, 170.41125, 463.12625, 192…
+## $ nitrite_n         [3m[38;5;246m<dbl>[39m[23m 0.020, 0.000, 0.000, 0.000, 0.003, 0.000, 0.000, 0.000, 0.000, 0.00…
+## $ magnesium         [3m[38;5;246m<dbl>[39m[23m NA, 12.867, 251.264, 160.715, 2.985, 1.802, 16.964, 9.528, 65.239, …
+## $ calcium           [3m[38;5;246m<dbl>[39m[23m NA, 30.447, 27.385, 11.668, 18.831, 21.002, 42.524, 23.928, 25.726,…
+## $ potassium         [3m[38;5;246m<dbl>[39m[23m NA, NA, 70.860, 397.076, 2.548, 3.148, 3.728, 0.308, 11.371, 145.05…
+## $ sodium            [3m[38;5;246m<dbl>[39m[23m NA, NA, NA, NA, NA, NA, NA, 8.729, NA, NA, 0.995, NA, 11.982, 7.563…
+## $ `NA`              [3m[38;5;246m<dbl>[39m[23m NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ aluminum          [3m[38;5;246m<dbl>[39m[23m NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ tkn               [3m[38;5;246m<dbl>[39m[23m NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ batch_id          [3m[38;5;246m<dbl>[39m[23m NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ nitrate_nitrite_n [3m[38;5;246m<dbl>[39m[23m NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
 ```
 
 So we now have our full NLA dataset and it has two columns, `lon_dd83` and `lat_dd83`, that we can use to create an `sf` object.  We can do that with the following
@@ -217,25 +217,23 @@ nla_wq_sites
 ## Bounding box:  xmin: -124.4373 ymin: 26.07154 xmax: -67.69865 ymax: 48.97325
 ## Geodetic CRS:  WGS 84
 ## # A tibble: 1,210 × 31
-##        uid site_id.x  cntyn…¹ site_…² date_col   state   doc silica
-##  *   <dbl> <chr>      <chr>   <chr>   <date>     <chr> <dbl>  <dbl>
-##  1 2010177 NLA17_NV-… Washoe  NLA17_… 2017-05-30 NV     7.72  7.00 
-##  2 2010178 NLA17_NV-… Washoe  NLA17_… 2017-05-31 NV     7.12 33.7  
-##  3 2010179 NLA17_ND-… Kidder  NLA17_… 2017-06-01 ND    27.2  14.3  
-##  4 2010180 NLA17_NV-… Mineral NLA17_… 2017-06-01 NV    62.6   2.73 
-##  5 2010181 NLA17_OH-… Geauga  NLA17_… 2017-06-01 OH     6.92  1.31 
-##  6 2010182 NLA17_TN-… Maury   NLA17_… 2017-06-02 TN     3.9   0.905
-##  7 2010183 NLA17_AZ-… Yavapai NLA17_… 2017-06-01 AZ    10.6   6.44 
-##  8 2010184 NLA17_MI-… Muskeg… NLA17_… 2017-06-05 MI     5.29  1.10 
-##  9 2010185 NLA17_ND-… Kidder  NLA17_… 2017-06-05 ND    17.1  12.9  
-## 10 2010186 NLA17_CA-… Marin   NLA17_… 2017-06-05 CA     4    11.0  
-## # … with 1,200 more rows, 23 more variables: chloride <dbl>,
-## #   cond <dbl>, nitrate_n <dbl>, ph <dbl>, chla <dbl>, ntl <dbl>,
-## #   turb <dbl>, ammonia_n <dbl>, sulfate <dbl>, color <dbl>,
-## #   anc <dbl>, ptl <dbl>, nitrite_n <dbl>, magnesium <dbl>,
-## #   calcium <dbl>, potassium <dbl>, sodium <dbl>, `NA` <dbl>,
-## #   aluminum <dbl>, tkn <dbl>, batch_id <dbl>,
-## #   nitrate_nitrite_n <dbl>, geometry <POINT [°]>, and …
+##        uid site_id.x cntyn…¹ site_…² date_col   state   doc silica chlor…³   cond nitra…⁴    ph
+##  *   <dbl> <chr>     <chr>   <chr>   <date>     <chr> <dbl>  <dbl>   <dbl>  <dbl>   <dbl> <dbl>
+##  1 2010177 NLA17_NV… Washoe  NLA17_… 2017-05-30 NV     7.72  7.00   102.    2172.  0.162   7.95
+##  2 2010178 NLA17_NV… Washoe  NLA17_… 2017-05-31 NV     7.12 33.7      8.67   333.  0.0196  8.45
+##  3 2010179 NLA17_ND… Kidder  NLA17_… 2017-06-01 ND    27.2  14.3    120.    3206.  0.0507  8.92
+##  4 2010180 NLA17_NV… Mineral NLA17_… 2017-06-01 NV    62.6   2.73  5694.   29932.  1.06    9.4 
+##  5 2010181 NLA17_OH… Geauga  NLA17_… 2017-06-01 OH     6.92  1.31    25.2    224.  0.0995  7.9 
+##  6 2010182 NLA17_TN… Maury   NLA17_… 2017-06-02 TN     3.9   0.905    1.94   129.  0       9.27
+##  7 2010183 NLA17_AZ… Yavapai NLA17_… 2017-06-01 AZ    10.6   6.44    38.9    469.  0       8.38
+##  8 2010184 NLA17_MI… Muskeg… NLA17_… 2017-06-05 MI     5.29  1.10    13.3    228. NA       8.45
+##  9 2010185 NLA17_ND… Kidder  NLA17_… 2017-06-05 ND    17.1  12.9      5.75   666.  0       8.87
+## 10 2010186 NLA17_CA… Marin   NLA17_… 2017-06-05 CA     4    11.0   6915.   20364.  2.18    8.11
+## # … with 1,200 more rows, 19 more variables: chla <dbl>, ntl <dbl>, turb <dbl>,
+## #   ammonia_n <dbl>, sulfate <dbl>, color <dbl>, anc <dbl>, ptl <dbl>, nitrite_n <dbl>,
+## #   magnesium <dbl>, calcium <dbl>, potassium <dbl>, sodium <dbl>, `NA` <dbl>, aluminum <dbl>,
+## #   tkn <dbl>, batch_id <dbl>, nitrate_nitrite_n <dbl>, geometry <POINT [°]>, and abbreviated
+## #   variable names ¹​cntyname, ²​site_id.y, ³​chloride, ⁴​nitrate_n
 ```
 
 ```r
@@ -245,37 +243,37 @@ glimpse(nla_wq_sites)
 ```
 ## Rows: 1,210
 ## Columns: 31
-## $ uid               <dbl> 2010177, 2010178, 2010179, 2010180, 201…
-## $ site_id.x         <chr> "NLA17_NV-10018", "NLA17_NV-10036", "NL…
-## $ cntyname          <chr> "Washoe", "Washoe", "Kidder", "Mineral"…
-## $ site_id.y         <chr> "NLA17_NV-10018", "NLA17_NV-10036", "NL…
-## $ date_col          <date> 2017-05-30, 2017-05-31, 2017-06-01, 20…
-## $ state             <chr> "NV", "NV", "ND", "NV", "OH", "TN", "AZ…
-## $ doc               <dbl> 7.72, 7.12, 27.17, 62.55, 6.92, 3.90, 1…
-## $ silica            <dbl> 6.996, 33.686, 14.273, 2.726, 1.310, 0.…
-## $ chloride          <dbl> 101.625, 8.668, 119.687, 5693.816, 25.1…
-## $ cond              <dbl> 2172.4, 333.4, 3206.2, 29931.9, 223.5, …
-## $ nitrate_n         <dbl> 0.1623, 0.0196, 0.0507, 1.0637, 0.0995,…
-## $ ph                <dbl> 7.95, 8.45, 8.92, 9.40, 7.90, 9.27, 8.3…
-## $ chla              <dbl> 5.19, 12.16, 6.14, 0.60, 305.28, 52.16,…
-## $ ntl               <dbl> 1.343, 0.900, 2.750, 2.323, 1.735, 1.27…
-## $ turb              <dbl> 3.16, 2.72, 2.68, 0.68, 10.57, 19.97, 0…
-## $ ammonia_n         <dbl> 0.599, 0.027, 0.014, 0.086, 0.051, 0.01…
-## $ sulfate           <dbl> 1004.914, 20.639, 1229.337, 5666.998, 6…
-## $ color             <dbl> 25, 27, 35, 5, 35, 3, 10, 5, 2, 5, 0, 2…
-## $ anc               <dbl> 2496.93, 2681.74, 9739.84, NA, 1125.87,…
-## $ ptl               <dbl> 92.32500, 234.69500, 63.34750, 700.4700…
-## $ nitrite_n         <dbl> 0.020, 0.000, 0.000, 0.000, 0.003, 0.00…
-## $ magnesium         <dbl> NA, 12.867, 251.264, 160.715, 2.985, 1.…
-## $ calcium           <dbl> NA, 30.447, 27.385, 11.668, 18.831, 21.…
-## $ potassium         <dbl> NA, NA, 70.860, 397.076, 2.548, 3.148, …
-## $ sodium            <dbl> NA, NA, NA, NA, NA, NA, NA, 8.729, NA, …
-## $ `NA`              <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ aluminum          <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ tkn               <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ batch_id          <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ nitrate_nitrite_n <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ geometry          <POINT [°]> POINT (-119.7789 39.54188), POINT…
+## $ uid               <dbl> 2010177, 2010178, 2010179, 2010180, 2010181, 2010182, 2010183, 2010…
+## $ site_id.x         <chr> "NLA17_NV-10018", "NLA17_NV-10036", "NLA17_ND-10011", "NLA17_NV-102…
+## $ cntyname          <chr> "Washoe", "Washoe", "Kidder", "Mineral", "Geauga", "Maury", "Yavapa…
+## $ site_id.y         <chr> "NLA17_NV-10018", "NLA17_NV-10036", "NLA17_ND-10011", "NLA17_NV-102…
+## $ date_col          <date> 2017-05-30, 2017-05-31, 2017-06-01, 2017-06-01, 2017-06-01, 2017-0…
+## $ state             <chr> "NV", "NV", "ND", "NV", "OH", "TN", "AZ", "MI", "ND", "CA", "KY", "…
+## $ doc               <dbl> 7.72, 7.12, 27.17, 62.55, 6.92, 3.90, 10.59, 5.29, 17.13, 4.00, 1.9…
+## $ silica            <dbl> 6.996, 33.686, 14.273, 2.726, 1.310, 0.905, 6.445, 1.096, 12.919, 1…
+## $ chloride          <dbl> 101.625, 8.668, 119.687, 5693.816, 25.178, 1.945, 38.929, 13.267, 5…
+## $ cond              <dbl> 2172.4, 333.4, 3206.2, 29931.9, 223.5, 128.7, 468.6, 227.6, 666.3, …
+## $ nitrate_n         <dbl> 0.1623, 0.0196, 0.0507, 1.0637, 0.0995, 0.0000, 0.0000, NA, 0.0000,…
+## $ ph                <dbl> 7.95, 8.45, 8.92, 9.40, 7.90, 9.27, 8.38, 8.45, 8.87, 8.11, 7.22, 8…
+## $ chla              <dbl> 5.19, 12.16, 6.14, 0.60, 305.28, 52.16, 2.64, 2.74, 9.34, 9.95, 2.2…
+## $ ntl               <dbl> 1.343, 0.900, 2.750, 2.323, 1.735, 1.278, 0.615, 0.520, 1.866, 0.70…
+## $ turb              <dbl> 3.16, 2.72, 2.68, 0.68, 10.57, 19.97, 0.73, 1.05, 5.71, 6.95, 2.57,…
+## $ ammonia_n         <dbl> 0.599, 0.027, 0.014, 0.086, 0.051, 0.011, 0.019, 0.019, 0.019, 0.03…
+## $ sulfate           <dbl> 1004.914, 20.639, 1229.337, 5666.998, 6.150, 0.392, 11.077, 3.605, …
+## $ color             <dbl> 25, 27, 35, 5, 35, 3, 10, 5, 2, 5, 0, 20, 29, 35, 15, 0, 0, 8, 0, 4…
+## $ anc               <dbl> 2496.93, 2681.74, 9739.84, NA, 1125.87, 1063.05, 3023.51, 1914.31, …
+## $ ptl               <dbl> 92.32500, 234.69500, 63.34750, 700.47000, 170.41125, 463.12625, 192…
+## $ nitrite_n         <dbl> 0.020, 0.000, 0.000, 0.000, 0.003, 0.000, 0.000, 0.000, 0.000, 0.00…
+## $ magnesium         <dbl> NA, 12.867, 251.264, 160.715, 2.985, 1.802, 16.964, 9.528, 65.239, …
+## $ calcium           <dbl> NA, 30.447, 27.385, 11.668, 18.831, 21.002, 42.524, 23.928, 25.726,…
+## $ potassium         <dbl> NA, NA, 70.860, 397.076, 2.548, 3.148, 3.728, 0.308, 11.371, 145.05…
+## $ sodium            <dbl> NA, NA, NA, NA, NA, NA, NA, 8.729, NA, NA, 0.995, NA, 11.982, 7.563…
+## $ `NA`              <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ aluminum          <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ tkn               <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ batch_id          <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ nitrate_nitrite_n <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ geometry          <POINT [°]> POINT (-119.7789 39.54188), POINT (-119.7898 39.4578), POINT …
 ```
 
 ```r
@@ -339,12 +337,10 @@ ri
 ## Dimension:     XY
 ## Bounding box:  xmin: -71.86277 ymin: 41.14634 xmax: -71.12057 ymax: 42.0188
 ## Geodetic CRS:  WGS 84
-##   statefp  statens    affgeoid geoid stusps         name lsad
-## 1      44 01219835 0400000US44    44     RI Rhode Island   00
-##        aland     awater   state_name state_abbr jurisdiction_type
-## 1 2677759219 1323691129 Rhode Island         RI             state
-##                         geometry
-## 1 MULTIPOLYGON (((-71.28802 4...
+##   statefp  statens    affgeoid geoid stusps         name lsad      aland     awater
+## 1      44 01219835 0400000US44    44     RI Rhode Island   00 2677759219 1323691129
+##     state_name state_abbr jurisdiction_type                       geometry
+## 1 Rhode Island         RI             state MULTIPOLYGON (((-71.28802 4...
 ```
 
 ```r
@@ -363,8 +359,7 @@ ri_nla_lakes <- st_intersection(ri_alb, nla17_lakes)
 ```
 
 ```
-## Warning: attribute variables are assumed to be spatially constant
-## throughout all geometries
+## Warning: attribute variables are assumed to be spatially constant throughout all geometries
 ```
 
 ```r
@@ -372,13 +367,67 @@ ri_nla_sites <- st_intersection(ri_alb, nla_wq_sites_alb)
 ```
 
 ```
-## Warning: attribute variables are assumed to be spatially constant
-## throughout all geometries
+## Warning: attribute variables are assumed to be spatially constant throughout all geometries
 ```
 
 ```r
 ri_nlcd <- terra::mask(nlcd, ri_alb)
 ```
+
+Next, let's get some elevation data with the `elevatr` package (full disclosure, this is one of mine!)  We can use the Rhode Island boundary and pull elevation data from the AWS Terrain Tiles.  The only trick we will have is that `elevatr` is still using the older spatial packages, most notable `raster`, but we can convert that easily to a `SpatRaster`.
+
+
+```r
+library(elevatr)
+ri_elev <- get_elev_raster(ri_alb, z = 10, clip = "locations") |>
+  rast()
+```
+
+```
+## Warning: PROJ support is provided by the sf and terra packages among others
+
+## Warning: PROJ support is provided by the sf and terra packages among others
+```
+
+```
+##  Accessing raster elevation [-------------------------]   0% Accessing raster elevation [>------------------------]   4% Accessing raster elevation [=>-----------------------]   8% Accessing raster elevation [==>----------------------]  12% Accessing raster elevation [===>---------------------]  16% Accessing raster elevation [====>--------------------]  20% Accessing raster elevation [=====>-------------------]  24% Accessing raster elevation [======>------------------]  28% Accessing raster elevation [=======>-----------------]  32% Accessing raster elevation [========>----------------]  36% Accessing raster elevation [=========>---------------]  40% Accessing raster elevation [==========>--------------]  44% Accessing raster elevation [===========>-------------]  48% Accessing raster elevation [============>------------]  52% Accessing raster elevation [=============>-----------]  56% Accessing raster elevation [==============>----------]  60% Accessing raster elevation [===============>---------]  64% Accessing raster elevation [================>--------]  68% Accessing raster elevation [=================>-------]  72% Accessing raster elevation [==================>------]  76% Accessing raster elevation [===================>-----]  80% Accessing raster elevation [====================>----]  84% Accessing raster elevation [=====================>---]  88% Accessing raster elevation [======================>--]  92% Accessing raster elevation [=======================>-]  96% Accessing raster elevation [=========================] 100%
+## Mosaicing & Projecting
+## Clipping DEM to locations
+```
+
+```
+## Warning: PROJ support is provided by the sf and terra packages among others
+```
+
+```
+## Note: Elevation units are in meters.
+```
+
+```r
+plot(ri_elev)
+```
+
+![plot of chunk elevation](figure/elevation-1.png)
+
+Lastly, there is a very useful package for grabbing a whole lot of Federal spatial data, `FedData`.  This package was peer reviewed by and is now a part of the [rOpenSci](https://ropensci.org) project (if you are interested in rOpenSci software peer review, let me know).  I have used `FedData` to get SSURGO soils, NLCD land use/land cover, NLCD impervious surface, NHD, etc.  For today, we will use it to grab watershed boundaries.
+
+
+```r
+library(FedData)
+ri_wbd <- get_wbd(ri, label = "ri", force.redo = TRUE) 
+ri_wbd_alb <- st_transform(ri_wbd, crs = crs(ri_alb))
+ri_wbd_alb <- st_intersection(ri_alb, ri_wbd_alb)
+```
+
+```
+## Warning: attribute variables are assumed to be spatially constant throughout all geometries
+```
+
+```r
+plot(ri_wbd_alb)
+```
+
+![plot of chunk feddata](figure/feddata-1.png)
 
 ## Static maps with default plotting, `ggplot2` and `ggspatial`
 
@@ -391,23 +440,28 @@ plot(ri_alb, add = TRUE, col = NA, border = "grey30", lwd = 2)
 ```
 
 ```
-## Warning in plot.sf(ri_alb, add = TRUE, col = NA, border =
-## "grey30", lwd = 2): ignoring all but the first attribute
+## Warning in plot.sf(ri_alb, add = TRUE, col = NA, border = "grey30", lwd = 2): ignoring all but
+## the first attribute
 ```
 
 ![plot of chunk generic](figure/generic-1.png)
 
-But this is a syntax different than what we have already learned with `ggplot2` and if you want to get a bit more fancy with your plots, that will be much easier to accomplish with `ggplot2`.  In addition to `ggplot2`, we need to load up the `tidyterra` package.  The two packages we rely on for working with spatial data have had a bit of convergent evolution and have arrived at a somewhat similar place, albeit with some distinctions.  The `tidyterra` package should make it a little bit easier as we can use it to force `terra` `SpatRaster` objects into a tidy workflow.
+But this is a syntax different than what we have already learned with `ggplot2` and if you want to get a bit more fancy with your plots, that will be much easier to accomplish with `ggplot2`.  In addition to `ggplot2`, we need to load up the `tidyterra` package.  The two packages we rely on for working with spatial data have had a bit of convergent evolution and have arrived at a somewhat similar place, albeit with some distinctions. Becuase of this `terra` isn't immediately workable with our Tidy ways.  The `tidyterra` package should make it a little bit easier as we can use it to force `terra` `SpatRaster` objects into a tidy workflow.
 
 
 ```r
 library(tidyterra)
 library(ggplot2)
-ri_nlcd_gg <- ggplot(ri_nlcd) +
-  geom_spatraster(data = ri_nlcd, aes(fill = Class)) +
-  geom_sf(data = ri_alb) +
+library(ggspatial)
+ri_nlcd_gg <- ggplot(ri_elev) +
+  geom_spatraster(data = ri_elev) +
+  geom_sf(data = ri_alb, alpha = 0.25, size = 3) +
   geom_sf(data = ri_nla_sites) +
-  geom_sf(data = ri_nla_lakes)
+  geom_sf(data = ri_wbd_alb, fill = "grey30", alpha = 0.1) +
+  scale_fill_continuous(na.value = NA) +
+  annotation_north_arrow(pad_y = unit(1, "cm")) +
+  annotation_scale() +
+  labs(title = "Rhode Island NLA Sites", x = "Longitude", y = "Latitude")
 ```
 
 ```
@@ -420,4 +474,25 @@ ri_nlcd_gg
 
 ![plot of chunk fancy](figure/fancy-1.png)
 
+Not terribly pretty, but with some more tweaking we can easily get there.
+
 ## Interactive maps with `mapview`
+
+Static maps are great for figures, but often we need to be able to interact with our spatial data.  The best way to do that is utilize some of the great web based tools (i.e. javascript) to add our spatial data to something akin to an online map.  The easiet way to do that is with the `mapview` package.
+
+
+```r
+library(mapview)
+
+mapview(ri_wbd_alb) + mapview(ri_nla_sites, col.regions = "red") 
+```
+
+```
+## PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
+## PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
+```
+
+```
+## Error in path.expand(path): invalid 'path' argument
+```
+
