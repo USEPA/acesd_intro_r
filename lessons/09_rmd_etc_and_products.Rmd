@@ -1,17 +1,12 @@
-```{r setup, echo=FALSE, warning=FALSE, purl=FALSE, message=FALSE}
-library(knitr)
-options(repos="http://cran.rstudio.com/")
-opts_chunk$set(fig.path="figures/",R.options=list(max.print=100),message = FALSE,
-               warning = FALSE, error = FALSE)
-if(!require("ggplot2")){
-  install.packages("ggplot2")
-}
-if(!require("dplyr")){
-  install.packages("dplyr")
-}
-library("ggplot2")
-library("dplyr")
-```
+# Reproducible Research: Closing the loop with QA and Products
+
+Up to this point we have learned a lot and seen many different things that we can do with R.  But one of the topics we haven't really covered is how do we capture this work, weave it in with the products we create (e.g. presentations and papers), and share the analysis so that others can reproduce the results and check the quality of the work.  To do this, we will cover the basic concepts of reproducibility and discuss the types of files needed (e.g. scripts, R Markdown/Quarto documents, folders, etc.) to facilitate others using our analysis.   
+
+
+
+
+
+
 
 # R Markdown
 
@@ -205,7 +200,7 @@ Alternatively, we can use the console to do this.
 rmarkdown::render("my_rmd.Rmd")
 ``` 
 
-note: File extensions are imporatant here.  For RStudio to recognize the file as something that needs to be rendered and run through R, you will need to have you file names with a ".Rmd" extension.  A ".md" extension is simple markdown and RStudio won't process that file as expected if you've include code chunks to be run.
+note: File extensions are important here.  For RStudio to recognize the file as something that needs to be rendered and run through R, you will need to have you file names with a ".Rmd" extension.  A ".md" extension is simple markdown and RStudio won't process that file as expected if you've include code chunks to be run.
 
 ## Exercise 3.1 
 

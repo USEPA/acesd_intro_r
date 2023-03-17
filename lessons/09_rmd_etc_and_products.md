@@ -1,3 +1,11 @@
+# Reproducible Research: Closing the loop with QA and Products
+
+Up to this point we have learned a lot and seen many different things that we can do with R.  But one of the topics we haven't really covered is how do we capture this work, weave it in with the products we create (e.g. presentations and papers), and share the analysis so that others can reproduce the results and check the quality of the work.  To do this, we will cover the basic concepts of reproducibility and discuss the types of files needed (e.g. scripts, R Markdown/Quarto documents, folders, etc.) to facilitate others using our analysis.   
+
+
+
+
+
 
 
 # R Markdown
@@ -146,16 +154,16 @@ knitr::kable(iris[sample(nrow(iris),10),],row.names = FALSE)
 
 | Sepal.Length| Sepal.Width| Petal.Length| Petal.Width|Species    |
 |------------:|-----------:|------------:|-----------:|:----------|
-|          6.3|         3.3|          6.0|         2.5|virginica  |
-|          6.8|         3.2|          5.9|         2.3|virginica  |
-|          5.9|         3.0|          4.2|         1.5|versicolor |
-|          5.5|         3.5|          1.3|         0.2|setosa     |
+|          5.7|         4.4|          1.5|         0.4|setosa     |
+|          6.5|         3.2|          5.1|         2.0|virginica  |
+|          6.3|         2.9|          5.6|         1.8|virginica  |
+|          6.3|         2.5|          5.0|         1.9|virginica  |
 |          6.3|         2.7|          4.9|         1.8|virginica  |
-|          6.2|         2.2|          4.5|         1.5|versicolor |
-|          7.3|         2.9|          6.3|         1.8|virginica  |
-|          6.2|         2.9|          4.3|         1.3|versicolor |
-|          6.7|         3.0|          5.2|         2.3|virginica  |
-|          4.8|         3.0|          1.4|         0.1|setosa     |
+|          4.8|         3.0|          1.4|         0.3|setosa     |
+|          6.7|         3.1|          4.7|         1.5|versicolor |
+|          5.4|         3.9|          1.3|         0.4|setosa     |
+|          7.7|         2.8|          6.7|         2.0|virginica  |
+|          7.4|         2.8|          6.1|         1.9|virginica  |
 
 Once we cover data frames, the utility of doing this will hopefully become more clear.
 
@@ -190,7 +198,7 @@ plot(x,y)<br>```</pre>
 
 Which returns:
 
-![plot of chunk myFigure](figures/myFigure-1.png)
+![plot of chunk myFigure](figure/myFigure-1.png)
 
 ## Rendering
 
@@ -205,7 +213,7 @@ Alternatively, we can use the console to do this.
 rmarkdown::render("my_rmd.Rmd")
 ```
 
-note: File extensions are imporatant here.  For RStudio to recognize the file as something that needs to be rendered and run through R, you will need to have you file names with a ".Rmd" extension.  A ".md" extension is simple markdown and RStudio won't process that file as expected if you've include code chunks to be run.
+note: File extensions are important here.  For RStudio to recognize the file as something that needs to be rendered and run through R, you will need to have you file names with a ".Rmd" extension.  A ".md" extension is simple markdown and RStudio won't process that file as expected if you've include code chunks to be run.
 
 ## Exercise 3.1 
 
