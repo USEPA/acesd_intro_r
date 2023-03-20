@@ -1,4 +1,4 @@
-# Geospatial Analysis (aka GIS) in R
+# Geospatial Analysis in R
 
 Believe it or not, you can meet all your GIS and geospatial analysis needs using only R! We will introduce this today and we will cover the basics of how to read in and write spatial data with R, geospatial data packages, and options for making maps. This will be a very high level overview and we will only be scratching the surface, but should at least get you started on the right path to learn more.
 
