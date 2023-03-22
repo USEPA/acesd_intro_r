@@ -14,3 +14,7 @@ library("dplyr")
 ```
 
 # Data Science Tools Available to us at USEPA
+
+```{r}
+plot(iris, col = "#FF5733")
+```

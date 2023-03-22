@@ -4,9 +4,35 @@ Up to this point we have learned a lot and seen many different things that we ca
 
 ## What is reproducibility and what do you need to share?
 
-## Reproducible Scripts
+Reproducibility in science is a very broad topic and even the definition of the assocaited terms (e.g., reproduce and replicate) are not universally agreed upon.  But the consensus that I have begun to see is that reproducibility relates to reproducing the same results with the same code and data.  This can also be referred to as "computational reproducibility".  Replicating a study relates to getting similar results but with a new study and new data.  These definitions are consitent with how the National Academies define reproducibility and replicability in a 2019 publication (https://nap.nationalacademies.org/catalog/25303/reproducibility-and-replicability-in-science).
 
-## Reproducible Documents
+In this lesson, we focus on computational reproducibility, how we can achieve that using R, and what we should plan on sharing to ensure proper QA and review.
+
+## Computational reproducibility with scripts and documents
+
+You may not have realized it, but throughout our class we have been working in a reproducible fashion.  The exercises that we are working on all have code that is saved as a `.R` script and those scripts include all of the bits and pieces we would need to successfully re-run the code.  The bare minimum that we need in order for our work to be reproduced (and thus reviewed) by someone else is:
+
+- Details on the computational environment
+- Code
+- All of the data the code uses
+- Documentation
+
+Let's look at each of these in a little more depth.
+
+### Details on the computational environment
+
+There are shades of grey on this one as the amount of detail ranges from simple to complex.  On the complex side of things a reproducible analysis would include access to the entire computational environment including operating system and version, all system dependencies, exact R version, and exact R package versions  This is often done with something like a [Docker](https://www.docker.com/) files/containers or [Binder](https://mybinder.org/) executable environments and exact package versions managed through something like [`renv`](https://cran.r-project.org/web/packages/renv/index.html).  For our first forays into reproducible work, we are not going to go this far.  
+
+What we all should strive for as a minimum level of information is details on the R version, R packages (and versions), and a snapshot of the operating system details.  We can do this with what we currently know about R.
+
+First, how should we deal with providing details on R packages?  We will need to make sure our code can deal with the packages and that we provide the details to users of versions.  We should already have the code written in a way that all of our packages are called with `library()`.  
+
+For example, here is some code for a lake photic zone temperature model: <https://github.com/USEPA/lake_photic_zone/blob/master/R/model.R>.  In this example, all of the packages are loaded in the first lines of code. 
+
+Another way to do this is to have a script called `packages.R` that is nothing but your `library()` calls.  Here is an example (prviate repo, so you won't have access): <https://github.com/USEPA/fluoroproj/blob/main/R/packages.R>  
+
+
+
 
 
 
