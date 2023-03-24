@@ -208,7 +208,6 @@ To see a bit of this in action, here are a few examples (these are R Markdown):
   ```r
   download.file("https://raw.githubusercontent.com/USEPA/ri_wq_trends/master/manuscript/ecosphere_production/manuscript.Rmd", "manuscript.Rmd")
   ```
-  - ![Open in RStudio](./manuscript.Rmd)
     
   - Word: Download with code below then open in Word
   
@@ -216,13 +215,8 @@ To see a bit of this in action, here are a few examples (these are R Markdown):
   ```r
   download.file("https://github.com/USEPA/ri_wq_trends/raw/master/manuscript/ecosphere_production/manuscript.docx", "manuscript_from_rmd.docx")
   ```
-  
-  - [Open in RStudio](file://manuscript_from_rmd.docx)
-  
-- Older paper with output to PDF
 
+And, a gallery of all the things you can do! <https://quarto.org/docs/gallery/>
 
-And, a gallery of all the things you can do!
-d
 
 
