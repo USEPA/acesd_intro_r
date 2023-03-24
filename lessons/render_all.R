@@ -1,5 +1,9 @@
-render_all<-function(path=".",pattern="*.Rmd"){
+render_all<-function(path=".",pattern="*.Rmd", ignore = NULL){
   files <- list.files(path,pattern,full.names = T)
+  if(!is.null(ignore)){
+    files <- files[!files %in% ignore]
+  }
+  
   for(i in files){
     out <- stringr::str_replace(i,"Rmd","md")
     if(!file.exists(out)){

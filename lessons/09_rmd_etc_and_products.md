@@ -57,29 +57,24 @@ sessionInfo()
 ## Matrix products: default
 ## 
 ## locale:
-## [1] LC_COLLATE=English_United States.utf8 
-## [2] LC_CTYPE=English_United States.utf8   
-## [3] LC_MONETARY=English_United States.utf8
-## [4] LC_NUMERIC=C                          
+## [1] LC_COLLATE=English_United States.utf8  LC_CTYPE=English_United States.utf8   
+## [3] LC_MONETARY=English_United States.utf8 LC_NUMERIC=C                          
 ## [5] LC_TIME=English_United States.utf8    
 ## 
 ## attached base packages:
-## [1] stats     graphics  grDevices utils     datasets  methods  
-## [7] base     
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+## [1] dplyr_1.1.0   ggplot2_3.4.1 knitr_1.42   
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] rstudioapi_0.14   knitr_1.42        magrittr_2.0.3   
-##  [4] tidyselect_1.2.0  here_1.0.1        R6_2.5.1         
-##  [7] rlang_1.0.6       fastmap_1.1.1     fansi_1.0.4      
-## [10] stringr_1.5.0     httr_1.4.5        dplyr_1.1.0      
-## [13] tools_4.2.2       xfun_0.37         sessioninfo_1.2.2
-## [16] png_0.1-8         utf8_1.2.3        dadjokeapi_1.0.2 
-## [19] cli_3.6.0         htmltools_0.5.4   rprojroot_2.0.3  
-## [22] yaml_2.3.7        digest_0.6.31     tibble_3.2.0     
-## [25] lifecycle_1.0.3   vctrs_0.5.2       curl_5.0.0       
-## [28] glue_1.6.2        evaluate_0.20     rmarkdown_2.20   
-## [31] stringi_1.7.12    compiler_4.2.2    pillar_1.8.1     
-## [34] generics_0.1.3    jsonlite_1.8.4    pkgconfig_2.0.3
+##  [1] pillar_1.8.1      compiler_4.2.2    tools_4.2.2       digest_0.6.31     jsonlite_1.8.4    evaluate_0.20    
+##  [7] lifecycle_1.0.3   tibble_3.2.0      gtable_0.3.1      pkgconfig_2.0.3   png_0.1-8         rlang_1.0.6      
+## [13] cli_3.6.0         rstudioapi_0.14   curl_5.0.0        yaml_2.3.7        xfun_0.37         fastmap_1.1.1    
+## [19] withr_2.5.0       httr_1.4.5        stringr_1.5.0     generics_0.1.3    vctrs_0.5.2       rprojroot_2.0.3  
+## [25] grid_4.2.2        tidyselect_1.2.0  glue_1.6.2        here_1.0.1        R6_2.5.1          dadjokeapi_1.0.2 
+## [31] fansi_1.0.4       rmarkdown_2.20    sessioninfo_1.2.2 magrittr_2.0.3    scales_1.2.1      htmltools_0.5.4  
+## [37] colorspace_2.1-0  utf8_1.2.3        stringi_1.7.12    munsell_0.5.0
 ```
 
 ```r
@@ -87,7 +82,7 @@ sessioninfo::session_info()
 ```
 
 ```
-## ─ Session info ───────────────────────────────────────────────────
+## ─ Session info ────────────────────────────────────────────────────────────────────────────────────────────────
 ##  setting  value
 ##  version  R version 4.2.2 (2022-10-31 ucrt)
 ##  os       Windows 10 x64 (build 19042)
@@ -101,25 +96,29 @@ sessioninfo::session_info()
 ##  rstudio  2022.12.0+353 Elsbeth Geranium (desktop)
 ##  pandoc   2.19.2 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
 ## 
-## ─ Packages ───────────────────────────────────────────────────────
+## ─ Packages ────────────────────────────────────────────────────────────────────────────────────────────────────
 ##  package     * version date (UTC) lib source
 ##  cli           3.6.0   2023-01-09 [1] CRAN (R 4.2.2)
+##  colorspace    2.1-0   2023-01-23 [1] CRAN (R 4.2.2)
 ##  curl          5.0.0   2023-01-12 [1] CRAN (R 4.2.2)
 ##  dadjokeapi    1.0.2   2021-03-01 [1] CRAN (R 4.2.2)
 ##  digest        0.6.31  2022-12-11 [1] CRAN (R 4.2.2)
-##  dplyr         1.1.0   2023-01-29 [1] CRAN (R 4.2.2)
+##  dplyr       * 1.1.0   2023-01-29 [1] CRAN (R 4.2.2)
 ##  evaluate      0.20    2023-01-17 [1] CRAN (R 4.2.2)
 ##  fansi         1.0.4   2023-01-22 [1] CRAN (R 4.2.2)
 ##  fastmap       1.1.1   2023-02-24 [1] CRAN (R 4.2.2)
 ##  generics      0.1.3   2022-07-05 [1] CRAN (R 4.2.2)
+##  ggplot2     * 3.4.1   2023-02-10 [1] CRAN (R 4.2.2)
 ##  glue          1.6.2   2022-02-24 [1] CRAN (R 4.2.2)
+##  gtable        0.3.1   2022-09-01 [1] CRAN (R 4.2.2)
 ##  here          1.0.1   2020-12-13 [1] CRAN (R 4.2.2)
 ##  htmltools     0.5.4   2022-12-07 [1] CRAN (R 4.2.2)
 ##  httr          1.4.5   2023-02-24 [1] CRAN (R 4.2.2)
 ##  jsonlite      1.8.4   2022-12-06 [1] CRAN (R 4.2.2)
-##  knitr         1.42    2023-01-25 [1] CRAN (R 4.2.2)
+##  knitr       * 1.42    2023-01-25 [1] CRAN (R 4.2.2)
 ##  lifecycle     1.0.3   2022-10-07 [1] CRAN (R 4.2.2)
 ##  magrittr      2.0.3   2022-03-30 [1] CRAN (R 4.2.2)
+##  munsell       0.5.0   2018-06-12 [1] CRAN (R 4.2.2)
 ##  pillar        1.8.1   2022-08-19 [1] CRAN (R 4.2.2)
 ##  pkgconfig     2.0.3   2019-09-22 [1] CRAN (R 4.2.2)
 ##  png           0.1-8   2022-11-29 [1] CRAN (R 4.2.2)
@@ -128,6 +127,7 @@ sessioninfo::session_info()
 ##  rmarkdown     2.20    2023-01-19 [1] CRAN (R 4.2.2)
 ##  rprojroot     2.0.3   2022-04-02 [1] CRAN (R 4.2.2)
 ##  rstudioapi    0.14    2022-08-22 [1] CRAN (R 4.2.2)
+##  scales        1.2.1   2022-08-20 [1] CRAN (R 4.2.2)
 ##  sessioninfo   1.2.2   2021-12-06 [1] CRAN (R 4.2.2)
 ##  stringi       1.7.12  2023-01-11 [1] CRAN (R 4.2.2)
 ##  stringr       1.5.0   2022-12-02 [1] CRAN (R 4.2.2)
@@ -135,15 +135,16 @@ sessioninfo::session_info()
 ##  tidyselect    1.2.0   2022-10-10 [1] CRAN (R 4.2.2)
 ##  utf8          1.2.3   2023-01-31 [1] CRAN (R 4.2.2)
 ##  vctrs         0.5.2   2023-01-23 [1] CRAN (R 4.2.2)
+##  withr         2.5.0   2022-03-03 [1] CRAN (R 4.2.2)
 ##  xfun          0.37    2023-01-31 [1] CRAN (R 4.2.2)
 ##  yaml          2.3.7   2023-01-23 [1] CRAN (R 4.2.2)
 ## 
 ##  [1] C:/Program Files/R/R-4.2.2/library
 ## 
-## ──────────────────────────────────────────────────────────────────
+## ───────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
-And the way to capture this with the `sink()` function is like this.
+And the way to capture this with the `capture.output()` function is like this.
 
 
 ```r
@@ -201,10 +202,20 @@ Take a look at:
 To see a bit of this in action, here are a few examples (these are R Markdown):
 
 - Recent paper of mine with output to Word
-  - Rmd: 
-  - Wor: 
-  - [Open File in RStudio](manuscript.Rmd)
-  - [Open File in Word](manuscript.docx)
+  - Rmd: Download with code below then open in RStudio
+  
+  
+  ```r
+  download.file("https://raw.githubusercontent.com/USEPA/ri_wq_trends/master/manuscript/ecosphere_production/manuscript.Rmd", "manuscript.Rmd")
+  ```
+  
+  - Word: Download with code below then open in Word
+  
+  
+  ```r
+  download.file("https://github.com/USEPA/ri_wq_trends/raw/master/manuscript/ecosphere_production/manuscript.docx", "manuscript_from_rmd.docx")
+  ```
+  
   
 - Older paper with output to PDF
 
