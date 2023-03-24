@@ -2,222 +2,214 @@
 
 Up to this point we have learned a lot and seen many different things that we can do with R.  But one of the topics we haven't really covered is how do we capture this work, weave it in with the products we create (e.g. presentations and papers), and share the analysis so that others can reproduce the results and check the quality of the work.  To do this, we will cover the basic concepts of reproducibility and discuss the types of files needed (e.g. scripts, R Markdown/Quarto documents, folders, etc.) to facilitate others using our analysis.   
 
+## TL;DR
+
+- Share all of the `.R` files used in your analysis
+- Share the data needed by your `.R` files
+- Make sure all the R packages you used are listed
+- Provide basic documentation is something like a README file
+
+An example of a simple case would be a folder lie:
+
+- my_project_folder
+    - my_project_analysis.R
+    - my_project_data.csv
+    - README.md
+
 ## What is reproducibility and what do you need to share?
 
-## Reproducible Scripts
+Reproducibility in science is a very broad topic and even the definition of the assocaited terms (e.g., reproduce and replicate) are not universally agreed upon.  But the consensus that I have begun to see is that reproducibility relates to reproducing the same results with the same code and data.  This can also be referred to as "computational reproducibility".  Replicating a study relates to getting similar results but with a new study and new data.  These definitions are consitent with how the National Academies define reproducibility and replicability in a 2019 publication (https://nap.nationalacademies.org/catalog/25303/reproducibility-and-replicability-in-science).
 
-## Reproducible Documents
+In this lesson, we focus on computational reproducibility, how we can achieve that using R, and what we should plan on sharing to ensure proper QA and review.
 
+## Computational reproducibility with scripts and documents
 
+You may not have realized it, but throughout our class we have been working in a reproducible fashion.  The exercises that we are working on all have code that is saved as a `.R` script and those scripts include all of the bits and pieces we would need to successfully re-run the code.  The bare minimum that we need in order for our work to be reproduced (and thus reviewed) by someone else is:
 
+- Details on the computational environment
+- All of the code and the data the code uses
+- Documentation
 
+Let's look at each of these in a little more depth, but through some existing examples.
 
+## Details on the computational environment
 
-### R Markdown
+There are shades of grey on this one as the amount of detail ranges from simple to complex.  On the complex side of things a reproducible analysis would include access to the entire computational environment including operating system and version, all system dependencies, exact R version, and exact R package versions  This is often done with something like a [Docker](https://www.docker.com/) files/containers or [Binder](https://mybinder.org/) executable environments and exact package versions managed through something like [`renv`](https://cran.r-project.org/web/packages/renv/index.html).  For our first forays into reproducible work, we are not going to go this far.  Here are some examples to look at
 
-R Markdown provides the ability for us to combine code and text.  The "Markdown" part of this references the [`markdown`](https://daringfireball.net/projects/markdown/) mark-up language that provides relatively simple text mark-up to format text.  The R part allows us to mix in code chunks with that text.  Together they provide the foundation of reproducible documents that allow us to blend code with explanation. 
-
-After this lesson, you will:
-
-- Gain familiarity with Markdown, `rmarkdown` and `knitr`
-- Work with and render an R Markdown document with RStudio
-
-#### YAML
-
-    ---
-    title: "My First Reproducible Document"
-    author: "Jeff W. Hollister"
-    date: "1/6/2015"
-    output: pdf_document
-    ---
-
-This is what the YAML(YAML Ain't Markup Language) header or front-matter looks like.  It is metadata about the document that can be very useful.  There is a lot more we can do with the YAML.  There are additional fields available for us to you, or we can even create our own.  For our purposes these basic ones are good, but we can also look at the additional built in ones.  The [`rmarkdown` cheatsheet](http://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf) is a good place to look as is the [online documentation for `rmarkdown`](http://rmarkdown.rstudio.com/lesson-1.html).  A lot of the optional ones I use are part of the [output format](http://rmarkdown.rstudio.com/lesson-9.html) 
-
-In our document, `region2_nla_analysis.Rmd` we can see our `YAML` header on lines 1-11.
-
-#### Markdown
-Markdown isn't R, but it has become an important tool in the R ecosystem as it can be used to create package vignettes, can be used on [GitHub](http://github.com), and forms the basis for several reproducible research tools in RStudio.  Markdown is a tool that allows you to write simply formatted text that is converted to HTML/XHTML.  The primary goal of markdown is readability of the raw file.  Over the last couple of years, Markdown has emerged as a key way to write up reproducible documents, create websites, write documentation (all of these lessons are written in Markdown), and make presentations.  For the basics of markdown and general information look at [Daring Fireball](http://daringfireball.net/projects/markdown/basics).
-
-To get you started, here is some of that same information on the most common markdown you will use: text, headers, lists, links, images, and tables.
-
-##### Text
-
-So, for basic text... Just type it!
-
-##### Headers
-
-In markdown, there are two ways to do headers but for most of what you need, you can use the following for headers:
+- Packages loaded at beginning of script: <https://github.com/USEPA/lake_photic_zone/blob/master/R/model.R>.
+- Packages kept in`packages.R` and loaded in other scripts using `source()`: 
+    - <https://github.com/USEPA/fluoroproj/blob/main/R/packages.R>
+    - <https://github.com/USEPA/fluoroproj/blob/main/R/figures.R>
+    - NOTE: These are in a private repo, so will only work for Jeff.
+    
+In addition to making sure your code knows which packages to use, we can also provide more detailed information on the computing environment that is more geared to the humans looking at this.  The easiest way to do that is with `sessionInfo()` or for a more nicely formatted version you can use the version from the `sessioninfo` package
 
 
-    # Header 1
-    ## Header 2
-    ...
-    ###### Header 6
+```r
+sessionInfo()
+```
+
+```
+## R version 4.2.2 (2022-10-31 ucrt)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 10 x64 (build 19042)
+## 
+## Matrix products: default
+## 
+## locale:
+## [1] LC_COLLATE=English_United States.utf8 
+## [2] LC_CTYPE=English_United States.utf8   
+## [3] LC_MONETARY=English_United States.utf8
+## [4] LC_NUMERIC=C                          
+## [5] LC_TIME=English_United States.utf8    
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods  
+## [7] base     
+## 
+## loaded via a namespace (and not attached):
+##  [1] rstudioapi_0.14   knitr_1.42        magrittr_2.0.3   
+##  [4] tidyselect_1.2.0  here_1.0.1        R6_2.5.1         
+##  [7] rlang_1.0.6       fastmap_1.1.1     fansi_1.0.4      
+## [10] stringr_1.5.0     httr_1.4.5        dplyr_1.1.0      
+## [13] tools_4.2.2       xfun_0.37         sessioninfo_1.2.2
+## [16] png_0.1-8         utf8_1.2.3        dadjokeapi_1.0.2 
+## [19] cli_3.6.0         htmltools_0.5.4   rprojroot_2.0.3  
+## [22] yaml_2.3.7        digest_0.6.31     tibble_3.2.0     
+## [25] lifecycle_1.0.3   vctrs_0.5.2       curl_5.0.0       
+## [28] glue_1.6.2        evaluate_0.20     rmarkdown_2.20   
+## [31] stringi_1.7.12    compiler_4.2.2    pillar_1.8.1     
+## [34] generics_0.1.3    jsonlite_1.8.4    pkgconfig_2.0.3
+```
+
+```r
+sessioninfo::session_info()
+```
+
+```
+## ─ Session info ───────────────────────────────────────────────────
+##  setting  value
+##  version  R version 4.2.2 (2022-10-31 ucrt)
+##  os       Windows 10 x64 (build 19042)
+##  system   x86_64, mingw32
+##  ui       RStudio
+##  language (EN)
+##  collate  English_United States.utf8
+##  ctype    English_United States.utf8
+##  tz       America/New_York
+##  date     2023-03-24
+##  rstudio  2022.12.0+353 Elsbeth Geranium (desktop)
+##  pandoc   2.19.2 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
+## 
+## ─ Packages ───────────────────────────────────────────────────────
+##  package     * version date (UTC) lib source
+##  cli           3.6.0   2023-01-09 [1] CRAN (R 4.2.2)
+##  curl          5.0.0   2023-01-12 [1] CRAN (R 4.2.2)
+##  dadjokeapi    1.0.2   2021-03-01 [1] CRAN (R 4.2.2)
+##  digest        0.6.31  2022-12-11 [1] CRAN (R 4.2.2)
+##  dplyr         1.1.0   2023-01-29 [1] CRAN (R 4.2.2)
+##  evaluate      0.20    2023-01-17 [1] CRAN (R 4.2.2)
+##  fansi         1.0.4   2023-01-22 [1] CRAN (R 4.2.2)
+##  fastmap       1.1.1   2023-02-24 [1] CRAN (R 4.2.2)
+##  generics      0.1.3   2022-07-05 [1] CRAN (R 4.2.2)
+##  glue          1.6.2   2022-02-24 [1] CRAN (R 4.2.2)
+##  here          1.0.1   2020-12-13 [1] CRAN (R 4.2.2)
+##  htmltools     0.5.4   2022-12-07 [1] CRAN (R 4.2.2)
+##  httr          1.4.5   2023-02-24 [1] CRAN (R 4.2.2)
+##  jsonlite      1.8.4   2022-12-06 [1] CRAN (R 4.2.2)
+##  knitr         1.42    2023-01-25 [1] CRAN (R 4.2.2)
+##  lifecycle     1.0.3   2022-10-07 [1] CRAN (R 4.2.2)
+##  magrittr      2.0.3   2022-03-30 [1] CRAN (R 4.2.2)
+##  pillar        1.8.1   2022-08-19 [1] CRAN (R 4.2.2)
+##  pkgconfig     2.0.3   2019-09-22 [1] CRAN (R 4.2.2)
+##  png           0.1-8   2022-11-29 [1] CRAN (R 4.2.2)
+##  R6            2.5.1   2021-08-19 [1] CRAN (R 4.2.2)
+##  rlang         1.0.6   2022-09-24 [1] CRAN (R 4.2.2)
+##  rmarkdown     2.20    2023-01-19 [1] CRAN (R 4.2.2)
+##  rprojroot     2.0.3   2022-04-02 [1] CRAN (R 4.2.2)
+##  rstudioapi    0.14    2022-08-22 [1] CRAN (R 4.2.2)
+##  sessioninfo   1.2.2   2021-12-06 [1] CRAN (R 4.2.2)
+##  stringi       1.7.12  2023-01-11 [1] CRAN (R 4.2.2)
+##  stringr       1.5.0   2022-12-02 [1] CRAN (R 4.2.2)
+##  tibble        3.2.0   2023-03-08 [1] CRAN (R 4.2.2)
+##  tidyselect    1.2.0   2022-10-10 [1] CRAN (R 4.2.2)
+##  utf8          1.2.3   2023-01-31 [1] CRAN (R 4.2.2)
+##  vctrs         0.5.2   2023-01-23 [1] CRAN (R 4.2.2)
+##  xfun          0.37    2023-01-31 [1] CRAN (R 4.2.2)
+##  yaml          2.3.7   2023-01-23 [1] CRAN (R 4.2.2)
+## 
+##  [1] C:/Program Files/R/R-4.2.2/library
+## 
+## ──────────────────────────────────────────────────────────────────
+```
+
+And the way to capture this with the `sink()` function is like this.
+
+
+```r
+capture.output(sessionInfo(),file="sessionInfo_2023-03-22.txt")
+```
+
+If you use the `sessioninfo::session_info()` version it provides a different (better, IMO) format.
+
+
+```r
+sessioninfo::session_info(to_file = "session_info_2023-03-22.txt")
+```
+
+## All of the code and the data the code uses
+
+This part seems pretty simple.  Just make sure your provide access to your files that contain your R code (e.g., `.R` script(s), `.Rmd` files, or `.qmd` files).  For the most part that is going to be enough, you just need to make sure that all of the code is available. Also, you will need to make sure that the data your code uses is available.  Two common ways to do this are to have your data available via the web or include the data files (e.g. as CSV or excel files) along with your `.R` scripts.  
+
+Here is an example:
+
+- RMarkdown files (`.Rmd`) that reference `.R` files:
+  - The code: <https://github.com/USEPA/ri_wq_trends/blob/aafaf6a43eebbf3e4093877e011d78e4f3f5de61/manuscript/ecosphere_resubmit_2/manuscript.Rmd#L24>
+  - The code that initially accesses the data: <https://github.com/USEPA/ri_wq_trends/blob/master/R/data_clean.R>
+  - The data in `ww_all.csv`: <https://github.com/USEPA/ri_wq_trends/tree/master/data> 
+
+## Documentation
+
+The last bit we would need is some level of documentation.  This could be provided by a simple README file or could be more complex like an `rmarkdown` or `quarto` document.
+
+### Simple README
+
+A README file could simply be written in text, but more commonly it would be written in Markdown (see <https://www.markdownguide.org/basic-syntax/>) to provide for some simple formatting options.  The type of information can vary, but you need to provide information about the code and data, details on use of the code and data (e.g. license/public domain dedication), links to other pertinent information (e.g. a published manuscript), and any other required pieces (e.g., a disclaimer).
+
+Here are a few examples:
+
+- A very simple case: <https://github.com/USEPA/Microcystinchla#readme>
+- More detailed (a data only site): <https://github.com/USEPA/provisional_habs#readme>
+
+## Quarto and R Markdown
+
+In the materials above, we've covered the baseline case for what should be shared in order to make an analysis reproducible for other users, for reviewers, and for QA purposes.  Of course, we can get a lot fancier (which isn't necessarily better) with this.  The most likely solution would be with the use of reproducible research documents via Quarto or R Markdown.  Both of these provide the ability for us to combine code and text.  For both, the text is written using "Markdown" which is a mark-up language that provides relatively simple text mark-up to format text.  The code part is included inside of code chunks or inline code mixed directly in with the text in the same document.  These documents are "rendered" to a final output (e.g. html, pdf, docx) and in this rendering process all of the code inside of the document is run and the output is included in the final rendered document. This approach provides the foundation of reproducible documents that allow us to blend code with explanation.
+
+
+We aren't going to have time to dig into the details of these today, but the materials provides by Posit (the company formerly known as RStudio) are probably the best around and will allow you to get pretty far.
+
+Take a look at:
+
+- Quarto:
+  - Main site: <https://quarto.org/>
+  - Hello, Quarto Tutorial: <https://quarto.org/docs/get-started/hello/rstudio.html>
+  - Getting started: <https://quarto.org/docs/get-started/>
+- R Markdown:
+  - Main site: <https://rmarkdown.rstudio.com/>
+  - Lessons: <https://rmarkdown.rstudio.com/lesson-1.html>
+
+To see a bit of this in action, here are a few examples (these are R Markdown):
+
+- Recent paper of mine with output to Word
+  - Rmd: 
+  - Wor: 
+  - [Open File in RStudio](manuscript.Rmd)
+  - [Open File in Word](manuscript.docx)
   
-
-##### List
-
-Lists can be done many ways in markdown. An unordered list is simply done with a `-`, `+`, or `*`.  For example
-
-- this list
-- is produced with
-- the following 
-- markdown.
-    - nested
-
-<pre>    
-- this list
-- is produced with
-- the following 
-- markdown
-    - nested
-</pre> 
-    
-Notice the space after the `-`.  
-
-To create an ordered list, simply use numbers.  So to produce:
-
-1. this list
-2. is produced with
-3. the following
-4. markdown.
-    - nested
-
-<pre>
-1. this list
-2. is produced with
-3. the following
-4. markdown.
-    - nested
-</pre>
-
-##### Links and Images
-
-Last type of formatting that you will likely want to accomplish with R markdown is including links and images.  While these two might seem dissimilar, I am including them together as their syntax is nearly identical.
-
-So, to create a link you would use the following:
-
-```
-[EPA Region 2](https://www.epa.gov/aboutepa/epa-region-2)
-```
-
-Which looks like: [EPA Region 2](https://www.epa.gov/aboutepa/epa-region-2).
-
-The text you want linked goes in the `[]` and the link itself goes in the `()`.  That's it! Now to show an image, you do this:
-
-```
-![Lower Manhattan](https://www.epa.gov/sites/production/files/styles/large/public/2015-10/1280px-lower_manhattan_from_jersey_city_november_2014_panorama_41.jpg)
-```
-
-And renders like: ![Lower Manhattan](https://www.epa.gov/sites/production/files/styles/large/public/2015-10/1280px-lower_manhattan_from_jersey_city_november_2014_panorama_41.jpg)
-
-The only difference is the use of the `!` at the beginning.  When parsed, the image itself will be included, and not linked text.  As these will be on the web, the images need to also be available via the web.  You can link to local files, but will need to use a path relative to the root of the document you are working on.  Let's not worry about that as it is a bit beyond the scope of this tutorial.
-
-And with this, we can have some real fun.  
-
-![matt foley](https://media.giphy.com/media/n7Nwr10hWzROE/giphy.gif)
-
-##### Tables
-
-Markdown has the ability to structure tables as well.  So to get a table like this:
-
-|First Name|Last Name|Favorite Color|
-|----------|---------|--------------|
-|Cookie    |Monster  |Blue          |
-|Big       |Bird     |Yellow        |
-|Elmo      |Monster  |Red           |
-
-We use Markdown that looks like this:
-
-<pre>
-|First Name|Last Name|Favorite Color|
-|----------|---------|--------------|
-|Cookie    |Monster  |Blue          |
-|Big       |Bird     |Yellow        |
-|Elmo      |Monster  |Red           |
-</pre>
-
-Coding these tables up by hand only makes sense for the simplest cases, but luckily we have many options for generating tables with R functions.  In our example `region2_nla_analysis.Rmd` we've seen the use of the `DT` package, although since this uses the [DataTables `javascript` library](https://datatables.net/) it will only work for documents with HTML as the output type.  For static non interactive tables there is the `kable()` function from the `knitr` package, there's the [`kableExtra` package](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) which provides tools for enhanced tables.  There are others as well and a good overview can be seen in [this rOpenSci discussion](https://github.com/ropensci/unconf17/issues/69).  
-
-The nice thing about using R functions to create these is that all of the data we have in R can be output as a table.  For instance:
+- Older paper with output to PDF
 
 
-```r
-knitr::kable(iris[sample(nrow(iris),10),],row.names = FALSE)
-```
+And, a gallery of all the things you can do!
 
 
 
-| Sepal.Length| Sepal.Width| Petal.Length| Petal.Width|Species    |
-|------------:|-----------:|------------:|-----------:|:----------|
-|          6.7|         3.0|          5.0|         1.7|versicolor |
-|          4.8|         3.1|          1.6|         0.2|setosa     |
-|          6.5|         3.0|          5.8|         2.2|virginica  |
-|          6.4|         3.2|          4.5|         1.5|versicolor |
-|          5.1|         3.8|          1.9|         0.4|setosa     |
-|          5.1|         3.8|          1.6|         0.2|setosa     |
-|          6.4|         2.7|          5.3|         1.9|virginica  |
-|          5.2|         2.7|          3.9|         1.4|versicolor |
-|          5.5|         2.3|          4.0|         1.3|versicolor |
-|          4.6|         3.4|          1.4|         0.3|setosa     |
-
-Once we cover data frames, the utility of doing this will hopefully become more clear.
-
-So, now that we know YAML controls the document build process, and we can structure our text with Markdown, we need to add the last step: incorportaing code.
-
-#### Code Chunks
-
-As we have mentioned, our documents will all be R Markdown documents (i.e. .Rmd).  To include R Code in your `.Rmd` you would do something like:
-
-<pre>```{r}
-x<-rnorm(100)
-x<br>```</pre>
-
-This identifies what is known as a code chunk.  When written like it is above, it will echo the code to your final document, evalute the code with R and echo the results to the final document.  There are some cases where you might not want all of this to happen.  You may want just the code returned and not have it evalutated by R.  This is accomplished with:
-
-<pre>```{r eval=FALSE}
-x<-rnorm(100)<br>```</pre>
-
-Alternatively, you might just want the output returned, as would be the case when using R Markdown to produce a figure in a presentation or paper:
-
-<pre>```{r echo=FALSE}
-x<-rnorm(100)
-y<-jitter(x,1000)
-plot(x,y)<br>```</pre>
-    
-Lastly, each of your code chunks can have a label.  That would be accomplished with something like:
-    
-<pre>```{r myFigure, echo=FALSE}
-x<-rnorm(100)
-y<-jitter(x,1000)
-plot(x,y)<br>```</pre>
-
-Which returns:
-
-![plot of chunk myFigure](figure/myFigure-1.png)
-
-#### Rendering
-
-If you look near the top of the editor window you will see:
-
-![knit it](figures/knit.jpg)
-
-Alternatively, we can use the console to do this.
-
-
-```r
-rmarkdown::render("my_rmd.Rmd")
-```
-
-note: File extensions are important here.  For RStudio to recognize the file as something that needs to be rendered and run through R, you will need to have you file names with a ".Rmd" extension.  A ".md" extension is simple markdown and RStudio won't process that file as expected if you've include code chunks to be run.
-
-## Exercise 3.1 
-
-We now have some tools at our disposal that we can use to start to add information to our `region2_nla_analysis.Rmd` document.  For this exercise add the following at the bottom:
-
-1. Add a new first level header with "Playing around with Markdown" as the text
-2. Add three second level headers underneath with the following text: "A bulleted list", "A link", "An animated GIF"
-3. Underneath "A bulleted list", add a bulleted list with three items that have your three favorite foods/
-4. Underneath "A link" add in a link to the website of your choosing. 
-5. Underneath "An animated GIF" add an image using the URL of an animated GIF of your choosing.  You can search for "Animated GIF" at <https://images.google.com>.
-6. If you have time, add in a small markdown table.
