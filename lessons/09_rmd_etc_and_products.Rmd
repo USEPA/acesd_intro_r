@@ -124,6 +124,6 @@ To see a bit of this in action, here are a few examples (these are R Markdown):
 
 
 And, a gallery of all the things you can do!
-
+d
 
 
