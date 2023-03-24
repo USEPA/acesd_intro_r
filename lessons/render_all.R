@@ -1,7 +1,8 @@
 render_all<-function(path=".",pattern="*.Rmd", ignore = NULL){
   files <- list.files(path,pattern,full.names = T)
   if(!is.null(ignore)){
-    files <- files[!files %in% ignore]
+    
+    files <- files[!grepl(ignore, files)]
   }
   
   for(i in files){

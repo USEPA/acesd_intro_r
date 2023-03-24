@@ -65,16 +65,16 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] dplyr_1.1.0   ggplot2_3.4.1 knitr_1.42   
+## [1] stringr_1.5.0 dplyr_1.1.0   ggplot2_3.4.1 knitr_1.42   
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] pillar_1.8.1      compiler_4.2.2    tools_4.2.2       digest_0.6.31     jsonlite_1.8.4    evaluate_0.20    
 ##  [7] lifecycle_1.0.3   tibble_3.2.0      gtable_0.3.1      pkgconfig_2.0.3   png_0.1-8         rlang_1.0.6      
 ## [13] cli_3.6.0         rstudioapi_0.14   curl_5.0.0        yaml_2.3.7        xfun_0.37         fastmap_1.1.1    
-## [19] withr_2.5.0       httr_1.4.5        stringr_1.5.0     generics_0.1.3    vctrs_0.5.2       rprojroot_2.0.3  
-## [25] grid_4.2.2        tidyselect_1.2.0  glue_1.6.2        here_1.0.1        R6_2.5.1          dadjokeapi_1.0.2 
-## [31] fansi_1.0.4       rmarkdown_2.20    sessioninfo_1.2.2 magrittr_2.0.3    scales_1.2.1      htmltools_0.5.4  
-## [37] colorspace_2.1-0  utf8_1.2.3        stringi_1.7.12    munsell_0.5.0
+## [19] withr_2.5.0       httr_1.4.5        generics_0.1.3    vctrs_0.5.2       rprojroot_2.0.3   grid_4.2.2       
+## [25] tidyselect_1.2.0  glue_1.6.2        here_1.0.1        R6_2.5.1          dadjokeapi_1.0.2  fansi_1.0.4      
+## [31] rmarkdown_2.20    sessioninfo_1.2.2 magrittr_2.0.3    scales_1.2.1      htmltools_0.5.4   colorspace_2.1-0 
+## [37] utf8_1.2.3        stringi_1.7.12    munsell_0.5.0
 ```
 
 ```r
@@ -130,7 +130,7 @@ sessioninfo::session_info()
 ##  scales        1.2.1   2022-08-20 [1] CRAN (R 4.2.2)
 ##  sessioninfo   1.2.2   2021-12-06 [1] CRAN (R 4.2.2)
 ##  stringi       1.7.12  2023-01-11 [1] CRAN (R 4.2.2)
-##  stringr       1.5.0   2022-12-02 [1] CRAN (R 4.2.2)
+##  stringr     * 1.5.0   2022-12-02 [1] CRAN (R 4.2.2)
 ##  tibble        3.2.0   2023-03-08 [1] CRAN (R 4.2.2)
 ##  tidyselect    1.2.0   2022-10-10 [1] CRAN (R 4.2.2)
 ##  utf8          1.2.3   2023-01-31 [1] CRAN (R 4.2.2)
@@ -208,7 +208,8 @@ To see a bit of this in action, here are a few examples (these are R Markdown):
   ```r
   download.file("https://raw.githubusercontent.com/USEPA/ri_wq_trends/master/manuscript/ecosphere_production/manuscript.Rmd", "manuscript.Rmd")
   ```
-  
+  - [Open in RStudio](./manuscript.Rmd)
+    
   - Word: Download with code below then open in Word
   
   
@@ -216,6 +217,7 @@ To see a bit of this in action, here are a few examples (these are R Markdown):
   download.file("https://github.com/USEPA/ri_wq_trends/raw/master/manuscript/ecosphere_production/manuscript.docx", "manuscript_from_rmd.docx")
   ```
   
+  - [Open in RStudio](./manuscript_from_rmd.docx)
   
 - Older paper with output to PDF
 
