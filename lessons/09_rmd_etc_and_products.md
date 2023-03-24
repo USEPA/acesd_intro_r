@@ -208,7 +208,7 @@ To see a bit of this in action, here are a few examples (these are R Markdown):
   ```r
   download.file("https://raw.githubusercontent.com/USEPA/ri_wq_trends/master/manuscript/ecosphere_production/manuscript.Rmd", "manuscript.Rmd")
   ```
-  - [Open in RStudio](file://manuscript.Rmd)
+  - ![Open in RStudio](./manuscript.Rmd)
     
   - Word: Download with code below then open in Word
   
