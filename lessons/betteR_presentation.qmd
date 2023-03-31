@@ -1,30 +1,171 @@
 ---
-title: "betteR:  What tools can we, at EPA, use to make better use of R"
+title: "betteR!"
+subtitle: "What tools can we, at EPA, use to make better use of R"
 format: revealjs
+execute: 
+  echo: true
 ---
 
-## TL;DR
+## Overview
 
 - What can we do on our current PCs?
-  - Speed up iteration
-  - Data I/O and storage
-  - When to worry about this/point of diminishing returns?
-- What can we do using other computational infrastrucutre?
+- What can we do using other computational infrastructure?
 - What additional tools, that compliment R, do we have available?
 
-## Bullets
+## Current PC: Speed up iteration
+
+- Doing things over and over again
+- Example
+
+```{r eval=FALSE}
+my_vec <- NULL
+set.seed(42)
+for(i in 1:5000){
+  my_vec_slow <- c(my_vec_slow, mean(rnorm(100)) 
+}
+```
+
+## Current PC: Speed up iteration
+
+- Speed it up by pre-allocating memory
+- Example
+
+```{r eval=FALSE}
+my_vec <- numeric(5000)
+set.seed(42) 
+for(i in 1:5000){
+ my_vec[i] <- mean(rnorm(100)) 
+}
+```
+
+## Current PC: Speed up iteration
+
+```{r}
+library(microbenchmark)
+microbenchmark(
+  not_allocated = {
+    my_vec_slow <- NULL
+    set.seed(42)
+    for(i in 1:5000){
+      my_vec_slow <- c(my_vec_slow, mean(rnorm(100))) 
+    }},
+  allocated = {
+    my_vec <- numeric(5000)
+    set.seed(42)
+    for(i in 1:5000){
+      my_vec[i] <- mean(rnorm(100)) 
+    }}, 
+  times = 10)
+```
+
+## Current PC: Parallel processing
+
+```{r}
+library(future)
+library(future.apply)
+plan(multisession, workers = availableCores() - 1)
+microbenchmark(
+  serial = {
+    my_vec <- numeric(5000)
+    set.seed(42)
+    for(i in 1:5000){
+      my_vec[i] <- mean(rnorm(100)) 
+    }}, 
+  parallel = {
+    my_vec_p <- numeric(5000)
+    my_vec_parallel <- unlist(future_lapply(my_vec_p, 
+                                            function(x) mean(rnorm(100)), 
+                            future.seed = 42))
+    },
+  times = 10)
+plan(sequential)
+```
+
+## Current PC: Parallel processing
+
+```{r}
+plan(multisession, workers = availableCores() - 1)
+microbenchmark(
+  serial = {
+    my_vec <- numeric(100000)
+    set.seed(42)
+    for(i in 1:100000){
+      my_vec[i] <- mean(rnorm(100)) 
+    }}, 
+  parallel = {
+    my_vec_p <- numeric(100000)
+    my_vec_parallel <- unlist(future_lapply(my_vec_p, 
+                                            function(x) mean(rnorm(100)), 
+                            future.seed = 42))
+    },
+  times = 10)
+plan(sequential)
+```
+
+## Current PC: Data I/O storage
+
+- Reading and writing data can take time
+- Data size can matter
+  - local or other services
+- the `.csv` is great, but ...
+  - not efficient storage
+  - can be slow to read and write.
+- Solutions: 
+  - Different packages
+  - Different formats
+  
+## Current PC: Data I/O storage
+
+- Start with biggish `.csv` file ([download])
+- read with base R
+- `big_nla.csv` = 33.2 MB
+
+```{r}
+microbenchmark(
+  read.csv = {base_read.csv <- read.csv("big_nla.csv")},
+  times = 10
+)
+```
+
+## Current PC: Data I/O storage
+
+- read with other options
+
+```{r messages = FALSE, warnings = FALSE}
+library(readr)
+library(data.table)
+library(arrow)
+microbenchmark(
+  base = {base_read.csv <- read.csv("big_nla.csv")},
+  readr = {readr_read_csv <- read_csv("big_nla.csv")},
+  data.table = {data.table_fread <- fread("big_nla.csv")},
+  arrow = {arrow_read_csv_arrow <- read_csv_arrow("big_nla.csv")},
+  times = 10
+)
+```
+
+## Current PC: When and and how much to worry about optimisation
+
+- Your old code took 1 minute
+- Your new code takes 10 seconds
+- Yeah!  Our code is 6 times faster
+- You spent one hour to get this improvement
+- That is 59 minutes you could have used for something else
+- Need to figure out if it makes sense.
+
+For a good read on the subject of improving performance of R code: <https://adv-r.hadley.nz/perf-improve.html>
 
 When you click the **Render** button a document will be generated that includes:
 
 -   Content authored with markdown
 -   Output from executable code
 
-## Code
+## Other infrastructure: Get a new PC
 
-When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+## Other infrastructure: HPC on Atmos
 
-```{r}
-1 + 1
-```
+## Other infrastructure: EPA DMAP Self Service Analytics
 
+## Additional tools: Git and GitHub Enterprise
 
+## Additional tools: Posit Connect
