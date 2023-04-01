@@ -402,13 +402,18 @@
 <li>What additional tools, that compliment R, do we have available?</li>
 </ul>
 </section>
+<section>
+<section id="better-r-on-your-current-pc" class="title-slide slide level1 center">
+<h1>Better R on your Current PC</h1>
+
+</section>
 <section id="current-pc-speed-up-iteration" class="slide level2">
 <h2>Current PC: Speed up iteration</h2>
 <ul>
 <li>Doing things over and over again</li>
 <li>Example</li>
 </ul>
-<div class="cell">
+<div class="cell" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-1_0b974d7a80b554e41e950c2961eac4f4">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>my_vec <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5000</span>){</span>
@@ -422,7 +427,7 @@
 <li>Speed it up by pre-allocating memory</li>
 <li>Example</li>
 </ul>
-<div class="cell">
+<div class="cell" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-2_e67ff06715c83e808489f5e13f4a6ac3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>my_vec <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="dv">5000</span>)</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="fu">set.seed</span>(<span class="dv">42</span>) </span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5000</span>){</span>
@@ -432,7 +437,7 @@
 </section>
 <section id="current-pc-speed-up-iteration-2" class="slide level2">
 <h2>Current PC: Speed up iteration</h2>
-<div class="cell">
+<div class="cell" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-3_d7311c1f13c1968be001dfef2283640f">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(microbenchmark)</span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="fu">microbenchmark</span>(</span>
 <span id="cb3-3"><a href="#cb3-3"></a>  <span class="at">not_allocated =</span> {</span>
@@ -451,14 +456,14 @@
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: milliseconds
           expr      min       lq     mean   median       uq      max neval
- not_allocated 221.3696 231.0921 239.7471 236.8024 240.1594 286.5008    10
-     allocated 107.7809 114.0629 127.3573 128.1746 137.0270 151.2563    10</code></pre>
+ not_allocated 279.7240 315.8901 347.4135 339.0510 389.0393 412.1806    10
+     allocated 133.0461 149.0112 156.3517 154.2224 161.4242 186.8185    10</code></pre>
 </div>
 </div>
 </section>
 <section id="current-pc-parallel-processing" class="slide level2">
 <h2>Current PC: Parallel processing</h2>
-<div class="cell">
+<div class="cell" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-4_91795e56b8a077a9e1c19b506a535f9c">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(future)</span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="fu">library</span>(future.apply)</span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="fu">plan</span>(multisession, <span class="at">workers =</span> <span class="fu">availableCores</span>() <span class="sc">-</span> <span class="dv">1</span>)</span>
@@ -479,15 +484,15 @@
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: milliseconds
      expr      min       lq     mean   median       uq       max neval
-   serial 101.0426 104.5733 109.5192 107.4060 113.3315  124.2934    10
- parallel 149.9633 157.8832 293.7571 164.0197 168.2937 1479.6114    10</code></pre>
+   serial 119.5742 121.6659 135.8448 137.0174 144.9053  159.6512    10
+ parallel 183.5550 184.5487 351.6709 188.7496 200.0475 1802.9359    10</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">plan</span>(sequential)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="current-pc-parallel-processing-1" class="slide level2">
 <h2>Current PC: Parallel processing</h2>
-<div class="cell">
+<div class="cell" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-5_8c41cf0ea48cc37c10f0bf8f14eda5b6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">plan</span>(multisession, <span class="at">workers =</span> <span class="fu">availableCores</span>() <span class="sc">-</span> <span class="dv">1</span>)</span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="fu">microbenchmark</span>(</span>
 <span id="cb8-3"><a href="#cb8-3"></a>  <span class="at">serial =</span> {</span>
@@ -506,8 +511,8 @@
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: seconds
      expr      min       lq     mean   median       uq      max neval
-   serial 2.019432 2.041772 2.136649 2.059117 2.189063 2.542428    10
- parallel 1.181292 1.196975 1.425941 1.250711 1.272370 2.827470    10</code></pre>
+   serial 2.018249 2.066974 2.320135 2.253804 2.472859 2.787795    10
+ parallel 1.185868 1.204268 1.556472 1.293889 1.639422 3.146736    10</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">plan</span>(sequential)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -539,15 +544,15 @@
 <li>read with base R</li>
 <li><code>big_nla.csv</code> = 33.2 MB</li>
 </ul>
-<div class="cell">
+<div class="cell" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-6_74ba56720a5cd1d933b16f30a183b032">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">microbenchmark</span>(</span>
 <span id="cb11-2"><a href="#cb11-2"></a>  <span class="at">read.csv =</span> {base_read.csv <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"big_nla.csv"</span>)},</span>
 <span id="cb11-3"><a href="#cb11-3"></a>  <span class="at">times =</span> <span class="dv">10</span></span>
 <span id="cb11-4"><a href="#cb11-4"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: seconds
-     expr      min       lq     mean   median      uq      max neval
- read.csv 2.114671 2.135538 2.202865 2.169239 2.25398 2.400214    10</code></pre>
+     expr     min       lq     mean   median       uq      max neval
+ read.csv 2.16615 2.239459 2.722027 2.694653 3.098443 3.368262    10</code></pre>
 </div>
 </div>
 </section>
@@ -556,7 +561,7 @@
 <ul>
 <li>read with other options</li>
 </ul>
-<div class="cell" data-messages="false" data-warnings="false">
+<div class="cell" data-messages="false" data-warnings="false" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-7_4238ebfebc87c4430d50d0f63a620aa8">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="fu">library</span>(data.table)</span>
 <span id="cb13-3"><a href="#cb13-3"></a><span class="fu">library</span>(arrow)</span>
@@ -570,10 +575,10 @@
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: milliseconds
        expr       min        lq      mean    median        uq       max neval
-       base 2097.3154 2165.7526 2198.8049 2185.8974 2248.1554 2313.5065    10
-      readr  750.5660  765.2921  822.6742  772.7229  787.0090 1163.8033    10
- data.table  230.1539  236.3578  255.8391  241.9282  257.9582  360.3275    10
-      arrow  279.9269  284.6634  300.7255  293.1004  302.6762  381.2239    10</code></pre>
+       base 2113.0694 2209.4623 2422.1210 2283.9815 2659.5448 3197.1399    10
+      readr  774.8987  789.6796  923.5743  827.3521  916.5602 1619.9516    10
+ data.table  263.5883  284.4634  307.8265  301.0123  314.4693  422.2622    10
+      arrow  282.0526  285.3164  320.4889  294.5258  335.1195  451.9772    10</code></pre>
 </div>
 </div>
 </section>
@@ -588,20 +593,49 @@
 <li>Need to figure out if it makes sense.</li>
 </ul>
 <p>For a good read on the subject of improving performance of R code: <a href="https://adv-r.hadley.nz/perf-improve.html" class="uri">https://adv-r.hadley.nz/perf-improve.html</a></p>
-<p>When you click the <strong>Render</strong> button a document will be generated that includes:</p>
-<ul>
-<li>Content authored with markdown</li>
-<li>Output from executable code</li>
-</ul>
+</section></section>
+<section>
+<section id="better-r-using-other-infrastructure" class="title-slide slide level1 center">
+<h1>Better R using other infrastructure</h1>
+
 </section>
 <section id="other-infrastructure-get-a-new-pc" class="slide level2">
 <h2>Other infrastructure: Get a new PC</h2>
+<ul>
+<li>EISD has limits</li>
+<li>ORD can purchase new PCs</li>
+<li>You can use VMs</li>
+<li>Issues
+<ul>
+<li>Maintenance and Updates</li>
+<li>What happens in 5-10 years?</li>
+<li>Still has EPA Image</li>
+</ul></li>
+</ul>
 </section>
-<section id="other-infrastructure-hpc-on-atmos" class="slide level2">
-<h2>Other infrastructure: HPC on Atmos</h2>
+<section id="other-infrastructure-high-end-scientific-computing" class="slide level2">
+<h2>Other infrastructure: High End Scientific Computing</h2>
+<ul>
+<li>Atmos, on permise HPC in RTP</li>
+<li>Yearly proposals</li>
+<li>Paid by WCF</li>
+<li>HPC less competive recently</li>
+<li>Linux only</li>
+<li>Lots of overhead</li>
+</ul>
 </section>
-<section id="other-infrastructure-epa-dmap-self-service-analytics" class="slide level2">
-<h2>Other infrastructure: EPA DMAP Self Service Analytics</h2>
+<section id="other-infrastructure-epa-dmap-analytics-platform" class="slide level2">
+<h2>Other infrastructure: EPA DMAP Analytics Platform</h2>
+<ul>
+<li><p><a href="https://usepa.sharepoint.com/sites/oei_Work/edapservicecenter/default.aspx">DMAP Sharepoint</a></p></li>
+<li><p><a href="https://forms.office.com/Pages/ResponsePage.aspx?id=s3iziEhnZ0is-Xaqy-ymp1GzdIs8T4FKixGaIGTfTcVUNkRVUlFMR0NZTkhFTkExNUM0Vzk2OFdaRyQlQCN0PWcu">DMAP Scoping Form</a></p></li>
+<li><p>There can be a cost, but if total runs are &lt; $500.00 seems to fly under the radar.</p></li>
+</ul>
+</section></section>
+<section>
+<section id="better-r-using-additional-tools" class="title-slide slide level1 center">
+<h1>Better R using additional tools</h1>
+
 </section>
 <section id="additional-tools-git-and-github-enterprise" class="slide level2">
 <h2>Additional tools: Git and GitHub Enterprise</h2>
@@ -611,7 +645,7 @@
 <div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

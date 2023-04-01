@@ -4,6 +4,7 @@ subtitle: "What tools can we, at EPA, use to make better use of R"
 format: revealjs
 execute: 
   echo: true
+  cache: true
 ---
 
 ## Overview
@@ -11,6 +12,8 @@ execute:
 - What can we do on our current PCs?
 - What can we do using other computational infrastructure?
 - What additional tools, that compliment R, do we have available?
+
+# Better R on your Current PC
 
 ## Current PC: Speed up iteration
 
@@ -155,16 +158,36 @@ microbenchmark(
 
 For a good read on the subject of improving performance of R code: <https://adv-r.hadley.nz/perf-improve.html>
 
-When you click the **Render** button a document will be generated that includes:
-
--   Content authored with markdown
--   Output from executable code
+# Better R using other infrastructure
 
 ## Other infrastructure: Get a new PC
 
-## Other infrastructure: HPC on Atmos
+- EISD has limits
+- ORD can purchase new PCs
+- You can use VMs
+- Issues
+  - Maintenance and Updates
+  - What happens in 5-10 years?
+  - Still has EPA Image
 
-## Other infrastructure: EPA DMAP Self Service Analytics
+## Other infrastructure: High End Scientific Computing
+
+- Atmos, on permise HPC in RTP
+- Yearly proposals
+- Paid by WCF
+- HPC less competive recently
+- Linux only
+- Lots of overhead 
+
+## Other infrastructure: EPA DMAP Analytics Platform
+
+- [DMAP Sharepoint](https://usepa.sharepoint.com/sites/oei_Work/edapservicecenter/default.aspx)
+
+- [DMAP Scoping Form](https://forms.office.com/Pages/ResponsePage.aspx?id=s3iziEhnZ0is-Xaqy-ymp1GzdIs8T4FKixGaIGTfTcVUNkRVUlFMR0NZTkhFTkExNUM0Vzk2OFdaRyQlQCN0PWcu)
+
+- There can be a cost, but if total runs are < $500.00 seems to fly under the radar.
+
+# Better R using additional tools
 
 ## Additional tools: Git and GitHub Enterprise
 
