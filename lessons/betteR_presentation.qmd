@@ -262,14 +262,14 @@ For a good read on the subject of improving performance of R code: <https://adv-
 - GitHub for collaboration (and more)
   - No install, it isn't software, its a website/service!
   - [USEPA on GitHub](https://github.com/USEPA)
-  - [USEPA GigHub Guidance](https://work.epa.gov/it-architecture/github-guidance)
+  - [USEPA GitHub Guidance](https://work.epa.gov/it-architecture/github-guidance)
 
 ## Git and GitHub Enterprise: Demo's
   - Use git and GitHub with RStudio
   - Provisional Data Example
-    - https://github.com/usepa/fedsdata
-    - https://github.com/usepa/high_res_cyano
-    - https://github.com/usepa/provisional_habs
+    - <https://github.com/usepa/fedsdata>
+    - <https://github.com/usepa/high_res_cyano>
+    - <https://github.com/usepa/provisional_habs>
 
 ## Other DMAP Tools
 
