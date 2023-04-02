@@ -437,7 +437,7 @@
 </section>
 <section id="speed-up-iteration-2" class="slide level2">
 <h2>Speed up iteration</h2>
-<div class="cell" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-3_70cca95b9e90745af588bbdca9776d9c">
+<div class="cell" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-3_0fd62358f392a5810361b19a724f981b">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(microbenchmark)</span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="fu">microbenchmark</span>(</span>
 <span id="cb3-3"><a href="#cb3-3"></a>  <span class="at">not_allocated =</span> {</span>
@@ -452,19 +452,19 @@
 <span id="cb3-12"><a href="#cb3-12"></a>    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5000</span>){</span>
 <span id="cb3-13"><a href="#cb3-13"></a>      my_vec[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">100</span>)) </span>
 <span id="cb3-14"><a href="#cb3-14"></a>    }}, </span>
-<span id="cb3-15"><a href="#cb3-15"></a>  <span class="at">times =</span> <span class="dv">10</span>, <span class="at">unit =</span> <span class="st">"microseconds"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a>  <span class="at">times =</span> <span class="dv">5</span>, <span class="at">unit =</span> <span class="st">"seconds"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb3-16"><a href="#cb3-16"></a>  <span class="fu">summary</span>() <span class="sc">|&gt;</span></span>
 <span id="cb3-17"><a href="#cb3-17"></a>  <span class="fu">select</span>(expr, min, mean, median, max)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           expr      min     mean   median      max
-1 not_allocated 217096.5 237329.2 232796.6 274076.8
-2     allocated 109090.5 121329.8 118319.6 135265.8</code></pre>
+<pre><code>           expr       min      mean    median       max
+1 not_allocated 0.2163934 0.2222145 0.2220363 0.2269427
+2     allocated 0.1099170 0.1167689 0.1117118 0.1297155</code></pre>
 </div>
 </div>
 </section>
 <section id="parallel-processing" class="slide level2">
 <h2>Parallel processing</h2>
-<div class="cell" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-4_19635b2c51a7df3b04a13f3d67476f07">
+<div class="cell" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-4_6ab944869dbb6cba18efd76791ca81ff">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(future)</span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="fu">library</span>(future.apply)</span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="fu">plan</span>(multisession, <span class="at">workers =</span> <span class="fu">availableCores</span>() <span class="sc">-</span> <span class="dv">1</span>)</span>
@@ -481,13 +481,13 @@
 <span id="cb5-14"><a href="#cb5-14"></a>                                            <span class="cf">function</span>(x) <span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">100</span>)), </span>
 <span id="cb5-15"><a href="#cb5-15"></a>                            <span class="at">future.seed =</span> <span class="dv">42</span>))</span>
 <span id="cb5-16"><a href="#cb5-16"></a>    },</span>
-<span id="cb5-17"><a href="#cb5-17"></a>  <span class="at">times =</span> <span class="dv">10</span>, <span class="at">unit =</span> <span class="st">"microseconds"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a>  <span class="at">times =</span> <span class="dv">5</span>, <span class="at">unit =</span> <span class="st">"seconds"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb5-18"><a href="#cb5-18"></a>  <span class="fu">summary</span>() <span class="sc">|&gt;</span></span>
 <span id="cb5-19"><a href="#cb5-19"></a>  <span class="fu">select</span>(expr, min, mean, median, max)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      expr      min     mean   median       max
-1   serial 101617.9 120815.9 121296.7  150584.9
-2 parallel 160611.6 279293.4 166046.6 1290368.2</code></pre>
+<pre><code>      expr       min      mean    median       max
+1   serial 0.1096290 0.1215079 0.1195852 0.1427582
+2 parallel 0.1644659 0.4176007 0.1743236 1.3943686</code></pre>
 </div>
 </div>
 <div class="cell" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-5_676c58aac9105ca9902eb07528b71bf3">
@@ -496,7 +496,7 @@
 </section>
 <section id="parallel-processing-1" class="slide level2">
 <h2>Parallel processing</h2>
-<div class="cell" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-6_4830ae671690f6087583f01f1afdb358">
+<div class="cell" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-6_7ded082ea037e9ac75f93f762909770f">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">plan</span>(multisession, <span class="at">workers =</span> <span class="fu">availableCores</span>() <span class="sc">-</span> <span class="dv">1</span>)</span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="fu">microbenchmark</span>(</span>
 <span id="cb7-3"><a href="#cb7-3"></a>  <span class="at">serial =</span> {</span>
@@ -511,13 +511,13 @@
 <span id="cb7-12"><a href="#cb7-12"></a>                                            <span class="cf">function</span>(x) <span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">100</span>)), </span>
 <span id="cb7-13"><a href="#cb7-13"></a>                            <span class="at">future.seed =</span> <span class="dv">42</span>))</span>
 <span id="cb7-14"><a href="#cb7-14"></a>    },</span>
-<span id="cb7-15"><a href="#cb7-15"></a>  <span class="at">times =</span> <span class="dv">10</span>, <span class="at">unit =</span> <span class="st">"microseconds"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>  <span class="at">times =</span> <span class="dv">5</span>, <span class="at">unit =</span> <span class="st">"seconds"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb7-16"><a href="#cb7-16"></a>  <span class="fu">summary</span>() <span class="sc">|&gt;</span></span>
 <span id="cb7-17"><a href="#cb7-17"></a>  <span class="fu">select</span>(expr, min, mean, median, max)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      expr     min    mean  median     max
-1   serial 2027280 2132263 2128338 2348726
-2 parallel 1191770 1381141 1254880 2484763</code></pre>
+<pre><code>      expr      min     mean   median      max
+1   serial 2.007845 2.117816 2.045085 2.260355
+2 parallel 1.164639 1.460045 1.233685 2.294632</code></pre>
 </div>
 </div>
 <div class="cell" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-7_c0e797b62a2d7e53fcca3c3503ac8f94">
@@ -550,23 +550,23 @@
 <li>Start with biggish <code>.csv</code> file ([download])</li>
 <li><code>big_nla.csv</code> = 33.2 MB</li>
 </ul>
-<div class="cell" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-8_93230c7117525e19956fcc6613083912">
+<div class="cell" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-8_383bbdcd69adad1af7e5b7cacf8581cd">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="fu">microbenchmark</span>(</span>
 <span id="cb9-3"><a href="#cb9-3"></a>  <span class="at">read.csv =</span> {big_nla <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"big_nla.csv"</span>)},</span>
-<span id="cb9-4"><a href="#cb9-4"></a>  <span class="at">times =</span> <span class="dv">10</span>, <span class="at">unit =</span> <span class="st">"microseconds"</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="at">times =</span> <span class="dv">5</span>, <span class="at">unit =</span> <span class="st">"seconds"</span></span>
 <span id="cb9-5"><a href="#cb9-5"></a>) <span class="sc">|&gt;</span></span>
 <span id="cb9-6"><a href="#cb9-6"></a>  <span class="fu">summary</span>() <span class="sc">|&gt;</span></span>
 <span id="cb9-7"><a href="#cb9-7"></a>  <span class="fu">select</span>(expr, min, mean, median, max)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      expr     min    mean  median     max
-1 read.csv 2221648 2500374 2381262 3376932</code></pre>
+<pre><code>      expr      min     mean   median      max
+1 read.csv 2.166739 2.325059 2.327829 2.518385</code></pre>
 </div>
 </div>
 </section>
 <section id="data-inputoutput-io-read-csv" class="slide level2">
 <h2>Data Input/Output (I/O): Read csv</h2>
-<div class="cell" data-messages="false" data-warnings="false" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-9_ddcd58832b925e1ff15ca5b2ec1a888a">
+<div class="cell" data-messages="false" data-warnings="false" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-9_d61b66f3fc69abb7cc16f7f547db9f59">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="fu">library</span>(data.table)</span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="fu">library</span>(arrow)</span>
@@ -575,16 +575,16 @@
 <span id="cb11-6"><a href="#cb11-6"></a>  <span class="at">readr =</span> {big_nla <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"big_nla.csv"</span>)},</span>
 <span id="cb11-7"><a href="#cb11-7"></a>  <span class="at">data.table =</span> {big_nla <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">"big_nla.csv"</span>)},</span>
 <span id="cb11-8"><a href="#cb11-8"></a>  <span class="at">arrow =</span> {big_nla <span class="ot">&lt;-</span> <span class="fu">read_csv_arrow</span>(<span class="st">"big_nla.csv"</span>)},</span>
-<span id="cb11-9"><a href="#cb11-9"></a>  <span class="at">times =</span> <span class="dv">10</span>, <span class="at">unit =</span> <span class="st">"microseconds"</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>  <span class="at">times =</span> <span class="dv">5</span>, <span class="at">unit =</span> <span class="st">"seconds"</span></span>
 <span id="cb11-10"><a href="#cb11-10"></a>) <span class="sc">|&gt;</span></span>
 <span id="cb11-11"><a href="#cb11-11"></a>  <span class="fu">summary</span>() <span class="sc">|&gt;</span></span>
 <span id="cb11-12"><a href="#cb11-12"></a>  <span class="fu">select</span>(expr, min, mean, median, max)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        expr       min      mean    median       max
-1       base 2044129.6 2178866.5 2170054.7 2292951.4
-2      readr  886445.9  977897.6  926256.2 1478261.4
-3 data.table  286460.6  335330.6  301893.9  413892.8
-4      arrow  282624.0  312539.4  292040.0  467447.6</code></pre>
+1       base 2.0486667 2.1401874 2.1757863 2.2024769
+2      readr 0.7348087 0.8303039 0.7601487 1.0891047
+3 data.table 0.2296281 0.2654663 0.2500393 0.3647287
+4      arrow 0.2798081 0.3068968 0.2978748 0.3628707</code></pre>
 </div>
 </div>
 </section>
@@ -593,41 +593,41 @@
 <ul>
 <li>write csv with other options</li>
 </ul>
-<div class="cell" data-messages="false" data-warnings="false" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-10_723b40283de7dbafd396388fc2c76f53">
+<div class="cell" data-messages="false" data-warnings="false" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-10_f6b30b0f350c1c9dbd9f54a0120c026c">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">microbenchmark</span>(</span>
 <span id="cb13-2"><a href="#cb13-2"></a>  <span class="at">base =</span> {<span class="fu">write.csv</span>(big_nla, <span class="st">"base_big_nla.csv"</span>)},</span>
 <span id="cb13-3"><a href="#cb13-3"></a>  <span class="at">readr =</span> {<span class="fu">write_csv</span>(big_nla, <span class="st">"readr_big_nla.csv"</span>)},</span>
 <span id="cb13-4"><a href="#cb13-4"></a>  <span class="at">data.table =</span> {<span class="fu">fwrite</span>(big_nla, <span class="st">"datatable_big_nla.csv"</span>)},</span>
 <span id="cb13-5"><a href="#cb13-5"></a>  <span class="at">arrow =</span> {<span class="fu">write_csv_arrow</span>(big_nla, <span class="st">"arrow_big_nla.csv"</span>)},</span>
-<span id="cb13-6"><a href="#cb13-6"></a>  <span class="at">times =</span> <span class="dv">10</span>, <span class="at">unit =</span> <span class="st">"microseconds"</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="at">times =</span> <span class="dv">2</span>, <span class="at">unit =</span> <span class="st">"seconds"</span></span>
 <span id="cb13-7"><a href="#cb13-7"></a>) <span class="sc">|&gt;</span></span>
 <span id="cb13-8"><a href="#cb13-8"></a>  <span class="fu">summary</span>() <span class="sc">|&gt;</span></span>
 <span id="cb13-9"><a href="#cb13-9"></a>  <span class="fu">select</span>(expr, min, mean, median, max)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        expr        min       mean     median        max
-1       base 10672395.5 12057408.0 12031780.5 13949691.5
-2      readr   257289.8   389144.7   284853.9  1120469.3
-3 data.table   107196.1   131973.6   127547.2   209189.8
-4      arrow   437635.0   514771.5   525364.8   624395.9</code></pre>
+1       base 10.6940931 10.8458365 10.8458365 10.9975799
+2      readr  0.2276466  0.4003795  0.4003795  0.5731123
+3 data.table  0.1255283  0.4457022  0.4457022  0.7658760
+4      arrow  0.3893708  0.4396575  0.4396575  0.4899442</code></pre>
 </div>
 </div>
 </section>
 <section id="data-inputoutput-io-write-other-formats" class="slide level2">
 <h2>Data Input/Output (I/O): Write other formats</h2>
-<div class="cell" data-messages="false" data-warnings="false" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-11_6acb04e9629cce6bf0fd5696ff1b639a">
+<div class="cell" data-messages="false" data-warnings="false" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-11_b7a54247c67f4a90e72e452e78bf21fc">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">microbenchmark</span>(</span>
 <span id="cb15-2"><a href="#cb15-2"></a>  <span class="at">base =</span> {<span class="fu">save</span>(big_nla, <span class="at">file =</span> <span class="st">"big_nla.rda"</span>)},</span>
 <span id="cb15-3"><a href="#cb15-3"></a>  <span class="at">arrow_parquet =</span> {<span class="fu">write_parquet</span>(big_nla, <span class="st">"big_nla.parquet"</span>)},</span>
 <span id="cb15-4"><a href="#cb15-4"></a>  <span class="at">arrow_feather =</span> {<span class="fu">write_feather</span>(big_nla, <span class="st">"big_nla.feather"</span>)},</span>
-<span id="cb15-5"><a href="#cb15-5"></a>  <span class="at">times =</span> <span class="dv">10</span>, <span class="at">unit =</span> <span class="st">"microseconds"</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>  <span class="at">times =</span> <span class="dv">5</span>, <span class="at">unit =</span> <span class="st">"seconds"</span></span>
 <span id="cb15-6"><a href="#cb15-6"></a>) <span class="sc">|&gt;</span></span>
 <span id="cb15-7"><a href="#cb15-7"></a>  <span class="fu">summary</span>() <span class="sc">|&gt;</span></span>
 <span id="cb15-8"><a href="#cb15-8"></a>  <span class="fu">select</span>(expr, min, mean, median, max)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           expr       min      mean    median       max
-1          base 1569248.0 1821900.9 1829180.8 2094692.7
-2 arrow_parquet  338205.1  433580.4  447171.1  492649.9
-3 arrow_feather  160248.6  183349.5  177407.5  232721.0</code></pre>
+1          base 1.4529321 1.5361579 1.5460560 1.6443688
+2 arrow_parquet 0.3377846 0.3659851 0.3689801 0.3875303
+3 arrow_feather 0.1325967 0.1606608 0.1637776 0.1949771</code></pre>
 </div>
 </div>
 </section>
@@ -656,7 +656,7 @@
 </section>
 <section id="data-inputoutput-io-read-all" class="slide level2">
 <h2>Data Input/Output (I/O): Read all</h2>
-<div class="cell" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-13_09a99c2a843a2662a608c09d4f91cf71">
+<div class="cell" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-13_c1f5832712e3d036881fae09d8129229">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">microbenchmark</span>(</span>
 <span id="cb19-2"><a href="#cb19-2"></a>  <span class="at">base_csv =</span> {big_nla <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"big_nla.csv"</span>)},</span>
 <span id="cb19-3"><a href="#cb19-3"></a>  <span class="at">readr_csv =</span> {big_nla <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"big_nla.csv"</span>)},</span>
@@ -665,20 +665,20 @@
 <span id="cb19-6"><a href="#cb19-6"></a>  <span class="at">base_rda =</span> {<span class="fu">load</span>(<span class="st">"big_nla.rda"</span>)},</span>
 <span id="cb19-7"><a href="#cb19-7"></a>  <span class="at">arrow_parquet =</span> {<span class="fu">read_parquet</span>(<span class="st">"big_nla.parquet"</span>)},</span>
 <span id="cb19-8"><a href="#cb19-8"></a>  <span class="at">arrow_feather =</span> {<span class="fu">read_feather</span>(<span class="st">"big_nla.feather"</span>)},</span>
-<span id="cb19-9"><a href="#cb19-9"></a>  <span class="at">times =</span> <span class="dv">10</span>, <span class="at">unit =</span> <span class="st">"microseconds"</span> </span>
+<span id="cb19-9"><a href="#cb19-9"></a>  <span class="at">times =</span> <span class="dv">5</span>, <span class="at">unit =</span> <span class="st">"seconds"</span> </span>
 <span id="cb19-10"><a href="#cb19-10"></a>) <span class="sc">|&gt;</span></span>
 <span id="cb19-11"><a href="#cb19-11"></a>  <span class="fu">summary</span>() <span class="sc">|&gt;</span></span>
 <span id="cb19-12"><a href="#cb19-12"></a>  <span class="fu">select</span>(expr, min, mean, median, max) <span class="sc">|&gt;</span></span>
 <span id="cb19-13"><a href="#cb19-13"></a>  <span class="fu">arrange</span>(median)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            expr       min       mean     median       max
-1  arrow_feather   15115.8   22890.55   17692.55   74971.6
-2  arrow_parquet  110108.2  122409.08  117062.90  143962.7
-3      arrow_csv  281054.2  300992.78  294659.00  326920.2
-4 data.table_csv  279365.9  305487.84  297999.10  400093.4
-5      readr_csv  758702.0  895629.65  846724.80 1277135.5
-6       base_rda  907426.0  997556.13  954966.95 1323203.4
-7       base_csv 2190119.9 2324290.34 2261886.40 2824175.9</code></pre>
+<pre><code>            expr       min       mean    median       max
+1  arrow_feather 0.0206029 0.02619878 0.0230970 0.0383547
+2  arrow_parquet 0.1126073 0.12787580 0.1276546 0.1506160
+3 data.table_csv 0.2279003 0.25923684 0.2488788 0.3349876
+4      arrow_csv 0.2785674 0.30258434 0.2933125 0.3572262
+5      readr_csv 0.7518489 0.81805864 0.7677235 0.9280826
+6       base_rda 0.8948710 0.93902386 0.9249553 1.0054641
+7       base_csv 2.0768341 2.17713748 2.1702191 2.2954901</code></pre>
 </div>
 </div>
 </section>

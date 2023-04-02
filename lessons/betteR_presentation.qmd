@@ -58,7 +58,7 @@ microbenchmark(
     for(i in 1:5000){
       my_vec[i] <- mean(rnorm(100)) 
     }}, 
-  times = 10, unit = "microseconds") |>
+  times = 5, unit = "seconds") |>
   summary() |>
   select(expr, min, mean, median, max)
 ```
@@ -82,7 +82,7 @@ microbenchmark(
                                             function(x) mean(rnorm(100)), 
                             future.seed = 42))
     },
-  times = 10, unit = "microseconds") |>
+  times = 5, unit = "seconds") |>
   summary() |>
   select(expr, min, mean, median, max)
 ```
@@ -107,7 +107,7 @@ microbenchmark(
                                             function(x) mean(rnorm(100)), 
                             future.seed = 42))
     },
-  times = 10, unit = "microseconds") |>
+  times = 5, unit = "seconds") |>
   summary() |>
   select(expr, min, mean, median, max)
 ```
@@ -136,7 +136,7 @@ plan(sequential)
 library(dplyr)
 microbenchmark(
   read.csv = {big_nla <- read.csv("big_nla.csv")},
-  times = 10, unit = "microseconds"
+  times = 5, unit = "seconds"
 ) |>
   summary() |>
   select(expr, min, mean, median, max)
@@ -153,7 +153,7 @@ microbenchmark(
   readr = {big_nla <- read_csv("big_nla.csv")},
   data.table = {big_nla <- fread("big_nla.csv")},
   arrow = {big_nla <- read_csv_arrow("big_nla.csv")},
-  times = 10, unit = "microseconds"
+  times = 5, unit = "seconds"
 ) |>
   summary() |>
   select(expr, min, mean, median, max)
@@ -169,7 +169,7 @@ microbenchmark(
   readr = {write_csv(big_nla, "readr_big_nla.csv")},
   data.table = {fwrite(big_nla, "datatable_big_nla.csv")},
   arrow = {write_csv_arrow(big_nla, "arrow_big_nla.csv")},
-  times = 10, unit = "microseconds"
+  times = 2, unit = "seconds"
 ) |>
   summary() |>
   select(expr, min, mean, median, max)
@@ -182,7 +182,7 @@ microbenchmark(
   base = {save(big_nla, file = "big_nla.rda")},
   arrow_parquet = {write_parquet(big_nla, "big_nla.parquet")},
   arrow_feather = {write_feather(big_nla, "big_nla.feather")},
-  times = 10, unit = "microseconds"
+  times = 5, unit = "seconds"
 ) |>
   summary() |>
   select(expr, min, mean, median, max)
@@ -209,7 +209,7 @@ microbenchmark(
   base_rda = {load("big_nla.rda")},
   arrow_parquet = {read_parquet("big_nla.parquet")},
   arrow_feather = {read_feather("big_nla.feather")},
-  times = 10, unit = "microseconds" 
+  times = 5, unit = "seconds" 
 ) |>
   summary() |>
   select(expr, min, mean, median, max) |>
