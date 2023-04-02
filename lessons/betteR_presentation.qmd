@@ -161,8 +161,6 @@ microbenchmark(
 
 ## Data Input/Output (I/O): Write
 
-- write csv with other options
-
 ```{r messages = FALSE, warnings = FALSE}
 microbenchmark(
   base = {write.csv(big_nla, "base_big_nla.csv")},
@@ -219,12 +217,10 @@ microbenchmark(
 
 ## Current PC: When and and how much to worry about optimisation
 
-- Your old code took 1 minute
-- Your new code takes 10 seconds
-- Yeah!  Our code is 6 times faster
+- Your old code took 1 minute, new code takes 10 seconds
+  - Yeah!  Our code is 6 times faster
 - You spent one hour to get this improvement
-- That is 59 minutes you could have used for something else
-- Need to figure out if it makes sense.
+  - That is 59 minutes you could have used for something else
 
 For a good read on the subject of improving performance of R code: <https://adv-r.hadley.nz/perf-improve.html>
 
@@ -267,7 +263,8 @@ For a good read on the subject of improving performance of R code: <https://adv-
   - No install, it isn't software, its a website/service!
   - [USEPA on GitHub](https://github.com/USEPA)
   - [USEPA GigHub Guidance](https://work.epa.gov/it-architecture/github-guidance)
-- Demo's
+
+## Git and GitHub Enterprise: Demo's
   - Use git and GitHub with RStudio
   - Provisional Data Example
     - https://github.com/usepa/fedsdata
@@ -284,11 +281,13 @@ For a good read on the subject of improving performance of R code: <https://adv-
     - General R output
     - Shiny app hosting
     - Plumber APIs
-  - Demo
-    - Make a Shiny app and publish to Posit Connect
+    
+## Other DMAP Tools: Demo
+
+- Make a Shiny app and publish to Posit Connect
 
 ## Parting Shot
 
 - Sign up for regular and automatic R/RStudio updates
-  - Sign Up Form: https:/forms.office.com/g/seT512wZi8 
+  - Sign Up Form: <https:/forms.office.com/g/seT512wZi8> 
 

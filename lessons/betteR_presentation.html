@@ -590,9 +590,6 @@
 </section>
 <section id="data-inputoutput-io-write" class="slide level2">
 <h2>Data Input/Output (I/O): Write</h2>
-<ul>
-<li>write csv with other options</li>
-</ul>
 <div class="cell" data-messages="false" data-warnings="false" data-hash="betteR_presentation_cache/revealjs/unnamed-chunk-10_f6b30b0f350c1c9dbd9f54a0120c026c">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">microbenchmark</span>(</span>
 <span id="cb13-2"><a href="#cb13-2"></a>  <span class="at">base =</span> {<span class="fu">write.csv</span>(big_nla, <span class="st">"base_big_nla.csv"</span>)},</span>
@@ -685,12 +682,14 @@
 <section id="current-pc-when-and-and-how-much-to-worry-about-optimisation" class="slide level2">
 <h2>Current PC: When and and how much to worry about optimisation</h2>
 <ul>
-<li>Your old code took 1 minute</li>
-<li>Your new code takes 10 seconds</li>
+<li>Your old code took 1 minute, new code takes 10 seconds
+<ul>
 <li>Yeah! Our code is 6 times faster</li>
-<li>You spent one hour to get this improvement</li>
+</ul></li>
+<li>You spent one hour to get this improvement
+<ul>
 <li>That is 59 minutes you could have used for something else</li>
-<li>Need to figure out if it makes sense.</li>
+</ul></li>
 </ul>
 <p>For a good read on the subject of improving performance of R code: <a href="https://adv-r.hadley.nz/perf-improve.html" class="uri">https://adv-r.hadley.nz/perf-improve.html</a></p>
 </section></section>
@@ -752,7 +751,10 @@
 <li><a href="https://github.com/USEPA">USEPA on GitHub</a></li>
 <li><a href="https://work.epa.gov/it-architecture/github-guidance">USEPA GigHub Guidance</a></li>
 </ul></li>
-<li>Demo’s
+</ul>
+</section>
+<section id="git-and-github-enterprise-demos" class="slide level2">
+<h2>Git and GitHub Enterprise: Demo’s</h2>
 <ul>
 <li>Use git and GitHub with RStudio</li>
 <li>Provisional Data Example
@@ -760,7 +762,6 @@
 <li>https://github.com/usepa/fedsdata</li>
 <li>https://github.com/usepa/high_res_cyano</li>
 <li>https://github.com/usepa/provisional_habs</li>
-</ul></li>
 </ul></li>
 </ul>
 </section>
@@ -778,11 +779,13 @@
 <li>Shiny app hosting</li>
 <li>Plumber APIs</li>
 </ul></li>
-<li>Demo
+</ul></li>
+</ul>
+</section>
+<section id="other-dmap-tools-demo" class="slide level2">
+<h2>Other DMAP Tools: Demo</h2>
 <ul>
 <li>Make a Shiny app and publish to Posit Connect</li>
-</ul></li>
-</ul></li>
 </ul>
 </section>
 <section id="parting-shot" class="slide level2">
@@ -790,7 +793,7 @@
 <ul>
 <li>Sign up for regular and automatic R/RStudio updates
 <ul>
-<li>Sign Up Form: https:/forms.office.com/g/seT512wZi8</li>
+<li>Sign Up Form: <a href="https:/forms.office.com/g/seT512wZi8" class="uri">https:/forms.office.com/g/seT512wZi8</a></li>
 </ul></li>
 </ul>
 <div class="footer footer-default">
