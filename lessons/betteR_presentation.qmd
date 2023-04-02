@@ -15,7 +15,7 @@ execute:
 
 # Better R on your Current PC
 
-## Current PC: Speed up iteration
+## Speed up iteration
 
 - Doing things over and over again
 - Example
@@ -28,7 +28,7 @@ for(i in 1:5000){
 }
 ```
 
-## Current PC: Speed up iteration
+## Speed up iteration
 
 - Speed it up by pre-allocating memory
 - Example
@@ -41,7 +41,7 @@ for(i in 1:5000){
 }
 ```
 
-## Current PC: Speed up iteration
+## Speed up iteration
 
 ```{r}
 library(microbenchmark)
@@ -58,10 +58,12 @@ microbenchmark(
     for(i in 1:5000){
       my_vec[i] <- mean(rnorm(100)) 
     }}, 
-  times = 10)
+  times = 10, unit = "microseconds") |>
+  summary() |>
+  select(expr, min, mean, median, max)
 ```
 
-## Current PC: Parallel processing
+## Parallel processing
 
 ```{r}
 library(future)
@@ -80,11 +82,15 @@ microbenchmark(
                                             function(x) mean(rnorm(100)), 
                             future.seed = 42))
     },
-  times = 10)
-plan(sequential)
+  times = 10, unit = "microseconds") |>
+  summary() |>
+  select(expr, min, mean, median, max)
 ```
 
-## Current PC: Parallel processing
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+plan(sequential)
+```
+## Parallel processing
 
 ```{r}
 plan(multisession, workers = availableCores() - 1)
@@ -101,11 +107,15 @@ microbenchmark(
                                             function(x) mean(rnorm(100)), 
                             future.seed = 42))
     },
-  times = 10)
-plan(sequential)
+  times = 10, unit = "microseconds") |>
+  summary() |>
+  select(expr, min, mean, median, max)
 ```
 
-## Current PC: Data I/O storage
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+plan(sequential)
+```
+## Data Input/Output (I/O)
 
 - Reading and writing data can take time
 - Data size can matter
@@ -117,35 +127,95 @@ plan(sequential)
   - Different packages
   - Different formats
   
-## Current PC: Data I/O storage
+## Data Input/Output (I/O)
 
 - Start with biggish `.csv` file ([download])
-- read with base R
 - `big_nla.csv` = 33.2 MB
 
 ```{r}
+library(dplyr)
 microbenchmark(
-  read.csv = {base_read.csv <- read.csv("big_nla.csv")},
-  times = 10
-)
+  read.csv = {big_nla <- read.csv("big_nla.csv")},
+  times = 10, unit = "microseconds"
+) |>
+  summary() |>
+  select(expr, min, mean, median, max)
 ```
 
-## Current PC: Data I/O storage
-
-- read with other options
+## Data Input/Output (I/O): Read csv
 
 ```{r messages = FALSE, warnings = FALSE}
 library(readr)
 library(data.table)
 library(arrow)
 microbenchmark(
-  base = {base_read.csv <- read.csv("big_nla.csv")},
-  readr = {readr_read_csv <- read_csv("big_nla.csv")},
-  data.table = {data.table_fread <- fread("big_nla.csv")},
-  arrow = {arrow_read_csv_arrow <- read_csv_arrow("big_nla.csv")},
-  times = 10
-)
+  base = {big_nla <- read.csv("big_nla.csv")},
+  readr = {big_nla <- read_csv("big_nla.csv")},
+  data.table = {big_nla <- fread("big_nla.csv")},
+  arrow = {big_nla <- read_csv_arrow("big_nla.csv")},
+  times = 10, unit = "microseconds"
+) |>
+  summary() |>
+  select(expr, min, mean, median, max)
 ```
+
+## Data Input/Output (I/O): Write
+
+- write csv with other options
+
+```{r messages = FALSE, warnings = FALSE}
+microbenchmark(
+  base = {write.csv(big_nla, "base_big_nla.csv")},
+  readr = {write_csv(big_nla, "readr_big_nla.csv")},
+  data.table = {fwrite(big_nla, "datatable_big_nla.csv")},
+  arrow = {write_csv_arrow(big_nla, "arrow_big_nla.csv")},
+  times = 10, unit = "microseconds"
+) |>
+  summary() |>
+  select(expr, min, mean, median, max)
+```
+
+## Data Input/Output (I/O): Write other formats
+
+```{r messages = FALSE, warnings = FALSE}
+microbenchmark(
+  base = {save(big_nla, file = "big_nla.rda")},
+  arrow_parquet = {write_parquet(big_nla, "big_nla.parquet")},
+  arrow_feather = {write_feather(big_nla, "big_nla.feather")},
+  times = 10, unit = "microseconds"
+) |>
+  summary() |>
+  select(expr, min, mean, median, max)
+```
+
+## Data Input/Output (I/O): File size
+
+```{r}
+library(tibble)
+file_sizes <- tibble(files = list.files(pattern = "big_nla"),
+                     size_mb = file.size(list.files(pattern = "big_nla"))/1000000)
+file_sizes |>
+  arrange(size_mb)
+```
+
+## Data Input/Output (I/O): Read all
+
+```{r}
+microbenchmark(
+  base_csv = {big_nla <- read.csv("big_nla.csv")},
+  readr_csv = {big_nla <- read_csv("big_nla.csv")},
+  data.table_csv = {big_nla <- fread("big_nla.csv")},
+  arrow_csv = {big_nla <- read_csv_arrow("big_nla.csv")},
+  base_rda = {load("big_nla.rda")},
+  arrow_parquet = {read_parquet("big_nla.parquet")},
+  arrow_feather = {read_feather("big_nla.feather")},
+  times = 10, unit = "microseconds" 
+) |>
+  summary() |>
+  select(expr, min, mean, median, max) |>
+  arrange(median)
+```
+
 
 ## Current PC: When and and how much to worry about optimisation
 
@@ -160,7 +230,7 @@ For a good read on the subject of improving performance of R code: <https://adv-
 
 # Better R using other infrastructure
 
-## Other infrastructure: Get a new PC
+## Get a new PC
 
 - EISD has limits
 - ORD can purchase new PCs
@@ -170,25 +240,55 @@ For a good read on the subject of improving performance of R code: <https://adv-
   - What happens in 5-10 years?
   - Still has EPA Image
 
-## Other infrastructure: High End Scientific Computing
+## High End Scientific Computing
 
-- Atmos, on permise HPC in RTP
+- Atmos, "on premise" HPC in RTP
 - Yearly proposals
 - Paid by WCF
-- HPC less competive recently
+- HPC less competitive recently
 - Linux only
-- Lots of overhead 
+- Lots of overhead to learn
+- Does have RStudio available
 
-## Other infrastructure: EPA DMAP Analytics Platform
+## EPA DMAP Analytics Platform
 
 - [DMAP Sharepoint](https://usepa.sharepoint.com/sites/oei_Work/edapservicecenter/default.aspx)
-
 - [DMAP Scoping Form](https://forms.office.com/Pages/ResponsePage.aspx?id=s3iziEhnZ0is-Xaqy-ymp1GzdIs8T4FKixGaIGTfTcVUNkRVUlFMR0NZTkhFTkExNUM0Vzk2OFdaRyQlQCN0PWcu)
-
 - There can be a cost, but if total runs are < $500.00 seems to fly under the radar.
+- [Demo](https://anote.epa.gov/#/userhome)
 
 # Better R using additional tools
 
-## Additional tools: Git and GitHub Enterprise
+## Git and GitHub Enterprise
 
-## Additional tools: Posit Connect
+- Git for version control
+  - [Link to request install]()
+- GitHub for collaboration (and more)
+  - No install, it isn't software, its a website/service!
+  - [USEPA on GitHub](https://github.com/USEPA)
+  - [USEPA GigHub Guidance](https://work.epa.gov/it-architecture/github-guidance)
+- Demo's
+  - Use git and GitHub with RStudio
+  - Provisional Data Example
+    - https://github.com/usepa/fedsdata
+    - https://github.com/usepa/high_res_cyano
+    - https://github.com/usepa/provisional_habs
+
+## Other DMAP Tools
+
+- Large data storage on AWS
+- Data sharing via the Data Commons
+- Posit Connect
+  - Enterprise tool for sharing R content
+    - Quarto/Markdown documents
+    - General R output
+    - Shiny app hosting
+    - Plumber APIs
+  - Demo
+    - Make a Shiny app and publish to Posit Connect
+
+## Parting Shot
+
+- Sign up for regular and automatic R/RStudio updates
+  - Sign Up Form: https:/forms.office.com/g/seT512wZi8 
+

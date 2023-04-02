@@ -4,3 +4,5 @@ future.apply
 readr
 data.table
 arrow
+tibble
+dplyr
